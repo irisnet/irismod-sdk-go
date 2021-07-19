@@ -12,7 +12,7 @@ import (
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	_ "github.com/golang/protobuf/ptypes/timestamp"
 	types "github.com/irisnet/core-sdk-go/common/codec/types"
-	github_com_irisnet_irishub_sdk_go_types "github.com/irisnet/core-sdk-go/types"
+	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types1 "github.com/irisnet/core-sdk-go/types"
 	_ "github.com/regen-network/cosmos-proto"
 	grpc "google.golang.org/grpc"
@@ -38,13 +38,13 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // MsgCreateValidator defines a SDK message for creating a new validator.
 type MsgCreateValidator struct {
-	Description       Description                                 `protobuf:"bytes,1,opt,name=description,proto3" json:"description"`
-	Commission        CommissionRates                             `protobuf:"bytes,2,opt,name=commission,proto3" json:"commission"`
-	MinSelfDelegation github_com_irisnet_irishub_sdk_go_types.Int `protobuf:"bytes,3,opt,name=min_self_delegation,json=minSelfDelegation,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"min_self_delegation" yaml:"min_self_delegation"`
-	DelegatorAddress  string                                      `protobuf:"bytes,4,opt,name=delegator_address,json=delegatorAddress,proto3" json:"delegator_address,omitempty" yaml:"delegator_address"`
-	ValidatorAddress  string                                      `protobuf:"bytes,5,opt,name=validator_address,json=validatorAddress,proto3" json:"validator_address,omitempty" yaml:"validator_address"`
-	Pubkey            *types.Any                                  `protobuf:"bytes,6,opt,name=pubkey,proto3" json:"pubkey,omitempty"`
-	Value             types1.Coin                                 `protobuf:"bytes,7,opt,name=value,proto3" json:"value"`
+	Description       Description                              `protobuf:"bytes,1,opt,name=description,proto3" json:"description"`
+	Commission        CommissionRates                          `protobuf:"bytes,2,opt,name=commission,proto3" json:"commission"`
+	MinSelfDelegation github_com_irisnet_core_sdk_go_types.Int `protobuf:"bytes,3,opt,name=min_self_delegation,json=minSelfDelegation,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"min_self_delegation" yaml:"min_self_delegation"`
+	DelegatorAddress  string                                   `protobuf:"bytes,4,opt,name=delegator_address,json=delegatorAddress,proto3" json:"delegator_address,omitempty" yaml:"delegator_address"`
+	ValidatorAddress  string                                   `protobuf:"bytes,5,opt,name=validator_address,json=validatorAddress,proto3" json:"validator_address,omitempty" yaml:"validator_address"`
+	Pubkey            *types.Any                               `protobuf:"bytes,6,opt,name=pubkey,proto3" json:"pubkey,omitempty"`
+	Value             types1.Coin                              `protobuf:"bytes,7,opt,name=value,proto3" json:"value"`
 }
 
 func (m *MsgCreateValidator) Reset()         { *m = MsgCreateValidator{} }
@@ -126,8 +126,8 @@ type MsgEditValidator struct {
 	// zero with no way to distinguish if an update was intended.
 	//
 	// REF: #2373
-	CommissionRate    *github_com_irisnet_irishub_sdk_go_types.Dec `protobuf:"bytes,3,opt,name=commission_rate,json=commissionRate,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Dec" json:"commission_rate,omitempty" yaml:"commission_rate"`
-	MinSelfDelegation *github_com_irisnet_irishub_sdk_go_types.Int `protobuf:"bytes,4,opt,name=min_self_delegation,json=minSelfDelegation,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"min_self_delegation,omitempty" yaml:"min_self_delegation"`
+	CommissionRate    *github_com_irisnet_core_sdk_go_types.Dec `protobuf:"bytes,3,opt,name=commission_rate,json=commissionRate,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Dec" json:"commission_rate,omitempty" yaml:"commission_rate"`
+	MinSelfDelegation *github_com_irisnet_core_sdk_go_types.Int `protobuf:"bytes,4,opt,name=min_self_delegation,json=minSelfDelegation,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"min_self_delegation,omitempty" yaml:"min_self_delegation"`
 }
 
 func (m *MsgEditValidator) Reset()         { *m = MsgEditValidator{} }
@@ -1839,7 +1839,7 @@ func (m *MsgEditValidator) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var v github_com_irisnet_irishub_sdk_go_types.Dec
+			var v github_com_irisnet_core_sdk_go_types.Dec
 			m.CommissionRate = &v
 			if err := m.CommissionRate.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
@@ -1875,7 +1875,7 @@ func (m *MsgEditValidator) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			var v github_com_irisnet_irishub_sdk_go_types.Int
+			var v github_com_irisnet_core_sdk_go_types.Int
 			m.MinSelfDelegation = &v
 			if err := m.MinSelfDelegation.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err

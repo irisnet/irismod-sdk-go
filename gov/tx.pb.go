@@ -10,7 +10,7 @@ import (
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
 	types "github.com/irisnet/core-sdk-go/common/codec/types"
-	github_com_irisnet_irishub_sdk_go_types "github.com/irisnet/core-sdk-go/types"
+	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types1 "github.com/irisnet/core-sdk-go/types"
 	_ "github.com/regen-network/cosmos-proto"
 	grpc "google.golang.org/grpc"
@@ -35,9 +35,9 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 // MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
 // proposal Content.
 type MsgSubmitProposal struct {
-	Content        *types.Any                                    `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
-	InitialDeposit github_com_irisnet_irishub_sdk_go_types.Coins `protobuf:"bytes,2,rep,name=initial_deposit,json=initialDeposit,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"initial_deposit" yaml:"initial_deposit"`
-	Proposer       string                                        `protobuf:"bytes,3,opt,name=proposer,proto3" json:"proposer,omitempty"`
+	Content        *types.Any                                 `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
+	InitialDeposit github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,2,rep,name=initial_deposit,json=initialDeposit,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"initial_deposit" yaml:"initial_deposit"`
+	Proposer       string                                     `protobuf:"bytes,3,opt,name=proposer,proto3" json:"proposer,omitempty"`
 }
 
 func (m *MsgSubmitProposal) Reset()      { *m = MsgSubmitProposal{} }
@@ -195,9 +195,9 @@ var xxx_messageInfo_MsgVoteResponse proto.InternalMessageInfo
 
 // MsgDeposit defines a message to submit a deposit to an existing proposal.
 type MsgDeposit struct {
-	ProposalId uint64                                        `protobuf:"varint,1,opt,name=proposal_id,json=proposalId,proto3" json:"proposal_id" yaml:"proposal_id"`
-	Depositor  string                                        `protobuf:"bytes,2,opt,name=depositor,proto3" json:"depositor,omitempty"`
-	Amount     github_com_irisnet_irishub_sdk_go_types.Coins `protobuf:"bytes,3,rep,name=amount,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"amount"`
+	ProposalId uint64                                     `protobuf:"varint,1,opt,name=proposal_id,json=proposalId,proto3" json:"proposal_id" yaml:"proposal_id"`
+	Depositor  string                                     `protobuf:"bytes,2,opt,name=depositor,proto3" json:"depositor,omitempty"`
+	Amount     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,3,rep,name=amount,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"amount"`
 }
 
 func (m *MsgDeposit) Reset()      { *m = MsgDeposit{} }
