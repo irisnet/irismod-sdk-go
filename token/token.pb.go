@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	github_com_irisnet_irishub_sdk_go_types "github.com/irisnet/core-sdk-go/types"
+	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
 	io "io"
 	math "math"
@@ -71,9 +71,9 @@ var xxx_messageInfo_Token proto.InternalMessageInfo
 
 // token parameters
 type Params struct {
-	TokenTaxRate      github_com_irisnet_irishub_sdk_go_types.Dec `protobuf:"bytes,1,opt,name=token_tax_rate,json=tokenTaxRate,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Dec" json:"token_tax_rate" yaml:"token_tax_rate"`
-	IssueTokenBaseFee types.Coin                                  `protobuf:"bytes,2,opt,name=issue_token_base_fee,json=issueTokenBaseFee,proto3" json:"issue_token_base_fee" yaml:"issue_token_base_fee"`
-	MintTokenFeeRatio github_com_irisnet_irishub_sdk_go_types.Dec `protobuf:"bytes,3,opt,name=mint_token_fee_ratio,json=mintTokenFeeRatio,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Dec" json:"mint_token_fee_ratio" yaml:"mint_token_fee_ratio"`
+	TokenTaxRate      github_com_irisnet_core_sdk_go_types.Dec `protobuf:"bytes,1,opt,name=token_tax_rate,json=tokenTaxRate,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Dec" json:"token_tax_rate" yaml:"token_tax_rate"`
+	IssueTokenBaseFee types.Coin                               `protobuf:"bytes,2,opt,name=issue_token_base_fee,json=issueTokenBaseFee,proto3" json:"issue_token_base_fee" yaml:"issue_token_base_fee"`
+	MintTokenFeeRatio github_com_irisnet_core_sdk_go_types.Dec `protobuf:"bytes,3,opt,name=mint_token_fee_ratio,json=mintTokenFeeRatio,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Dec" json:"mint_token_fee_ratio" yaml:"mint_token_fee_ratio"`
 }
 
 func (m *Params) Reset()      { *m = Params{} }

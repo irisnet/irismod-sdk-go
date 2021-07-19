@@ -9,7 +9,7 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
-	github_com_irisnet_irishub_sdk_go_types "github.com/irisnet/core-sdk-go/types"
+	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -32,19 +32,19 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // MsgCreateFeed defines an sdk.Msg type that supports creating a feed
 type MsgCreateFeed struct {
-	FeedName          string                                        `protobuf:"bytes,1,opt,name=feed_name,json=feedName,proto3" json:"feed_name,omitempty" yaml:"feed_name"`
-	LatestHistory     uint64                                        `protobuf:"varint,2,opt,name=latest_history,json=latestHistory,proto3" json:"latest_history,omitempty" yaml:"latest_history"`
-	Description       string                                        `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Creator           string                                        `protobuf:"bytes,4,opt,name=creator,proto3" json:"creator,omitempty"`
-	ServiceName       string                                        `protobuf:"bytes,5,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Providers         []string                                      `protobuf:"bytes,6,rep,name=providers,proto3" json:"providers,omitempty"`
-	Input             string                                        `protobuf:"bytes,7,opt,name=input,proto3" json:"input,omitempty"`
-	Timeout           int64                                         `protobuf:"varint,8,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	ServiceFeeCap     github_com_irisnet_irishub_sdk_go_types.Coins `protobuf:"bytes,9,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
-	RepeatedFrequency uint64                                        `protobuf:"varint,10,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
-	AggregateFunc     string                                        `protobuf:"bytes,11,opt,name=aggregate_func,json=aggregateFunc,proto3" json:"aggregate_func,omitempty" yaml:"aggregate_func"`
-	ValueJsonPath     string                                        `protobuf:"bytes,12,opt,name=value_json_path,json=valueJsonPath,proto3" json:"value_json_path,omitempty" yaml:"value_json_path"`
-	ResponseThreshold uint32                                        `protobuf:"varint,13,opt,name=response_threshold,json=responseThreshold,proto3" json:"response_threshold,omitempty" yaml:"response_threshold"`
+	FeedName          string                                     `protobuf:"bytes,1,opt,name=feed_name,json=feedName,proto3" json:"feed_name,omitempty" yaml:"feed_name"`
+	LatestHistory     uint64                                     `protobuf:"varint,2,opt,name=latest_history,json=latestHistory,proto3" json:"latest_history,omitempty" yaml:"latest_history"`
+	Description       string                                     `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Creator           string                                     `protobuf:"bytes,4,opt,name=creator,proto3" json:"creator,omitempty"`
+	ServiceName       string                                     `protobuf:"bytes,5,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Providers         []string                                   `protobuf:"bytes,6,rep,name=providers,proto3" json:"providers,omitempty"`
+	Input             string                                     `protobuf:"bytes,7,opt,name=input,proto3" json:"input,omitempty"`
+	Timeout           int64                                      `protobuf:"varint,8,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	ServiceFeeCap     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,9,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
+	RepeatedFrequency uint64                                     `protobuf:"varint,10,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
+	AggregateFunc     string                                     `protobuf:"bytes,11,opt,name=aggregate_func,json=aggregateFunc,proto3" json:"aggregate_func,omitempty" yaml:"aggregate_func"`
+	ValueJsonPath     string                                     `protobuf:"bytes,12,opt,name=value_json_path,json=valueJsonPath,proto3" json:"value_json_path,omitempty" yaml:"value_json_path"`
+	ResponseThreshold uint32                                     `protobuf:"varint,13,opt,name=response_threshold,json=responseThreshold,proto3" json:"response_threshold,omitempty" yaml:"response_threshold"`
 }
 
 func (m *MsgCreateFeed) Reset()         { *m = MsgCreateFeed{} }
@@ -136,7 +136,7 @@ func (m *MsgCreateFeed) GetTimeout() int64 {
 	return 0
 }
 
-func (m *MsgCreateFeed) GetServiceFeeCap() github_com_irisnet_irishub_sdk_go_types.Coins {
+func (m *MsgCreateFeed) GetServiceFeeCap() github_com_irisnet_core_sdk_go_types.Coins {
 	if m != nil {
 		return m.ServiceFeeCap
 	}
@@ -390,15 +390,15 @@ var xxx_messageInfo_MsgPauseFeedResponse proto.InternalMessageInfo
 
 // MsgEditFeed defines an sdk.Msg type that supports editing a feed
 type MsgEditFeed struct {
-	FeedName          string                                        `protobuf:"bytes,1,opt,name=feed_name,json=feedName,proto3" json:"feed_name,omitempty" yaml:"feed_name"`
-	Description       string                                        `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	LatestHistory     uint64                                        `protobuf:"varint,3,opt,name=latest_history,json=latestHistory,proto3" json:"latest_history,omitempty" yaml:"latest_history"`
-	Providers         []string                                      `protobuf:"bytes,4,rep,name=providers,proto3" json:"providers,omitempty"`
-	Timeout           int64                                         `protobuf:"varint,5,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	ServiceFeeCap     github_com_irisnet_irishub_sdk_go_types.Coins `protobuf:"bytes,6,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
-	RepeatedFrequency uint64                                        `protobuf:"varint,7,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
-	ResponseThreshold uint32                                        `protobuf:"varint,8,opt,name=response_threshold,json=responseThreshold,proto3" json:"response_threshold,omitempty" yaml:"response_threshold"`
-	Creator           string                                        `protobuf:"bytes,9,opt,name=creator,proto3" json:"creator,omitempty"`
+	FeedName          string                                     `protobuf:"bytes,1,opt,name=feed_name,json=feedName,proto3" json:"feed_name,omitempty" yaml:"feed_name"`
+	Description       string                                     `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	LatestHistory     uint64                                     `protobuf:"varint,3,opt,name=latest_history,json=latestHistory,proto3" json:"latest_history,omitempty" yaml:"latest_history"`
+	Providers         []string                                   `protobuf:"bytes,4,rep,name=providers,proto3" json:"providers,omitempty"`
+	Timeout           int64                                      `protobuf:"varint,5,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	ServiceFeeCap     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,6,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
+	RepeatedFrequency uint64                                     `protobuf:"varint,7,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
+	ResponseThreshold uint32                                     `protobuf:"varint,8,opt,name=response_threshold,json=responseThreshold,proto3" json:"response_threshold,omitempty" yaml:"response_threshold"`
+	Creator           string                                     `protobuf:"bytes,9,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
 func (m *MsgEditFeed) Reset()         { *m = MsgEditFeed{} }
@@ -469,7 +469,7 @@ func (m *MsgEditFeed) GetTimeout() int64 {
 	return 0
 }
 
-func (m *MsgEditFeed) GetServiceFeeCap() github_com_irisnet_irishub_sdk_go_types.Coins {
+func (m *MsgEditFeed) GetServiceFeeCap() github_com_irisnet_core_sdk_go_types.Coins {
 	if m != nil {
 		return m.ServiceFeeCap
 	}

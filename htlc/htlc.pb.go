@@ -9,7 +9,7 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	_ "github.com/golang/protobuf/ptypes/duration"
-	github_com_irisnet_irishub_sdk_go_types "github.com/irisnet/core-sdk-go/types"
+	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
 	io "io"
 	math "math"
@@ -95,20 +95,20 @@ func (SwapDirection) EnumDescriptor() ([]byte, []int) {
 
 // HTLC defines the struct of an HTLC
 type HTLC struct {
-	Id                   string                                        `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Sender               string                                        `protobuf:"bytes,2,opt,name=sender,proto3" json:"sender,omitempty"`
-	To                   string                                        `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`
-	ReceiverOnOtherChain string                                        `protobuf:"bytes,4,opt,name=receiver_on_other_chain,json=receiverOnOtherChain,proto3" json:"receiver_on_other_chain,omitempty" yaml:"receiver_on_other_chain"`
-	SenderOnOtherChain   string                                        `protobuf:"bytes,5,opt,name=sender_on_other_chain,json=senderOnOtherChain,proto3" json:"sender_on_other_chain,omitempty" yaml:"sender_on_other_chain"`
-	Amount               github_com_irisnet_irishub_sdk_go_types.Coins `protobuf:"bytes,6,rep,name=amount,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"amount"`
-	HashLock             string                                        `protobuf:"bytes,7,opt,name=hash_lock,json=hashLock,proto3" json:"hash_lock,omitempty" yaml:"hash_lock"`
-	Secret               string                                        `protobuf:"bytes,8,opt,name=secret,proto3" json:"secret,omitempty"`
-	Timestamp            uint64                                        `protobuf:"varint,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	ExpirationHeight     uint64                                        `protobuf:"varint,10,opt,name=expiration_height,json=expirationHeight,proto3" json:"expiration_height,omitempty" yaml:"expiration_height"`
-	State                HTLCState                                     `protobuf:"varint,11,opt,name=state,proto3,enum=irismod.htlc.HTLCState" json:"state,omitempty"`
-	ClosedBlock          uint64                                        `protobuf:"varint,12,opt,name=closed_block,json=closedBlock,proto3" json:"closed_block,omitempty" yaml:"closed_block"`
-	Transfer             bool                                          `protobuf:"varint,13,opt,name=transfer,proto3" json:"transfer,omitempty"`
-	Direction            SwapDirection                                 `protobuf:"varint,14,opt,name=direction,proto3,enum=irismod.htlc.SwapDirection" json:"direction,omitempty"`
+	Id                   string                                     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Sender               string                                     `protobuf:"bytes,2,opt,name=sender,proto3" json:"sender,omitempty"`
+	To                   string                                     `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`
+	ReceiverOnOtherChain string                                     `protobuf:"bytes,4,opt,name=receiver_on_other_chain,json=receiverOnOtherChain,proto3" json:"receiver_on_other_chain,omitempty" yaml:"receiver_on_other_chain"`
+	SenderOnOtherChain   string                                     `protobuf:"bytes,5,opt,name=sender_on_other_chain,json=senderOnOtherChain,proto3" json:"sender_on_other_chain,omitempty" yaml:"sender_on_other_chain"`
+	Amount               github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,6,rep,name=amount,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"amount"`
+	HashLock             string                                     `protobuf:"bytes,7,opt,name=hash_lock,json=hashLock,proto3" json:"hash_lock,omitempty" yaml:"hash_lock"`
+	Secret               string                                     `protobuf:"bytes,8,opt,name=secret,proto3" json:"secret,omitempty"`
+	Timestamp            uint64                                     `protobuf:"varint,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	ExpirationHeight     uint64                                     `protobuf:"varint,10,opt,name=expiration_height,json=expirationHeight,proto3" json:"expiration_height,omitempty" yaml:"expiration_height"`
+	State                HTLCState                                  `protobuf:"varint,11,opt,name=state,proto3,enum=irismod.htlc.HTLCState" json:"state,omitempty"`
+	ClosedBlock          uint64                                     `protobuf:"varint,12,opt,name=closed_block,json=closedBlock,proto3" json:"closed_block,omitempty" yaml:"closed_block"`
+	Transfer             bool                                       `protobuf:"varint,13,opt,name=transfer,proto3" json:"transfer,omitempty"`
+	Direction            SwapDirection                              `protobuf:"varint,14,opt,name=direction,proto3,enum=irismod.htlc.SwapDirection" json:"direction,omitempty"`
 }
 
 func (m *HTLC) Reset()         { *m = HTLC{} }
@@ -224,15 +224,15 @@ func (m *Params) XXX_DiscardUnknown() {
 var xxx_messageInfo_Params proto.InternalMessageInfo
 
 type AssetParam struct {
-	Denom         string                                      `protobuf:"bytes,1,opt,name=denom,proto3" json:"denom,omitempty"`
-	SupplyLimit   SupplyLimit                                 `protobuf:"bytes,2,opt,name=supply_limit,json=supplyLimit,proto3" json:"supply_limit" yaml:"supply_limit"`
-	Active        bool                                        `protobuf:"varint,3,opt,name=active,proto3" json:"active,omitempty"`
-	DeputyAddress string                                      `protobuf:"bytes,4,opt,name=deputy_address,json=deputyAddress,proto3" json:"deputy_address,omitempty" yaml:"deputy_address"`
-	FixedFee      github_com_irisnet_irishub_sdk_go_types.Int `protobuf:"bytes,5,opt,name=fixed_fee,json=fixedFee,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"fixed_fee"`
-	MinSwapAmount github_com_irisnet_irishub_sdk_go_types.Int `protobuf:"bytes,6,opt,name=min_swap_amount,json=minSwapAmount,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"min_swap_amount"`
-	MaxSwapAmount github_com_irisnet_irishub_sdk_go_types.Int `protobuf:"bytes,7,opt,name=max_swap_amount,json=maxSwapAmount,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"max_swap_amount"`
-	MinBlockLock  uint64                                      `protobuf:"varint,8,opt,name=min_block_lock,json=minBlockLock,proto3" json:"min_block_lock,omitempty" yaml:"min_block_lock"`
-	MaxBlockLock  uint64                                      `protobuf:"varint,9,opt,name=max_block_lock,json=maxBlockLock,proto3" json:"max_block_lock,omitempty" yaml:"max_block_lock"`
+	Denom         string                                   `protobuf:"bytes,1,opt,name=denom,proto3" json:"denom,omitempty"`
+	SupplyLimit   SupplyLimit                              `protobuf:"bytes,2,opt,name=supply_limit,json=supplyLimit,proto3" json:"supply_limit" yaml:"supply_limit"`
+	Active        bool                                     `protobuf:"varint,3,opt,name=active,proto3" json:"active,omitempty"`
+	DeputyAddress string                                   `protobuf:"bytes,4,opt,name=deputy_address,json=deputyAddress,proto3" json:"deputy_address,omitempty" yaml:"deputy_address"`
+	FixedFee      github_com_irisnet_core_sdk_go_types.Int `protobuf:"bytes,5,opt,name=fixed_fee,json=fixedFee,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"fixed_fee"`
+	MinSwapAmount github_com_irisnet_core_sdk_go_types.Int `protobuf:"bytes,6,opt,name=min_swap_amount,json=minSwapAmount,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"min_swap_amount"`
+	MaxSwapAmount github_com_irisnet_core_sdk_go_types.Int `protobuf:"bytes,7,opt,name=max_swap_amount,json=maxSwapAmount,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"max_swap_amount"`
+	MinBlockLock  uint64                                   `protobuf:"varint,8,opt,name=min_block_lock,json=minBlockLock,proto3" json:"min_block_lock,omitempty" yaml:"min_block_lock"`
+	MaxBlockLock  uint64                                   `protobuf:"varint,9,opt,name=max_block_lock,json=maxBlockLock,proto3" json:"max_block_lock,omitempty" yaml:"max_block_lock"`
 }
 
 func (m *AssetParam) Reset()         { *m = AssetParam{} }
@@ -269,10 +269,10 @@ func (m *AssetParam) XXX_DiscardUnknown() {
 var xxx_messageInfo_AssetParam proto.InternalMessageInfo
 
 type SupplyLimit struct {
-	Limit          github_com_irisnet_irishub_sdk_go_types.Int `protobuf:"bytes,1,opt,name=limit,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"limit"`
-	TimeLimited    bool                                        `protobuf:"varint,2,opt,name=time_limited,json=timeLimited,proto3" json:"time_limited,omitempty" yaml:"time_limited"`
-	TimePeriod     time.Duration                               `protobuf:"bytes,3,opt,name=time_period,json=timePeriod,proto3,stdduration" json:"time_period" yaml:"time_period"`
-	TimeBasedLimit github_com_irisnet_irishub_sdk_go_types.Int `protobuf:"bytes,4,opt,name=time_based_limit,json=timeBasedLimit,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"time_based_limit"`
+	Limit          github_com_irisnet_core_sdk_go_types.Int `protobuf:"bytes,1,opt,name=limit,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"limit"`
+	TimeLimited    bool                                     `protobuf:"varint,2,opt,name=time_limited,json=timeLimited,proto3" json:"time_limited,omitempty" yaml:"time_limited"`
+	TimePeriod     time.Duration                            `protobuf:"bytes,3,opt,name=time_period,json=timePeriod,proto3,stdduration" json:"time_period" yaml:"time_period"`
+	TimeBasedLimit github_com_irisnet_core_sdk_go_types.Int `protobuf:"bytes,4,opt,name=time_based_limit,json=timeBasedLimit,proto3,customtype=github.com/irisnet/irishub-sdk-go/types.Int" json:"time_based_limit"`
 }
 
 func (m *SupplyLimit) Reset()         { *m = SupplyLimit{} }

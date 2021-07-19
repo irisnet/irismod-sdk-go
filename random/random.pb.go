@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
-	github_com_irisnet_irishub_sdk_go_types "github.com/irisnet/core-sdk-go/types"
+	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
 	io "io"
 	math "math"
@@ -88,12 +88,12 @@ func (m *Random) GetValue() string {
 
 // Request defines the random request standard
 type Request struct {
-	Height           int64                                         `protobuf:"varint,1,opt,name=height,proto3" json:"height,omitempty"`
-	Consumer         string                                        `protobuf:"bytes,2,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	TxHash           string                                        `protobuf:"bytes,3,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty" yaml:"tx_hash"`
-	Oracle           bool                                          `protobuf:"varint,4,opt,name=oracle,proto3" json:"oracle,omitempty"`
-	ServiceFeeCap    github_com_irisnet_irishub_sdk_go_types.Coins `protobuf:"bytes,5,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
-	ServiceContextId string                                        `protobuf:"bytes,6,opt,name=service_context_id,json=serviceContextId,proto3" json:"service_context_id,omitempty"`
+	Height           int64                                      `protobuf:"varint,1,opt,name=height,proto3" json:"height,omitempty"`
+	Consumer         string                                     `protobuf:"bytes,2,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	TxHash           string                                     `protobuf:"bytes,3,opt,name=tx_hash,json=txHash,proto3" json:"tx_hash,omitempty" yaml:"tx_hash"`
+	Oracle           bool                                       `protobuf:"varint,4,opt,name=oracle,proto3" json:"oracle,omitempty"`
+	ServiceFeeCap    github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,5,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/irishub-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
+	ServiceContextId string                                     `protobuf:"bytes,6,opt,name=service_context_id,json=serviceContextId,proto3" json:"service_context_id,omitempty"`
 }
 
 func (m *Request) Reset()         { *m = Request{} }
@@ -157,7 +157,7 @@ func (m *Request) GetOracle() bool {
 	return false
 }
 
-func (m *Request) GetServiceFeeCap() github_com_irisnet_irishub_sdk_go_types.Coins {
+func (m *Request) GetServiceFeeCap() github_com_irisnet_core_sdk_go_types.Coins {
 	if m != nil {
 		return m.ServiceFeeCap
 	}
