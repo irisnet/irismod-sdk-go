@@ -1,4 +1,4 @@
-module github.com/irisnet/htlc-sdk-go
+module github.com/irisnet/irismod-sdk-go/htlc
 
 go 1.16
 

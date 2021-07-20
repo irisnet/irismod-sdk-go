@@ -1,4 +1,4 @@
-module github.com/irisnet/token-sdk-go
+module github.com/irisnet/irismod-sdk-go/token
 
 go 1.16
 

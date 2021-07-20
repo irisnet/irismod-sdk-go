@@ -1,4 +1,4 @@
-module github.com/irisnet/gov-sdk-go
+module github.com/irisnet/irismod-sdk-go/gov
 
 go 1.16
 

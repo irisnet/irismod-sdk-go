@@ -1,4 +1,4 @@
-module github.com/irisnet/service-sdk-go
+module github.com/irisnet/irismod-sdk-go/service
 
 go 1.16
 

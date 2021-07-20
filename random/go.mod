@@ -1,4 +1,4 @@
-module github.com/irisnet/random-sdk-go
+module github.com/irisnet/irismod-sdk-go/random
 
 go 1.16
 

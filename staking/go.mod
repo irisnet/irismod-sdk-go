@@ -1,4 +1,4 @@
-module github.com/irisnet/staking-sdk-go
+module github.com/irisnet/irismod-sdk-go/staking
 
 go 1.16
 
