@@ -1,2 +1,2 @@
-docker stop irishub-sdk-go-test
-docker rmi irishub-sdk-go
+docker rm --force irishub-sdk-go-test
+docker rmi  irishub-sdk-go
