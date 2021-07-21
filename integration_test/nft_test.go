@@ -7,7 +7,7 @@ import (
 	sdk "github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/nft-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/nft"
 )
 
 func (s IntegrationTestSuite) TestNFT() {

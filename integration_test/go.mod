@@ -1,19 +1,19 @@
-module github.com/irisnet/integration-test
+module github.com/irisnet/irismod-sdk-go/integration-test
 
 go 1.16
 
 require (
-	github.com/irisnet/coinswap-sdk-go v0.1.0
 	github.com/irisnet/core-sdk-go v0.0.0-20210719031639-9c6ece68d908
-	github.com/irisnet/gov-sdk-go v0.1.0
-	github.com/irisnet/htlc-sdk-go v0.1.0
-	github.com/irisnet/nft-sdk-go v0.1.0
-	github.com/irisnet/oracle-sdk-go v0.1.0
-	github.com/irisnet/random-sdk-go v0.1.0
-	github.com/irisnet/record-sdk-go v0.1.0
-	github.com/irisnet/service-sdk-go v0.1.0
-	github.com/irisnet/staking-sdk-go v0.1.0
-	github.com/irisnet/token-sdk-go v0.1.0
+	github.com/irisnet/irismod-sdk-go/coinswap v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/gov v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/htlc v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/nft v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/oracle v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/random v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/record v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/service v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/staking v0.0.0-20210721015333-ebf465dc6692
+	github.com/irisnet/irismod-sdk-go/token v0.0.0-20210721015333-ebf465dc6692
 	github.com/stretchr/testify v1.7.0
 	github.com/tendermint/tendermint v0.34.11
 
@@ -21,15 +21,5 @@ require (
 
 replace (
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
-	github.com/irisnet/coinswap-sdk-go => ../coinswap
-	github.com/irisnet/gov-sdk-go => ../gov
-	github.com/irisnet/htlc-sdk-go => ../htlc
-	github.com/irisnet/nft-sdk-go => ../nft
-	github.com/irisnet/oracle-sdk-go => ../oracle
-	github.com/irisnet/random-sdk-go => ../random
-	github.com/irisnet/record-sdk-go => ../record
-	github.com/irisnet/service-sdk-go => ../service
-	github.com/irisnet/staking-sdk-go => ../staking
-	github.com/irisnet/token-sdk-go => ../token
 	github.com/tendermint/tendermint => github.com/bianjieai/tendermint v0.34.1-irita-210113
 )

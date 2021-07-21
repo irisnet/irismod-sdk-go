@@ -6,7 +6,7 @@ import (
 	sdk "github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/staking-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/staking"
 )
 
 func (s IntegrationTestSuite) TestStaking() {

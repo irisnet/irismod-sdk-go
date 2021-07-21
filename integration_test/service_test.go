@@ -7,7 +7,7 @@ import (
 	"github.com/irisnet/core-sdk-go/types/query"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/service-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/service"
 )
 
 func (s IntegrationTestSuite) TestService() {

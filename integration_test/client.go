@@ -10,27 +10,17 @@ import (
 	txtypes "github.com/irisnet/core-sdk-go/types/tx"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/irisnet/token-sdk-go"
-
-	"github.com/irisnet/coinswap-sdk-go"
-
-	"github.com/irisnet/staking-sdk-go"
-
-	"github.com/irisnet/service-sdk-go"
-
-	"github.com/irisnet/record-sdk-go"
-
-	"github.com/irisnet/random-sdk-go"
-
 	keys "github.com/irisnet/core-sdk-go/client"
-
-	"github.com/irisnet/oracle-sdk-go"
-
-	"github.com/irisnet/nft-sdk-go"
-
-	"github.com/irisnet/htlc-sdk-go"
-
-	"github.com/irisnet/gov-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/coinswap"
+	"github.com/irisnet/irismod-sdk-go/gov"
+	"github.com/irisnet/irismod-sdk-go/htlc"
+	"github.com/irisnet/irismod-sdk-go/nft"
+	"github.com/irisnet/irismod-sdk-go/oracle"
+	"github.com/irisnet/irismod-sdk-go/random"
+	"github.com/irisnet/irismod-sdk-go/record"
+	"github.com/irisnet/irismod-sdk-go/service"
+	"github.com/irisnet/irismod-sdk-go/staking"
+	"github.com/irisnet/irismod-sdk-go/token"
 )
 
 type Client struct {

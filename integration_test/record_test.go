@@ -6,7 +6,7 @@ import (
 	sdk "github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/record-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/record"
 )
 
 func (s IntegrationTestSuite) TestRecord() {

@@ -7,7 +7,7 @@ import (
 	"github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/gov-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/gov"
 )
 
 func (s IntegrationTestSuite) TestGov() {

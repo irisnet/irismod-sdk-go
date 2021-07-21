@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 
-	"github.com/irisnet/htlc-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/htlc"
 )
 
 func (s IntegrationTestSuite) TestHTLC() {

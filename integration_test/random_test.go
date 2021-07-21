@@ -6,7 +6,7 @@ import (
 
 	"github.com/irisnet/core-sdk-go/types"
 
-	"github.com/irisnet/random-sdk-go"
+	"github.com/irisnet/irismod-sdk-go/random"
 )
 
 type TestRandom struct {
