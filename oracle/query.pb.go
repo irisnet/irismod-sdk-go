@@ -11,7 +11,7 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
-	service "github.com/irisnet/service-sdk-go"
+	service "github.com/irisnet/irismod-sdk-go/service"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
