@@ -42,7 +42,7 @@ You can define a client according to your own needs
 
 
 ### New Client
-The initialization SDK code is as follows:
+
 ```go
     
     func NewClient(cfg types.ClientConfig) Client {
@@ -116,7 +116,7 @@ The initialization SDK code is as follows:
 
 
 ### Init Client
-
+The initialization SDK code is as follows:
 
 ```go
     
