@@ -3,7 +3,7 @@ package irismod.token;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/irisnet/irishub-sdk-go/modules/token";
+option go_package = "github.com/irisnet/irismod-sdk-go/token";
 option (gogoproto.goproto_getters_all) = false;
 
 // MsgIssueToken defines an SDK message for issuing a new token.

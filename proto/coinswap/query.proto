@@ -5,7 +5,7 @@ import "cosmos/base/v1beta1/coin.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 
-option go_package = "github.com/irisnet/irishub-sdk-go/modules/coinswap";
+option go_package = "github.com/irisnet/irismod-sdk-go/coinswap";
 
 // Query creates service with coinswap as rpc
 service Query {

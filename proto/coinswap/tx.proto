@@ -5,7 +5,7 @@ import "coinswap/coinswap.proto";
 import "cosmos/base/v1beta1/coin.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/irisnet/irishub-sdk-go/modules/coinswap";
+option go_package = "github.com/irisnet/irismod-sdk-go/coinswap";
 option (gogoproto.goproto_getters_all) = false;
 
 // Msg defines the coinswap Msg service

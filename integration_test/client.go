@@ -3,6 +3,7 @@ package integrationtest
 import (
 	"github.com/irisnet/core-sdk-go/bank"
 	"github.com/irisnet/core-sdk-go/client"
+	keys "github.com/irisnet/core-sdk-go/client"
 	"github.com/irisnet/core-sdk-go/common/codec"
 	cdctypes "github.com/irisnet/core-sdk-go/common/codec/types"
 	cryptocodec "github.com/irisnet/core-sdk-go/common/crypto/codec"
@@ -37,7 +38,7 @@ type Client struct {
 	encodingConfig types.EncodingConfig
 
 	types.BaseClient
-	Key     client.Client
+	Key     keys.Client
 	Bank    bank.Client
 	Token   token.Client
 	Staking staking.Client

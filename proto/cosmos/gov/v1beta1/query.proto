@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/gov/v1beta1/gov.proto";
 
-option go_package = "github.com/irisnet/irishub-sdk-go/modules/gov";
+option go_package = "github.com/irisnet/irismod-sdk-go/gov";
 
 // Query defines the gRPC querier service for gov module
 service Query {

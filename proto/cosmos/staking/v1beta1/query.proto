@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/staking/v1beta1/staking.proto";
 
-option go_package = "github.com/irisnet/irishub-sdk-go/modules/staking";
+option go_package = "github.com/irisnet/irismod-sdk-go/staking";
 
 // Query defines the gRPC querier service.
 service Query {

@@ -4,7 +4,7 @@ package irismod.record;
 import "record/record.proto";
 import "google/api/annotations.proto";
 
-option go_package = "github.com/irisnet/irishub-sdk-go/modules/record";
+option go_package = "github.com/irisnet/irismod-sdk-go/record";
 
 // Query defines the gRPC querier service for record module
 service Query {

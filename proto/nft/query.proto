@@ -5,7 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "nft/nft.proto";
 
-option go_package = "github.com/irisnet/irishub-sdk-go/modules/nft";
+option go_package = "github.com/irisnet/irismod-sdk-go/nft";
 
 // Query defines the gRPC querier service for nft module
 service Query {
