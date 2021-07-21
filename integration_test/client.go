@@ -3,7 +3,6 @@ package integrationtest
 import (
 	"github.com/irisnet/core-sdk-go/bank"
 	"github.com/irisnet/core-sdk-go/client"
-	keys "github.com/irisnet/core-sdk-go/client"
 	"github.com/irisnet/core-sdk-go/common/codec"
 	cdctypes "github.com/irisnet/core-sdk-go/common/codec/types"
 	cryptocodec "github.com/irisnet/core-sdk-go/common/crypto/codec"
@@ -38,7 +37,6 @@ type Client struct {
 	encodingConfig types.EncodingConfig
 
 	types.BaseClient
-	Key     keys.Client
 	Bank    bank.Client
 	Token   token.Client
 	Staking staking.Client
@@ -57,9 +55,6 @@ func NewClient(cfg types.ClientConfig) Client {
 
 	// create a instance of baseClient
 	baseClient := client.NewBaseClient(cfg, encodingConfig, nil)
-
-	keysClient := client.NewKeysClient(cfg, baseClient)
-
 	bankClient := bank.NewClient(baseClient, encodingConfig.Marshaler)
 	tokenClient := token.NewClient(baseClient, encodingConfig.Marshaler)
 	stakingClient := staking.NewClient(baseClient, encodingConfig.Marshaler)
@@ -77,7 +72,6 @@ func NewClient(cfg types.ClientConfig) Client {
 		BaseClient:     baseClient,
 		moduleManager:  make(map[string]types.Module),
 		encodingConfig: encodingConfig,
-		Key:            keysClient,
 		Bank:           bankClient,
 		Token:          tokenClient,
 		Staking:        stakingClient,

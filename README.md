@@ -1,6 +1,21 @@
 ### irismod-sdk-go
 Golang SDK for IRISMOD Modules
 
+### install
+### Requirement
+Go version above 1.16.4
+
+### Use Go Mod
+
+```
+replace (
+    github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.2-alpha.regen.4
+    github.com/tendermint/tendermint => github.com/bianjieai/tendermint v0.34.1-irita-210113
+)
+```
+
+### Customize the Client type
+
 ```go
     
     type Client struct {
@@ -23,8 +38,11 @@ Golang SDK for IRISMOD Modules
         Swap    coinswap.Client
     }
 ```
+You can define a client according to your own needs
 
 
+### New Client
+The initialization SDK code is as follows:
 ```go
     
     func NewClient(cfg types.ClientConfig) Client {
@@ -84,6 +102,7 @@ Golang SDK for IRISMOD Modules
 
 ```
 
+### Module Register
 
 ```go
 
@@ -96,6 +115,7 @@ Golang SDK for IRISMOD Modules
 ```
 
 
+### Init Client
 
 
 ```go
