@@ -1,7 +1,6 @@
-### irismod-sdk-go
+### IRISMOD Go SDK
 Golang SDK for IRISMOD Modules
 
-### install
 ### Requirement
 Go version above 1.16.4
 
@@ -17,7 +16,6 @@ replace (
 ### Customize the Client type
 
 ```go
-    
     type Client struct {
         logger         log.Logger
         moduleManager  map[string]types.Module
@@ -44,7 +42,6 @@ You can define a client according to your own needs
 ### New Client
 
 ```go
-    
     func NewClient(cfg types.ClientConfig) Client {
         encodingConfig := makeEncodingConfig()
     
@@ -105,7 +102,6 @@ You can define a client according to your own needs
 ### Module Register
 
 ```go
-
     func (client Client) RegisterModule(ms ...types.Module) {
         for _, m := range ms {
             m.RegisterInterfaceTypes(client.encodingConfig.InterfaceRegistry)
@@ -119,7 +115,6 @@ You can define a client according to your own needs
 The initialization SDK code is as follows:
 
 ```go
-    
     options := []types.Option{
             types.KeyDAOOption(store.NewMemory(nil)),
             types.TimeoutOption(10),
