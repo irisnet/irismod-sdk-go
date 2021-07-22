@@ -40,7 +40,7 @@ message MsgCreateValidator {
   Description     description         = 1 [(gogoproto.nullable) = false];
   CommissionRates commission          = 2 [(gogoproto.nullable) = false];
   string          min_self_delegation = 3 [
-    (gogoproto.customtype) = "github.com/irisnet/irishub-sdk-go/types.Int",
+    (gogoproto.customtype) = "github.com/irisnet/core-sdk-go/types.Int",
     (gogoproto.moretags)   = "yaml:\"min_self_delegation\"",
     (gogoproto.nullable)   = false
   ];
@@ -67,11 +67,11 @@ message MsgEditValidator {
   //
   // REF: #2373
   string commission_rate = 3 [
-    (gogoproto.customtype) = "github.com/irisnet/irishub-sdk-go/types.Dec",
+    (gogoproto.customtype) = "github.com/irisnet/core-sdk-go/types.Dec",
     (gogoproto.moretags)   = "yaml:\"commission_rate\""
   ];
   string min_self_delegation = 4 [
-    (gogoproto.customtype) = "github.com/irisnet/irishub-sdk-go/types.Int",
+    (gogoproto.customtype) = "github.com/irisnet/core-sdk-go/types.Int",
     (gogoproto.moretags)   = "yaml:\"min_self_delegation\""
   ];
 }

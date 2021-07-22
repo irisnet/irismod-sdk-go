@@ -19,6 +19,6 @@ message Request {
     string consumer = 2;
     string tx_hash = 3 [ (gogoproto.moretags) = "yaml:\"tx_hash\"" ];
     bool oracle = 4;
-    repeated cosmos.base.v1beta1.Coin service_fee_cap = 5 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/irishub-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
+    repeated cosmos.base.v1beta1.Coin service_fee_cap = 5 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/core-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
     string service_context_id = 6;
 }

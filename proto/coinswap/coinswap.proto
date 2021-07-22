@@ -25,7 +25,7 @@ message Params {
   option (gogoproto.goproto_stringer) = true;
 
   cosmos.base.v1beta1.Coin fee = 1 [
-    (gogoproto.customtype) = "github.com/irisnet/irishub-sdk-go/types.Dec",
+    (gogoproto.customtype) = "github.com/irisnet/core-sdk-go/types.Dec",
     (gogoproto.nullable) = false
   ];
 }

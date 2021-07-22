@@ -29,7 +29,7 @@ message Params {
 
     string token_tax_rate = 1 [
         (gogoproto.moretags) = "yaml:\"token_tax_rate\"",
-        (gogoproto.customtype) = "github.com/irisnet/irishub-sdk-go/types.Dec",
+        (gogoproto.customtype) = "github.com/irisnet/core-sdk-go/types.Dec",
         (gogoproto.nullable) = false
     ];
 
@@ -40,7 +40,7 @@ message Params {
 
     string mint_token_fee_ratio = 3 [
         (gogoproto.moretags) = "yaml:\"mint_token_fee_ratio\"",
-        (gogoproto.customtype) = "github.com/irisnet/irishub-sdk-go/types.Dec",
+        (gogoproto.customtype) = "github.com/irisnet/core-sdk-go/types.Dec",
         (gogoproto.nullable) = false
     ];
 }

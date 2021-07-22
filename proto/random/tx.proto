@@ -11,5 +11,5 @@ message MsgRequestRandom {
     uint64 block_interval = 1 [ (gogoproto.moretags) = "yaml:\"block_interval\"" ];
     string consumer = 2 ;
     bool oracle = 3;
-    repeated cosmos.base.v1beta1.Coin service_fee_cap = 4 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/irishub-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
+    repeated cosmos.base.v1beta1.Coin service_fee_cap = 4 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/core-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
 }

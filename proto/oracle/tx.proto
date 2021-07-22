@@ -31,7 +31,7 @@ message MsgCreateFeed {
     repeated string providers = 6;
     string input = 7;
     int64 timeout = 8;
-    repeated cosmos.base.v1beta1.Coin service_fee_cap = 9 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/irishub-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
+    repeated cosmos.base.v1beta1.Coin service_fee_cap = 9 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/core-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
     uint64 repeated_frequency = 10 [ (gogoproto.moretags) = "yaml:\"repeated_frequency\"" ];
     string aggregate_func = 11 [ (gogoproto.moretags) = "yaml:\"aggregate_func\"" ];
     string value_json_path = 12 [ (gogoproto.moretags) = "yaml:\"value_json_path\"" ];
@@ -66,7 +66,7 @@ message MsgEditFeed {
     uint64 latest_history = 3 [ (gogoproto.moretags) = "yaml:\"latest_history\"" ];
     repeated string providers = 4;
     int64 timeout = 5;
-    repeated cosmos.base.v1beta1.Coin service_fee_cap = 6 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/irishub-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
+    repeated cosmos.base.v1beta1.Coin service_fee_cap = 6 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/core-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
     uint64 repeated_frequency = 7 [ (gogoproto.moretags) = "yaml:\"repeated_frequency\"" ];
     uint32 response_threshold = 8 [ (gogoproto.moretags) = "yaml:\"response_threshold\"" ];
     string creator = 9;
