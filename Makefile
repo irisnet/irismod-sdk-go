@@ -22,7 +22,7 @@ test-unit:
 
 test-integration:
 	cd integration_test/scripts/ && sh build.sh && sh start.sh
-	sleep 2s
+	sleep 5s
 	cd integration_test && go test -v ./...
 	cd integration_test/scripts/ && sh clean.sh
 
