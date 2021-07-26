@@ -85,7 +85,7 @@ func (s IntegrationTestSuite) TestNFT() {
 	uName := s.RandStringOfLength(10)
 	pwd := "11111111"
 
-	recipient, _, err := s.Key.Add(uName, pwd)
+	recipient, _, err := s.Add(uName, pwd)
 	require.NoError(s.T(), err)
 
 	transferReq := nft.TransferNFTRequest{
@@ -144,4 +144,12 @@ func (s IntegrationTestSuite) TestNFT() {
 	require.NoError(s.T(), err)
 	require.Equal(s.T(), uint64(0), supply)
 
+	//test TransferDenom
+	//transferDenomReq := nft.TransferDenomRequest{
+	//	Recipient: recipient,
+	//	ID:        mintReq.ID,
+	//}
+	//res, err = s.NFT.TransferDenom(transferDenomReq, baseTx)
+	//require.NoError(s.T(), err)
+	//require.NotEmpty(s.T(), res.Hash)
 }
