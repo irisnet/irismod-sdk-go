@@ -11,6 +11,7 @@ type Client interface {
 	EditNFT(request EditNFTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	TransferNFT(request TransferNFTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	BurnNFT(request BurnNFTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
+	TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 
 	QuerySupply(denomID, creator string) (uint64, sdk.Error)
 	QueryOwner(creator, denomID string) (QueryOwnerResp, sdk.Error)
@@ -55,6 +56,11 @@ type TransferNFTRequest struct {
 type BurnNFTRequest struct {
 	Denom string `json:"denom"`
 	ID    string `json:"id"`
+}
+
+type TransferDenomRequest struct {
+	ID        string `json:"id"`
+	Recipient string `json:"recipient"`
 }
 
 // IDC defines a set of nft ids that belong to a specific

@@ -16,6 +16,7 @@ var (
 	_ sdk.Msg = &MsgEditNFT{}
 	_ sdk.Msg = &MsgMintNFT{}
 	_ sdk.Msg = &MsgBurnNFT{}
+	_ sdk.Msg = &MsgTransferDenom{}
 )
 
 func (m MsgIssueDenom) Route() string {
@@ -217,6 +218,48 @@ func (m MsgBurnNFT) GetSignBytes() []byte {
 }
 
 func (m MsgBurnNFT) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
+}
+
+func (m MsgTransferDenom) Route() string {
+	return ModuleName
+}
+
+func (m MsgTransferDenom) Type() string {
+	return "transfer_denom"
+}
+
+func (m MsgTransferDenom) ValidateBasic() error {
+	if len(m.Sender) == 0 {
+		return sdk.Wrapf("missing sender address")
+	}
+
+	if err := sdk.ValidateAccAddress(m.Sender); err != nil {
+		return sdk.Wrap(err)
+	}
+	id := strings.TrimSpace(m.Id)
+	if len(id) == 0 {
+		return sdk.Wrapf("missing id")
+	}
+
+	if len(m.Recipient) == 0 {
+		return sdk.Wrapf("missing recipient address")
+	}
+	if err := sdk.ValidateAccAddress(m.Recipient); err != nil {
+		return sdk.Wrap(err)
+	}
+	return nil
+}
+
+func (m MsgTransferDenom) GetSignBytes() []byte {
+	bz, err := ModuleCdc.MarshalJSON(&m)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(bz)
+}
+
+func (m MsgTransferDenom) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 

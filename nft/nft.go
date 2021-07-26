@@ -122,6 +122,20 @@ func (nc nftClient) BurnNFT(request BurnNFTRequest, baseTx sdk.BaseTx) (sdk.Resu
 	return nc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
+func (nc nftClient) TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	sender, err := nc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
+
+	msg := &MsgTransferDenom{
+		Sender:    sender.String(),
+		Id:        request.ID,
+		Recipient: request.Recipient,
+	}
+	return nc.BuildAndSend([]sdk.Msg{msg}, baseTx)
+}
+
 func (nc nftClient) QuerySupply(denom, creator string) (uint64, sdk.Error) {
 	if len(denom) == 0 {
 		return 0, sdk.Wrapf("denom is required")
