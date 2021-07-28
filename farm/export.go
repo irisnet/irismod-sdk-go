@@ -4,11 +4,11 @@ import (
 	sdk "github.com/irisnet/core-sdk-go/types"
 )
 
-// expose Gov module api for user
+// expose Farm module api for user
 type Client interface {
 	sdk.Module
 
-	CreatePool(request CreatePoolRequest) sdk.Error
+	CreatePool(request CreatePoolRequest) (MsgCreatePoolResponse, sdk.Error)
 	DestroyPool(request DestroyPoolRequest) sdk.Error
 	AdjustPool(request AdjustPoolRequest) sdk.Error
 	Stake(request StakeRequest) sdk.Error
@@ -22,25 +22,41 @@ type Client interface {
 }
 
 type CreatePoolRequest struct {
-	Title string `json:"title"`
+	Name           string    `json:"name"`
+	Description    string    `json:"description"`
+	LpTokenDenom   string    `json:"lp_token_denom"`
+	StartHeight    int64     `json:"start_height"`
+	RewardPerBlock sdk.Coins `json:"reward_per_block"`
+	TotalReward    sdk.Coins `json:"total_reward"`
+	Editable       bool      `json:"editable"`
+	Creator        string    `json:"creator"`
 }
 
 type DestroyPoolRequest struct {
-	Title string `json:"title"`
+	PoolName string `json:"pool_name"`
+	Creator  string `json:"creator"`
 }
 
 type AdjustPoolRequest struct {
-	Title string `json:"title"`
+	PoolName         string    `json:"pool_name"`
+	AdditionalReward sdk.Coins `json:"additional_reward"`
+	RewardPerBlock   sdk.Coins `json:"reward_per_block"`
+	Creator          string    `json:"creator"`
 }
 
 type StakeRequest struct {
-	Title string `json:"title"`
+	PoolName string   `json:"pool_name"`
+	Amount   sdk.Coin `json:"amount"`
+	Sender   string   `json:"sender"`
 }
 
 type UnstakeRequest struct {
-	Title string `json:"title"`
+	PoolName string   `json:"pool_name"`
+	Amount   sdk.Coin `json:"amount"`
+	Sender   string   `json:"sender"`
 }
 
 type HarvestRequest struct {
-	Title string `json:"title"`
+	PoolName string `json:"pool_name"`
+	Sender   string `json:"sender"`
 }

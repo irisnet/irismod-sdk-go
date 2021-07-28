@@ -26,9 +26,13 @@ func (fc farmClient) RegisterInterfaceTypes(registry types.InterfaceRegistry) {
 	RegisterInterfaces(registry)
 }
 
-func (fc farmClient) CreatePool(request CreatePoolRequest) sdk.Error {
+func (fc farmClient) CreatePool(request CreatePoolRequest) (MsgCreatePoolResponse, sdk.Error) {
+	//creator, err := sdk.AccAddressFromBech32(request.Creator)
+	//if err != nil {
+	//	return MsgCreatePoolResponse{}, err
+	//}
 
-	return nil
+	return MsgCreatePoolResponse{}, nil
 }
 
 func (fc farmClient) DestroyPool(request DestroyPoolRequest) sdk.Error {

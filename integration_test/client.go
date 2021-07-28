@@ -8,11 +8,10 @@ import (
 	cryptocodec "github.com/irisnet/core-sdk-go/common/crypto/codec"
 	"github.com/irisnet/core-sdk-go/types"
 	txtypes "github.com/irisnet/core-sdk-go/types/tx"
+
 	"github.com/tendermint/tendermint/libs/log"
 
 	"github.com/irisnet/irismod-sdk-go/token"
-
-	"github.com/irisnet/irismod-sdk-go/staking"
 
 	"github.com/irisnet/irismod-sdk-go/service"
 
@@ -26,8 +25,6 @@ import (
 
 	"github.com/irisnet/irismod-sdk-go/htlc"
 
-	"github.com/irisnet/irismod-sdk-go/gov"
-
 	"github.com/irisnet/irismod-sdk-go/coinswap"
 )
 
@@ -37,10 +34,9 @@ type Client struct {
 	encodingConfig types.EncodingConfig
 
 	types.BaseClient
-	Bank    bank.Client
-	Token   token.Client
-	Staking staking.Client
-	Gov     gov.Client
+	Bank  bank.Client
+	Token token.Client
+
 	Service service.Client
 	Record  record.Client
 	Random  random.Client
@@ -52,13 +48,11 @@ type Client struct {
 
 func NewClient(cfg types.ClientConfig) Client {
 	encodingConfig := makeEncodingConfig()
-
 	// create a instance of baseClient
 	baseClient := client.NewBaseClient(cfg, encodingConfig, nil)
 	bankClient := bank.NewClient(baseClient, encodingConfig.Marshaler)
 	tokenClient := token.NewClient(baseClient, encodingConfig.Marshaler)
-	stakingClient := staking.NewClient(baseClient, encodingConfig.Marshaler)
-	govClient := gov.NewClient(baseClient, encodingConfig.Marshaler)
+
 	serviceClient := service.NewClient(baseClient, encodingConfig.Marshaler)
 	recordClient := record.NewClient(baseClient, encodingConfig.Marshaler)
 	nftClient := nft.NewClient(baseClient, encodingConfig.Marshaler)
@@ -74,8 +68,6 @@ func NewClient(cfg types.ClientConfig) Client {
 		encodingConfig: encodingConfig,
 		Bank:           bankClient,
 		Token:          tokenClient,
-		Staking:        stakingClient,
-		Gov:            govClient,
 		Service:        serviceClient,
 		Record:         recordClient,
 		Random:         randomClient,
@@ -88,8 +80,6 @@ func NewClient(cfg types.ClientConfig) Client {
 	client.RegisterModule(
 		bankClient,
 		tokenClient,
-		stakingClient,
-		govClient,
 		serviceClient,
 		recordClient,
 		nftClient,
