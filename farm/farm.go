@@ -26,38 +26,92 @@ func (fc farmClient) RegisterInterfaceTypes(registry types.InterfaceRegistry) {
 	RegisterInterfaces(registry)
 }
 
-func (fc farmClient) CreatePool(request CreatePoolRequest) (MsgCreatePoolResponse, sdk.Error) {
-	//creator, err := sdk.AccAddressFromBech32(request.Creator)
-	//if err != nil {
-	//	return MsgCreatePoolResponse{}, err
-	//}
+func (fc farmClient) CreatePool(request CreatePoolRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	author, err := fc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
 
-	return MsgCreatePoolResponse{}, nil
+	msg := &MsgCreatePool{
+		Name:           request.Name,
+		Description:    request.Description,
+		LpTokenDenom:   request.LpTokenDenom,
+		StartHeight:    request.StartHeight,
+		RewardPerBlock: request.RewardPerBlock,
+		TotalReward:    request.TotalReward,
+		Editable:       request.Editable,
+		Creator:        author.String(),
+	}
+	return fc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
-func (fc farmClient) DestroyPool(request DestroyPoolRequest) sdk.Error {
+func (fc farmClient) DestroyPool(request DestroyPoolRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	author, err := fc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
 
-	return nil
+	msg := &MsgDestroyPool{
+		PoolName: request.PoolName,
+		Creator:  author.String(),
+	}
+	return fc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
-func (fc farmClient) AdjustPool(request AdjustPoolRequest) sdk.Error {
+func (fc farmClient) AdjustPool(request AdjustPoolRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	author, err := fc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
 
-	return nil
+	msg := &MsgAdjustPool{
+		PoolName:         request.PoolName,
+		AdditionalReward: request.AdditionalReward,
+		RewardPerBlock:   request.RewardPerBlock,
+		Creator:          author.String(),
+	}
+	return fc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
-func (fc farmClient) Stake(request StakeRequest) sdk.Error {
+func (fc farmClient) Stake(request StakeRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	author, err := fc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
 
-	return nil
+	msg := &MsgStake{
+		PoolName: request.PoolName,
+		Amount:   request.Amount,
+		Sender:   author.String(),
+	}
+	return fc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
-func (fc farmClient) Unstake(request UnstakeRequest) sdk.Error {
+func (fc farmClient) Unstake(request UnstakeRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	author, err := fc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
 
-	return nil
+	msg := &MsgUnstake{
+		PoolName: request.PoolName,
+		Amount:   request.Amount,
+		Sender:   author.String(),
+	}
+	return fc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
-func (fc farmClient) Harvest(request HarvestRequest) sdk.Error {
+func (fc farmClient) Harvest(request HarvestRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	author, err := fc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
 
-	return nil
+	msg := &MsgUnstake{
+		PoolName: request.PoolName,
+		Sender:   author.String(),
+	}
+	return fc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
 func (fc farmClient) QueryFarmPools(request QueryFarmPoolsRequest) (QueryFarmPoolsResponse, sdk.Error) {
