@@ -8,6 +8,7 @@ import (
 	cryptocodec "github.com/irisnet/core-sdk-go/common/crypto/codec"
 	"github.com/irisnet/core-sdk-go/types"
 	txtypes "github.com/irisnet/core-sdk-go/types/tx"
+	"github.com/irisnet/irismod-sdk-go/farm"
 
 	"github.com/tendermint/tendermint/libs/log"
 
@@ -34,9 +35,9 @@ type Client struct {
 	encodingConfig types.EncodingConfig
 
 	types.BaseClient
-	Bank  bank.Client
-	Token token.Client
-
+	Bank    bank.Client
+	Token   token.Client
+	Farm    farm.Client
 	Service service.Client
 	Record  record.Client
 	Random  random.Client
