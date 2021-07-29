@@ -2,6 +2,7 @@ package farm
 
 import (
 	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/core-sdk-go/types/query"
 )
 
 // expose Farm module api for user
@@ -59,4 +60,9 @@ type UnstakeRequest struct {
 type HarvestRequest struct {
 	PoolName string `json:"pool_name"`
 	Sender   string `json:"sender"`
+}
+
+type QueryFarmPoolsResp struct {
+	Pools      []*FarmPoolEntry    `json:"pools"`
+	Pagination *query.PageResponse `json:"pagination"`
 }

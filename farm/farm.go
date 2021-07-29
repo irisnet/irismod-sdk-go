@@ -1,6 +1,7 @@
 package farm
 
 import (
+	"context"
 	"github.com/irisnet/core-sdk-go/common/codec"
 	"github.com/irisnet/core-sdk-go/common/codec/types"
 	sdk "github.com/irisnet/core-sdk-go/types"
@@ -115,21 +116,86 @@ func (fc farmClient) Harvest(request HarvestRequest, baseTx sdk.BaseTx) (sdk.Res
 }
 
 func (fc farmClient) QueryFarmPools(request QueryFarmPoolsRequest) (QueryFarmPoolsResponse, sdk.Error) {
+	conn, err := fc.GenConn()
+	if err != nil {
+		return QueryFarmPoolsResponse{}, sdk.Wrap(err)
+	}
 
-	return QueryFarmPoolsResponse{}, nil
+	res, err := NewQueryClient(conn).FarmPools(
+		context.Background(),
+		&QueryFarmPoolsRequest{
+			Pagination: request.Pagination,
+		},
+	)
+	if err != nil {
+		return QueryFarmPoolsResponse{}, sdk.Wrap(err)
+	}
+
+	return QueryFarmPoolsResponse{
+		Pools:      res.Pools,
+		Pagination: res.Pagination,
+	}, nil
 }
 
 func (fc farmClient) QueryFarmPool(request QueryFarmPoolRequest) (QueryFarmPoolResponse, sdk.Error) {
+	conn, err := fc.GenConn()
+	if err != nil {
+		return QueryFarmPoolResponse{}, sdk.Wrap(err)
+	}
 
-	return QueryFarmPoolResponse{}, nil
+	res, err := NewQueryClient(conn).FarmPool(
+		context.Background(),
+		&QueryFarmPoolRequest{
+			Name: request.Name,
+		},
+	)
+	if err != nil {
+		return QueryFarmPoolResponse{}, sdk.Wrap(err)
+	}
+
+	return QueryFarmPoolResponse{
+		Pool: res.Pool,
+	}, nil
 }
 
 func (fc farmClient) QueryFarmer(request QueryFarmerRequest) (QueryFarmerResponse, sdk.Error) {
+	conn, err := fc.GenConn()
+	if err != nil {
+		return QueryFarmerResponse{}, sdk.Wrap(err)
+	}
 
-	return QueryFarmerResponse{}, nil
+	res, err := NewQueryClient(conn).Farmer(
+		context.Background(),
+		&QueryFarmerRequest{
+			Farmer:   request.Farmer,
+			PoolName: request.PoolName,
+		},
+	)
+	if err != nil {
+		return QueryFarmerResponse{}, sdk.Wrap(err)
+	}
+
+	return QueryFarmerResponse{
+		List:   res.List,
+		Height: res.Height,
+	}, nil
 }
 
 func (fc farmClient) QueryParams(request QueryParamsRequest) (QueryParamsResponse, sdk.Error) {
+	conn, err := fc.GenConn()
+	if err != nil {
+		return QueryParamsResponse{}, sdk.Wrap(err)
+	}
 
-	return QueryParamsResponse{}, nil
+	res, err := NewQueryClient(conn).Params(
+		context.Background(),
+		&QueryParamsRequest{},
+	)
+	if err != nil {
+		return QueryParamsResponse{}, sdk.Wrap(err)
+	}
+
+	return QueryParamsResponse{
+		Params: res.Params,
+	}, nil
 }
