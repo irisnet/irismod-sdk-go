@@ -8,6 +8,7 @@ import (
 	cryptocodec "github.com/irisnet/core-sdk-go/common/crypto/codec"
 	"github.com/irisnet/core-sdk-go/types"
 	txtypes "github.com/irisnet/core-sdk-go/types/tx"
+
 	"github.com/irisnet/irismod-sdk-go/farm"
 
 	"github.com/tendermint/tendermint/libs/log"
@@ -53,7 +54,7 @@ func NewClient(cfg types.ClientConfig) Client {
 	baseClient := client.NewBaseClient(cfg, encodingConfig, nil)
 	bankClient := bank.NewClient(baseClient, encodingConfig.Marshaler)
 	tokenClient := token.NewClient(baseClient, encodingConfig.Marshaler)
-
+	farmClient := farm.NewClient(baseClient, encodingConfig.Marshaler)
 	serviceClient := service.NewClient(baseClient, encodingConfig.Marshaler)
 	recordClient := record.NewClient(baseClient, encodingConfig.Marshaler)
 	nftClient := nft.NewClient(baseClient, encodingConfig.Marshaler)
@@ -69,6 +70,7 @@ func NewClient(cfg types.ClientConfig) Client {
 		encodingConfig: encodingConfig,
 		Bank:           bankClient,
 		Token:          tokenClient,
+		Farm:           farmClient,
 		Service:        serviceClient,
 		Record:         recordClient,
 		Random:         randomClient,
@@ -81,6 +83,7 @@ func NewClient(cfg types.ClientConfig) Client {
 	client.RegisterModule(
 		bankClient,
 		tokenClient,
+		farmClient,
 		serviceClient,
 		recordClient,
 		nftClient,
