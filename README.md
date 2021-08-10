@@ -1,5 +1,5 @@
-# IRISMOD Go SDK
-Golang SDK for IRISMOD Modules
+# IRISMOD SDK
+Golang SDK for IRISnet Modules
 
 ## Requirement
 Go version above 1.16.4
