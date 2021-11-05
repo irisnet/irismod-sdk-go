@@ -2,11 +2,12 @@ syntax = "proto3";
 package irismod.oracle;
 
 import "oracle/oracle.proto";
+import "service/service.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/irisnet/irismod-sdk-go/oracle";
+option go_package = "github.com/irisnet/irishub-sdk-go/modules/oracle";
 
 // Query creates service with guardian as rpc
 service Query {
@@ -68,19 +69,5 @@ message FeedContext {
     repeated cosmos.base.v1beta1.Coin service_fee_cap = 6 [ (gogoproto.nullable) = false, (gogoproto.castrepeated) = "github.com/irisnet/core-sdk-go/types.Coins", (gogoproto.moretags) = "yaml:\"service_fee_cap\"" ];
     uint64 repeated_frequency = 7 [ (gogoproto.moretags) = "yaml:\"repeated_frequency\"" ];
     uint32 response_threshold = 8 [ (gogoproto.moretags) = "yaml:\"response_threshold\"" ];
-    RequestContextState state = 9;
-}
-
-// RequestContextState is a type alias that represents a request status as a byte
-enum RequestContextState {
-    option (gogoproto.enum_stringer) = true;
-    option (gogoproto.goproto_enum_stringer) = false;
-    option (gogoproto.goproto_enum_prefix) = false;
-
-    // RUNNING defines the running request context status.
-    RUNNING = 0 [(gogoproto.enumvalue_customname) = "RUNNING"];
-    // PAUSED defines the paused request context status.
-    PAUSED = 1 [(gogoproto.enumvalue_customname) = "PAUSED"];
-    // COMPLETED defines the completed request context status.
-    COMPLETED = 2 [(gogoproto.enumvalue_customname) = "COMPLETED"];
+    irismod.service.RequestContextState state = 9;
 }

@@ -1,12 +1,11 @@
-package integrationtest
+package integration_test
 
 import (
 	"strconv"
 	"time"
 
 	"github.com/irisnet/core-sdk-go/types"
-
-	"github.com/irisnet/irismod-sdk-go/random"
+	"github.com/irisnet/irishub-sdk-go/modules/random"
 )
 
 type TestRandom struct {
@@ -48,7 +47,7 @@ func requestRandom(s IntegrationTestSuite) {
 		Memo:     "test",
 		Mode:     types.Commit,
 	}
-	serviceFeeCap, err := types.ParseCoins("10iris")
+	serviceFeeCap, err := types.ParseCoinsNormalized("10iris")
 	s.NoError(err)
 
 	req := random.RequestRandomRequest{

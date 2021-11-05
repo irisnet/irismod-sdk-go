@@ -1,14 +1,15 @@
-package integrationtest
+package integration_test
 
 import (
+	"fmt"
+	"github.com/irisnet/irishub-sdk-go/modules/token"
 	"time"
 
-	sdk "github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/irismod-sdk-go/token"
-
-	"github.com/irisnet/irismod-sdk-go/coinswap"
+	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/irishub-sdk-go/modules/coinswap"
+	sdkquery "github.com/irisnet/irishub-sdk-go/modules/coinswap"
 )
 
 func (s IntegrationTestSuite) TestCoinSwap() {
@@ -37,7 +38,7 @@ func (s IntegrationTestSuite) TestCoinSwap() {
 	request := coinswap.AddLiquidityRequest{
 		MaxToken: sdk.Coin{
 			Denom:  "ubnb",
-			Amount: sdk.NewInt(1000_000_000),
+			Amount: sdk.NewInt(10_000_000_000),
 		},
 		BaseAmt:      sdk.NewInt(1000_000_000),
 		MinLiquidity: sdk.NewInt(1000_000_000),
@@ -62,4 +63,19 @@ func (s IntegrationTestSuite) TestCoinSwap() {
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), resp.TxHash)
 	require.True(s.T(), resp.OutputAmt.Equal(sdk.NewInt(99)))
+}
+
+func (s IntegrationTestSuite) TestQuery() {
+	res, err := s.Swap.QueryAllPools(sdkquery.PageRequest{
+		Offset:     0,
+		Limit:      10,
+		CountTotal: false,
+	})
+	require.NoError(s.T(), err)
+	fmt.Println(res)
+
+	res1, err1 := s.Swap.QueryPool("lpt-1")
+	require.NoError(s.T(), err1)
+	fmt.Println(res1)
+
 }

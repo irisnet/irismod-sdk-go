@@ -4,11 +4,14 @@ package irismod.coinswap;
 import "gogoproto/gogo.proto";
 import "coinswap/coinswap.proto";
 
-option go_package = "github.com/irisnet/irismod-sdk-go/coinswap";
+option go_package = "github.com/irisnet/irishub-sdk-go/modules/coinswap";
 
 // GenesisState defines the coinswap module's genesis state
 message GenesisState {
   Params params = 1 [ (gogoproto.nullable) = false ];
   string standard_denom = 2
-      [ (gogoproto.moretags) = "yaml:\"standard_denom\"" ];
+  [ (gogoproto.moretags) = "yaml:\"standard_denom\"" ];
+  repeated Pool pool = 3 [ (gogoproto.nullable) = false ];
+  uint64 sequence = 4;
 }
+

@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/irisnet/irismod-sdk-go/service";
+option go_package = "github.com/irisnet/irishub-sdk-go/modules/service";
 option (gogoproto.goproto_getters_all) = false;
 
 // ServiceDefinition defines a standard for service definition.

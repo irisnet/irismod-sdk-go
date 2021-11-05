@@ -4,7 +4,7 @@ package irismod.random;
 import "gogoproto/gogo.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/irisnet/irismod-sdk-go/random";
+option go_package = "github.com/irisnet/irishub-sdk-go/modules/random";
 
 // MsgRequestRandom defines an sdk.Msg type that supports requesting a random number
 message MsgRequestRandom {

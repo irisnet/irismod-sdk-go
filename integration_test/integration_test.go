@@ -1,4 +1,4 @@
-package integrationtest
+package integration_test
 
 import (
 	"io/ioutil"
@@ -8,23 +8,25 @@ import (
 	"testing"
 	"time"
 
-	"github.com/irisnet/core-sdk-go/common/log"
 	"github.com/irisnet/core-sdk-go/types"
 	"github.com/irisnet/core-sdk-go/types/store"
+	sdk "github.com/irisnet/irishub-sdk-go"
+	"github.com/irisnet/irishub-sdk-go/utils/log"
+
 	"github.com/stretchr/testify/suite"
 )
 
 const (
-	nodeURI  = "tcp://localhost:26657"
-	grpcAddr = "localhost:9090"
+	nodeURI  = "tcp://127.0.0.1:26657"
+	grpcAddr = "127.0.0.1:9090"
 	chainID  = "test"
 	charset  = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	addr     = "iaa1w9lvhwlvkwqvg08q84n2k4nn896u9pqx93velx"
+	addr     = "iaa1x6nrhlx2he9kw73x8qcwgsl9tznh6z52msdkwx"
 )
 
 type IntegrationTestSuite struct {
 	suite.Suite
-	Client
+	sdk.IRISHUBClient
 	r            *rand.Rand
 	rootAccount  MockAccount
 	randAccounts []MockAccount
@@ -55,7 +57,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 		panic(err)
 	}
 
-	s.Client = NewClient(cfg)
+	s.IRISHUBClient = sdk.NewIRISHUBClient(cfg)
 	s.r = rand.New(rand.NewSource(time.Now().UnixNano()))
 	s.rootAccount = MockAccount{
 		Name:     "validator",
@@ -70,7 +72,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 }
 
 func (s *IntegrationTestSuite) initAccount() {
-	_, err := s.Import(
+	_, err := s.Key.Import(
 		s.Account().Name,
 		s.Account().Password,
 		string(getPrivKeyArmor()),
@@ -83,7 +85,7 @@ func (s *IntegrationTestSuite) initAccount() {
 	for i := 0; i < 5; i++ {
 		name := s.RandStringOfLength(10)
 		pwd := s.RandStringOfLength(16)
-		address, _, err := s.Add(name, "11111111")
+		address, _, err := s.Key.Add(name, "11111111")
 		if err != nil {
 			panic("generate test account failed")
 		}

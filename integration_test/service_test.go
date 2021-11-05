@@ -1,13 +1,14 @@
-package integrationtest
+package integration_test
 
 import (
 	"time"
 
-	sdk "github.com/irisnet/core-sdk-go/types"
-	"github.com/irisnet/core-sdk-go/types/query"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/irismod-sdk-go/service"
+	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/core-sdk-go/types/query"
+
+	"github.com/irisnet/irishub-sdk-go/modules/service"
 )
 
 func (s IntegrationTestSuite) TestService() {
@@ -143,7 +144,7 @@ loop:
 	require.Equal(s.T(), request.ServiceName, invocation.ServiceName)
 	require.Equal(s.T(), request.Input, invocation.Input)
 
-	addr, _, err := s.Add(s.RandStringOfLength(30), "1234567890")
+	addr, _, err := s.Key.Add(s.RandStringOfLength(30), "1234567890")
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), addr)
 

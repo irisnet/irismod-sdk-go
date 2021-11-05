@@ -1,15 +1,14 @@
-package integrationtest
+package integration_test
 
 import (
 	"fmt"
 	"time"
 
-	"github.com/irisnet/irismod-sdk-go/oracle"
-
-	sdk "github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/irismod-sdk-go/service"
+	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/irishub-sdk-go/modules/oracle"
+	"github.com/irisnet/irishub-sdk-go/modules/service"
 )
 
 var serviceName = generateServiceName()

@@ -1,15 +1,15 @@
-package integrationtest
+package integration_test
 
 import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
 
-	sdk "github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 
-	"github.com/irisnet/irismod-sdk-go/htlc"
+	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/irishub-sdk-go/modules/htlc"
 )
 
 func (s IntegrationTestSuite) TestHTLC() {

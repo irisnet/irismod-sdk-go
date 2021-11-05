@@ -1,12 +1,12 @@
-package integrationtest
+package integration_test
 
 import (
 	"fmt"
 
-	sdk "github.com/irisnet/core-sdk-go/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/irismod-sdk-go/record"
+	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/irishub-sdk-go/modules/record"
 )
 
 func (s IntegrationTestSuite) TestRecord() {
