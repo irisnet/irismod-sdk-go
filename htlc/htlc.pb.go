@@ -8,9 +8,9 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-	_ "github.com/golang/protobuf/ptypes/duration"
 	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
+	_ "google.golang.org/protobuf/types/known/durationpb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1539,7 +1539,10 @@ func (m *HTLC) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthHtlc
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthHtlc
 			}
 			if (iNdEx + skippy) > l {
@@ -1754,7 +1757,10 @@ func (m *AssetSupply) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthHtlc
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthHtlc
 			}
 			if (iNdEx + skippy) > l {
@@ -1838,7 +1844,10 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthHtlc
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthHtlc
 			}
 			if (iNdEx + skippy) > l {
@@ -2145,7 +2154,10 @@ func (m *AssetParam) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthHtlc
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthHtlc
 			}
 			if (iNdEx + skippy) > l {
@@ -2316,7 +2328,10 @@ func (m *SupplyLimit) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthHtlc
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthHtlc
 			}
 			if (iNdEx + skippy) > l {

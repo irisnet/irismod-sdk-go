@@ -8,10 +8,10 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-	_ "github.com/golang/protobuf/ptypes/duration"
-	_ "github.com/golang/protobuf/ptypes/timestamp"
 	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
+	_ "google.golang.org/protobuf/types/known/durationpb"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -2090,7 +2090,10 @@ func (m *ServiceDefinition) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -2406,7 +2409,10 @@ func (m *ServiceBinding) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -2860,7 +2866,10 @@ func (m *RequestContext) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3193,7 +3202,10 @@ func (m *Request) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3398,7 +3410,10 @@ func (m *CompactRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3627,7 +3642,10 @@ func (m *Response) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3779,7 +3797,10 @@ func (m *Pricing) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3929,7 +3950,10 @@ func (m *PromotionByTime) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -4032,7 +4056,10 @@ func (m *PromotionByVolume) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -4339,7 +4366,10 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
