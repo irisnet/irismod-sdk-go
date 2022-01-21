@@ -8,12 +8,12 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
-	_ "github.com/golang/protobuf/ptypes/duration"
-	_ "github.com/golang/protobuf/ptypes/timestamp"
 	types1 "github.com/irisnet/core-sdk-go/common/codec/types"
 	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
 	_ "github.com/regen-network/cosmos-proto"
+	_ "google.golang.org/protobuf/types/known/durationpb"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -1355,7 +1355,10 @@ func (m *TextProposal) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
@@ -1490,7 +1493,10 @@ func (m *Deposit) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
@@ -1813,7 +1819,10 @@ func (m *Proposal) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
@@ -1999,7 +2008,10 @@ func (m *TallyResult) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
@@ -2119,7 +2131,10 @@ func (m *Vote) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
@@ -2236,7 +2251,10 @@ func (m *DepositParams) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
@@ -2319,7 +2337,10 @@ func (m *VotingParams) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
@@ -2468,7 +2489,10 @@ func (m *TallyParams) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
+			if skippy < 0 {
+				return ErrInvalidLengthGov
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthGov
 			}
 			if (iNdEx + skippy) > l {
