@@ -22,9 +22,14 @@ type Client interface {
 }
 
 type IssueDenomRequest struct {
-	ID     string `json:"id"`
-	Name   string `json:"name"`
-	Schema string `json:"schema"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Schema      string `json:"schema"`
+	Symbol      string `json:"symbol"`
+	Description string `json:"description"`
+	Uri         string `json:"uri"`
+	UriHash     string `json:"uri_hash"`
+	Data        string `json:"data"`
 }
 
 type MintNFTRequest struct {
@@ -34,14 +39,16 @@ type MintNFTRequest struct {
 	URI       string `json:"uri"`
 	Data      string `json:"data"`
 	Recipient string `json:"recipient"`
+	URIHash   string `json:"uri_hash"`
 }
 
 type EditNFTRequest struct {
-	Denom string `json:"denom"`
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	URI   string `json:"uri"`
-	Data  string `json:"data"`
+	Denom   string `json:"denom"`
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+	URI     string `json:"uri"`
+	Data    string `json:"data"`
+	URIHash string `json:"uri_hash"`
 }
 
 type TransferNFTRequest struct {
@@ -51,6 +58,7 @@ type TransferNFTRequest struct {
 	Data      string `json:"data"`
 	Name      string `json:"name"`
 	Recipient string `json:"recipient"`
+	URIHash   string `json:"uri_hash"`
 }
 
 type BurnNFTRequest struct {
@@ -81,13 +89,18 @@ type QueryNFTResp struct {
 	URI     string `json:"uri"`
 	Data    string `json:"data"`
 	Creator string `json:"creator"`
+	URIHash string `json:"uri_hash"`
 }
 
 type QueryDenomResp struct {
-	ID      string `json:"id"`
-	Name    string `json:"name"`
-	Schema  string `json:"schema"`
-	Creator string `json:"creator"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Schema      string `json:"schema"`
+	Creator     string `json:"creator"`
+	Description string `json:"description"`
+	Uri         string `json:"uri"`
+	UriHash     string `json:"uri_hash"`
+	Data        string `json:"data"`
 }
 
 type QueryCollectionResp struct {
