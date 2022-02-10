@@ -111,6 +111,7 @@ func (nc nftClient) TransferNFT(request TransferNFTRequest, baseTx sdk.BaseTx) (
 		Data:      request.Data,
 		Sender:    sender.String(),
 		Recipient: request.Recipient,
+		UriHash:   request.URIHash,
 	}
 	return nc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
