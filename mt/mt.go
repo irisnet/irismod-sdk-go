@@ -253,13 +253,9 @@ func (mc mtClient) QueryMT(denom, mtID string) (QueryMTResp, sdk.Error) {
 	return res.Mt.Convert().(QueryMTResp), nil
 }
 
-func (mc mtClient) QueryMTs(denom, mtID string, pagination *query.PageRequest) ([]QueryMTResp, sdk.Error) {
-	if len(denom) == 0 {
-		return nil, sdk.Wrapf("denom is required")
-	}
-
-	if len(mtID) == 0 {
-		return nil, sdk.Wrapf("mtID is required")
+func (mc mtClient) QueryMTs(denomID string, pagination *query.PageRequest) ([]QueryMTResp, sdk.Error) {
+	if len(denomID) == 0 {
+		return nil, sdk.Wrapf("denomID is required")
 	}
 
 	conn, err := mc.GenConn()
@@ -271,7 +267,7 @@ func (mc mtClient) QueryMTs(denom, mtID string, pagination *query.PageRequest) (
 	res, err := NewQueryClient(conn).MTs(
 		context.Background(),
 		&QueryMTsRequest{
-			DenomId:    denom,
+			DenomId:    denomID,
 			Pagination: pagination,
 		},
 	)

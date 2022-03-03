@@ -9,25 +9,29 @@ type Client interface {
 	sdk.Module
 
 	IssueDenom(request IssueDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
+	TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	EditMT(request EditMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	TransferMT(request TransferMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	BurnMT(request BurnMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
-	TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 
 	QuerySupply(denomID, creator string) (uint64, sdk.Error)
 	QueryDenoms() ([]QueryDenomResp, sdk.Error)
 	QueryDenom(denomID string) (QueryDenomResp, sdk.Error)
 	QueryMTSupply(denomID, mtID string) (uint64, sdk.Error)
-	QueryMTs(denomID, mtID string, pagination *query.PageRequest) ([]QueryMTResp, sdk.Error)
+	QueryMTs(denomID string, pagination *query.PageRequest) ([]QueryMTResp, sdk.Error)
 	QueryMT(denomID, mtID string) (QueryMTResp, sdk.Error)
 	QueryBalances(denomID, creator string, pagination *query.PageRequest) ([]Balance, sdk.Error)
 }
 
 type IssueDenomRequest struct {
-	ID   string `json:"id"`
 	Name string `json:"name"`
 	Data []byte `json:"data"`
+}
+
+type TransferDenomRequest struct {
+	ID        string `json:"id"`
+	Recipient string `json:"recipient"`
 }
 
 type MintMTRequest struct {
@@ -57,10 +61,6 @@ type BurnMTRequest struct {
 	Amount uint64 `json:"amount"`
 }
 
-type TransferDenomRequest struct {
-	ID        string `json:"id"`
-	Recipient string `json:"recipient"`
-}
 
 // IDC defines a set of mt ids that belong to a specific
 type IDC struct {
@@ -73,7 +73,7 @@ type QueryOwnerResp struct {
 	IDCs    []IDC  `json:"idcs" yaml:"idcs"`
 }
 
-// BaseMT non fungible token definition
+// QueryMTResp defines a multi token
 type QueryMTResp struct {
 	ID     string `json:"id"`
 	Supply uint64 `json:"supply"`
