@@ -1,4 +1,4 @@
-module github.com/irisnet/irismod-sdk-go/nft
+module github.com/irisnet/irismod-sdk-go/mt
 
 go 1.16
 
