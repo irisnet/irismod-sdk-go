@@ -1,7 +1,6 @@
 package mt
 
 import (
-	"github.com/cosmos/cosmos-sdk/types/query"
 	sdk "github.com/irisnet/core-sdk-go/types"
 )
 
@@ -19,13 +18,12 @@ type Client interface {
 	QueryDenoms() ([]QueryDenomResp, sdk.Error)
 	QueryDenom(denomID string) (QueryDenomResp, sdk.Error)
 	QueryMTSupply(denomID, mtID string) (uint64, sdk.Error)
-	QueryMTs(denomID, mtID string, pagination *query.PageRequest) ([]QueryMTResp, sdk.Error)
+	QueryMTs(denomID string) ([]QueryMTResp, sdk.Error)
 	QueryMT(denomID, mtID string) (QueryMTResp, sdk.Error)
-	QueryBalances(denomID, creator string, pagination *query.PageRequest) ([]Balance, sdk.Error)
+	QueryBalances(denomID, owner string) ([]QueryBalanceResp, sdk.Error)
 }
 
 type IssueDenomRequest struct {
-	ID   string `json:"id"`
 	Name string `json:"name"`
 	Data []byte `json:"data"`
 }
@@ -62,17 +60,6 @@ type TransferDenomRequest struct {
 	Recipient string `json:"recipient"`
 }
 
-// IDC defines a set of mt ids that belong to a specific
-type IDC struct {
-	Denom    string   `json:"denom" yaml:"denom"`
-	TokenIDs []string `json:"token_ids" yaml:"token_ids"`
-}
-
-type QueryOwnerResp struct {
-	Address string `json:"address" yaml:"address"`
-	IDCs    []IDC  `json:"idcs" yaml:"idcs"`
-}
-
 // BaseMT non fungible token definition
 type QueryMTResp struct {
 	ID     string `json:"id"`
@@ -88,11 +75,6 @@ type QueryDenomResp struct {
 }
 
 type QueryBalanceResp struct {
-	Balance    []Balance           `json:"balance"`
-	Pagination *query.PageResponse `json:"pagination"`
-}
-
-type QueryCollectionResp struct {
-	Denom QueryDenomResp `json:"denom" yaml:"denom"`
-	MTs   []QueryMTResp  `json:"mts" yaml:"mts"`
+	MtId   string `json:"mt_id"`
+	Amount uint64 `json:"amount"`
 }

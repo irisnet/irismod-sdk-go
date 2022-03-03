@@ -2,7 +2,6 @@ package mt
 
 import (
 	"context"
-	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/irisnet/core-sdk-go/common/codec"
 	"github.com/irisnet/core-sdk-go/common/codec/types"
 	sdk "github.com/irisnet/core-sdk-go/types"
@@ -123,6 +122,10 @@ func (mc mtClient) TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx
 		return sdk.ResultTx{}, sdk.Wrap(err)
 	}
 
+	if err := sdk.ValidateAccAddress(request.Recipient); err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
+
 	msg := &MsgTransferDenom{
 		Id:        request.ID,
 		Sender:    sender.String(),
@@ -189,8 +192,11 @@ func (mc mtClient) QueryMTSupply(denom, mtID string) (uint64, sdk.Error) {
 }
 
 func (mc mtClient) QueryDenom(denom string) (QueryDenomResp, sdk.Error) {
-	conn, err := mc.GenConn()
+	if len(denom) == 0 {
+		return QueryDenomResp{}, sdk.Wrapf("denom is required")
+	}
 
+	conn, err := mc.GenConn()
 	if err != nil {
 		return QueryDenomResp{}, sdk.Wrap(err)
 	}
@@ -253,13 +259,9 @@ func (mc mtClient) QueryMT(denom, mtID string) (QueryMTResp, sdk.Error) {
 	return res.Mt.Convert().(QueryMTResp), nil
 }
 
-func (mc mtClient) QueryMTs(denom, mtID string, pagination *query.PageRequest) ([]QueryMTResp, sdk.Error) {
+func (mc mtClient) QueryMTs(denom string) ([]QueryMTResp, sdk.Error) {
 	if len(denom) == 0 {
 		return nil, sdk.Wrapf("denom is required")
-	}
-
-	if len(mtID) == 0 {
-		return nil, sdk.Wrapf("mtID is required")
 	}
 
 	conn, err := mc.GenConn()
@@ -271,8 +273,7 @@ func (mc mtClient) QueryMTs(denom, mtID string, pagination *query.PageRequest) (
 	res, err := NewQueryClient(conn).MTs(
 		context.Background(),
 		&QueryMTsRequest{
-			DenomId:    denom,
-			Pagination: pagination,
+			DenomId: denom,
 		},
 	)
 	if err != nil {
@@ -282,9 +283,16 @@ func (mc mtClient) QueryMTs(denom, mtID string, pagination *query.PageRequest) (
 	return mts(res.Mts).Convert().([]QueryMTResp), nil
 }
 
-func (mc mtClient) QueryBalances(denom, owner string, pagination *query.PageRequest) ([]Balance, sdk.Error) {
-	conn, err := mc.GenConn()
+func (mc mtClient) QueryBalances(denom, owner string) ([]QueryBalanceResp, sdk.Error) {
+	if len(denom) == 0 {
+		return nil, sdk.Wrapf("denom is required")
+	}
 
+	if err := sdk.ValidateAccAddress(owner); err != nil {
+		return nil, sdk.Wrap(err)
+	}
+
+	conn, err := mc.GenConn()
 	if err != nil {
 		return nil, sdk.Wrap(err)
 	}
@@ -292,13 +300,12 @@ func (mc mtClient) QueryBalances(denom, owner string, pagination *query.PageRequ
 	res, err := NewQueryClient(conn).Balances(
 		context.Background(),
 		&QueryBalancesRequest{
-			DenomId:    denom,
-			Owner:      owner,
-			Pagination: pagination,
+			DenomId: denom,
+			Owner:   owner,
 		},
 	)
 	if err != nil {
 		return nil, sdk.Wrap(err)
 	}
-	return res.Balance, nil
+	return balances(res.Balance).Convert().([]QueryBalanceResp), nil
 }
