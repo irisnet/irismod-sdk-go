@@ -3,7 +3,7 @@ package mt
 import sdk "github.com/irisnet/core-sdk-go/types"
 
 const (
-	ModuleName = "oracle"
+	ModuleName = "mt"
 )
 
 var (
