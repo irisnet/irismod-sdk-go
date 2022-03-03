@@ -8,11 +8,11 @@ type Client interface {
 	sdk.Module
 
 	IssueDenom(request IssueDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
+	TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	EditMT(request EditMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	TransferMT(request TransferMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	BurnMT(request BurnMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
-	TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 
 	QuerySupply(denomID, creator string) (uint64, sdk.Error)
 	QueryDenoms() ([]QueryDenomResp, sdk.Error)
@@ -26,6 +26,11 @@ type Client interface {
 type IssueDenomRequest struct {
 	Name string `json:"name"`
 	Data []byte `json:"data"`
+}
+
+type TransferDenomRequest struct {
+	ID        string `json:"id"`
+	Recipient string `json:"recipient"`
 }
 
 type MintMTRequest struct {
@@ -55,11 +60,19 @@ type BurnMTRequest struct {
 	Amount uint64 `json:"amount"`
 }
 
-type TransferDenomRequest struct {
-	ID        string `json:"id"`
-	Recipient string `json:"recipient"`
+
+// IDC defines a set of mt ids that belong to a specific
+type IDC struct {
+	Denom    string   `json:"denom" yaml:"denom"`
+	TokenIDs []string `json:"token_ids" yaml:"token_ids"`
 }
 
+type QueryOwnerResp struct {
+	Address string `json:"address" yaml:"address"`
+	IDCs    []IDC  `json:"idcs" yaml:"idcs"`
+}
+
+// QueryMTResp defines a multi token
 // BaseMT non fungible token definition
 type QueryMTResp struct {
 	ID     string `json:"id"`

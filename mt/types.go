@@ -1,6 +1,9 @@
 package mt
 
-import sdk "github.com/irisnet/core-sdk-go/types"
+import (
+	sdk "github.com/irisnet/core-sdk-go/types"
+	"strings"
+)
 
 const (
 	ModuleName = "mt"
@@ -41,28 +44,38 @@ func (m *MsgMintMT) GetSigners() []sdk.AccAddress {
 }
 
 func (m *MsgIssueDenom) Route() string {
-	//TODO implement me
-	panic("implement me")
+	return ModuleName
 }
 
 func (m *MsgIssueDenom) Type() string {
-	//TODO implement me
-	panic("implement me")
+	return "issue_denom"
 }
 
 func (m *MsgIssueDenom) ValidateBasic() error {
-	//TODO implement me
-	panic("implement me")
+	if len(m.Sender) == 0 {
+		return sdk.Wrapf("missing sender address")
+	}
+
+	if err := sdk.ValidateAccAddress(m.Sender); err != nil {
+		return sdk.Wrap(err)
+	}
+	name := strings.TrimSpace(m.Name)
+	if len(name) == 0 {
+		return sdk.Wrapf("missing name")
+	}
+	return nil
 }
 
 func (m *MsgIssueDenom) GetSignBytes() []byte {
-	//TODO implement me
-	panic("implement me")
+	bz, err := ModuleCdc.MarshalJSON(m)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(bz)
 }
 
 func (m *MsgIssueDenom) GetSigners() []sdk.AccAddress {
-	//TODO implement me
-	panic("implement me")
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 
 func (m *MsgEditMT) Route() string {
@@ -90,79 +103,137 @@ func (m *MsgEditMT) GetSigners() []sdk.AccAddress {
 	panic("implement me")
 }
 
-func (m *MsgTransferMT) Route() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferMT) Route() string {
+	return ModuleName
 }
 
-func (m *MsgTransferMT) Type() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferMT) Type() string {
+	return "transfer_mt"
 }
 
-func (m *MsgTransferMT) ValidateBasic() error {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferMT) ValidateBasic() error {
+	if len(m.Sender) == 0 {
+		return sdk.Wrapf("missing sender address")
+	}
+	if err := sdk.ValidateAccAddress(m.Sender); err != nil {
+		return sdk.Wrap(err)
+	}
+
+	if len(m.Recipient) == 0 {
+		return sdk.Wrapf("missing recipient address")
+	}
+	if err := sdk.ValidateAccAddress(m.Recipient); err != nil {
+		return sdk.Wrap(err)
+	}
+
+	denom := strings.TrimSpace(m.DenomId)
+	if len(denom) == 0 {
+		return sdk.Wrapf("missing denom")
+	}
+
+	tokenID := strings.TrimSpace(m.Id)
+	if len(tokenID) == 0 {
+		return sdk.Wrapf("missing ID")
+	}
+
+	if m.Amount <= 0 {
+		return sdk.Wrapf("invalid amount")
+	}
+	return nil
 }
 
-func (m *MsgTransferMT) GetSignBytes() []byte {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferMT) GetSignBytes() []byte {
+	bz, err := ModuleCdc.MarshalJSON(&m)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(bz)
 }
 
-func (m *MsgTransferMT) GetSigners() []sdk.AccAddress {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferMT) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 
-func (m *MsgBurnMT) Route() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgBurnMT) Route() string {
+	return ModuleName
 }
 
-func (m *MsgBurnMT) Type() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgBurnMT) Type() string {
+	return "burn_mt"
 }
 
-func (m *MsgBurnMT) ValidateBasic() error {
-	//TODO implement me
-	panic("implement me")
+func (m MsgBurnMT) ValidateBasic() error {
+	if len(m.Sender) == 0 {
+		return sdk.Wrapf("missing sender address")
+	}
+	if err := sdk.ValidateAccAddress(m.Sender); err != nil {
+		return sdk.Wrap(err)
+	}
+
+	denom := strings.TrimSpace(m.DenomId)
+	if len(denom) == 0 {
+		return sdk.Wrapf("missing denom")
+	}
+
+	tokenID := strings.TrimSpace(m.Id)
+	if len(tokenID) == 0 {
+		return sdk.Wrapf("missing ID")
+	}
+	return nil
 }
 
-func (m *MsgBurnMT) GetSignBytes() []byte {
-	//TODO implement me
-	panic("implement me")
+func (m MsgBurnMT) GetSignBytes() []byte {
+	bz, err := ModuleCdc.MarshalJSON(&m)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(bz)
 }
 
-func (m *MsgBurnMT) GetSigners() []sdk.AccAddress {
-	//TODO implement me
-	panic("implement me")
+func (m MsgBurnMT) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 
-func (m *MsgTransferDenom) Route() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferDenom) Route() string {
+	return ModuleName
 }
 
-func (m *MsgTransferDenom) Type() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferDenom) Type() string {
+	return "transfer_denom"
 }
 
-func (m *MsgTransferDenom) ValidateBasic() error {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferDenom) ValidateBasic() error {
+	if len(m.Sender) == 0 {
+		return sdk.Wrapf("missing sender address")
+	}
+
+	if err := sdk.ValidateAccAddress(m.Sender); err != nil {
+		return sdk.Wrap(err)
+	}
+	id := strings.TrimSpace(m.Id)
+	if len(id) == 0 {
+		return sdk.Wrapf("missing id")
+	}
+
+	if len(m.Recipient) == 0 {
+		return sdk.Wrapf("missing recipient address")
+	}
+	if err := sdk.ValidateAccAddress(m.Recipient); err != nil {
+		return sdk.Wrap(err)
+	}
+	return nil
 }
 
-func (m *MsgTransferDenom) GetSignBytes() []byte {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferDenom) GetSignBytes() []byte {
+	bz, err := ModuleCdc.MarshalJSON(&m)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(bz)
 }
 
-func (m *MsgTransferDenom) GetSigners() []sdk.AccAddress {
-	//TODO implement me
-	panic("implement me")
+func (m MsgTransferDenom) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 
 func (this Denom) Convert() interface{} {
@@ -200,4 +271,21 @@ func (this mts) Convert() interface{} {
 		mts = append(mts, mt.Convert().(QueryMTResp))
 	}
 	return mts
+}
+
+func (this Balance) Convert() interface{} {
+	return QueryBalanceResp{
+		MtId:   this.MtId,
+		Amount: this.Amount,
+	}
+}
+
+type balances []Balance
+
+func (this balances) Convert() interface{} {
+	var balances []QueryBalanceResp
+	for _, balance := range this {
+		balances = append(balances, balance.Convert().(QueryBalanceResp))
+	}
+	return balances
 }

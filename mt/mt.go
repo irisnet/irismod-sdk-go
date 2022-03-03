@@ -134,9 +134,9 @@ func (mc mtClient) TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx
 	return mc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
-func (mc mtClient) QuerySupply(denom, creator string) (uint64, sdk.Error) {
-	if len(denom) == 0 {
-		return 0, sdk.Wrapf("denom is required")
+func (mc mtClient) QuerySupply(denomID, creator string) (uint64, sdk.Error) {
+	if len(denomID) == 0 {
+		return 0, sdk.Wrapf("denomID is required")
 	}
 
 	if err := sdk.ValidateAccAddress(creator); err != nil {
@@ -153,7 +153,7 @@ func (mc mtClient) QuerySupply(denom, creator string) (uint64, sdk.Error) {
 		context.Background(),
 		&QuerySupplyRequest{
 			Owner:   creator,
-			DenomId: denom,
+			DenomId: denomID,
 		},
 	)
 	if err != nil {
@@ -163,9 +163,9 @@ func (mc mtClient) QuerySupply(denom, creator string) (uint64, sdk.Error) {
 	return res.Amount, nil
 }
 
-func (mc mtClient) QueryMTSupply(denom, mtID string) (uint64, sdk.Error) {
-	if len(denom) == 0 {
-		return 0, sdk.Wrapf("denom is required")
+func (mc mtClient) QueryMTSupply(denomID, mtID string) (uint64, sdk.Error) {
+	if len(denomID) == 0 {
+		return 0, sdk.Wrapf("denomID is required")
 	}
 	if len(mtID) == 0 {
 		return 0, sdk.Wrapf("mtID is required")
@@ -180,7 +180,7 @@ func (mc mtClient) QueryMTSupply(denom, mtID string) (uint64, sdk.Error) {
 	res, err := NewQueryClient(conn).MTSupply(
 		context.Background(),
 		&QueryMTSupplyRequest{
-			DenomId: denom,
+			DenomId: denomID,
 			MtId:    mtID,
 		},
 	)
@@ -191,9 +191,9 @@ func (mc mtClient) QueryMTSupply(denom, mtID string) (uint64, sdk.Error) {
 	return res.Amount, nil
 }
 
-func (mc mtClient) QueryDenom(denom string) (QueryDenomResp, sdk.Error) {
-	if len(denom) == 0 {
-		return QueryDenomResp{}, sdk.Wrapf("denom is required")
+func (mc mtClient) QueryDenom(denomID string) (QueryDenomResp, sdk.Error) {
+	if len(denomID) == 0 {
+		return QueryDenomResp{}, sdk.Wrapf("denomID is required")
 	}
 
 	conn, err := mc.GenConn()
@@ -203,7 +203,7 @@ func (mc mtClient) QueryDenom(denom string) (QueryDenomResp, sdk.Error) {
 
 	res, err := NewQueryClient(conn).Denom(
 		context.Background(),
-		&QueryDenomRequest{DenomId: denom},
+		&QueryDenomRequest{DenomId: denomID},
 	)
 	if err != nil {
 		return QueryDenomResp{}, sdk.Wrap(err)
@@ -230,9 +230,9 @@ func (mc mtClient) QueryDenoms() ([]QueryDenomResp, sdk.Error) {
 	return denoms(res.Denoms).Convert().([]QueryDenomResp), nil
 }
 
-func (mc mtClient) QueryMT(denom, mtID string) (QueryMTResp, sdk.Error) {
-	if len(denom) == 0 {
-		return QueryMTResp{}, sdk.Wrapf("denom is required")
+func (mc mtClient) QueryMT(denomID, mtID string) (QueryMTResp, sdk.Error) {
+	if len(denomID) == 0 {
+		return QueryMTResp{}, sdk.Wrapf("denomID is required")
 	}
 
 	if len(mtID) == 0 {
@@ -248,7 +248,7 @@ func (mc mtClient) QueryMT(denom, mtID string) (QueryMTResp, sdk.Error) {
 	res, err := NewQueryClient(conn).MT(
 		context.Background(),
 		&QueryMTRequest{
-			DenomId: denom,
+			DenomId: denomID,
 			MtId:    mtID,
 		},
 	)
@@ -259,9 +259,9 @@ func (mc mtClient) QueryMT(denom, mtID string) (QueryMTResp, sdk.Error) {
 	return res.Mt.Convert().(QueryMTResp), nil
 }
 
-func (mc mtClient) QueryMTs(denom string) ([]QueryMTResp, sdk.Error) {
-	if len(denom) == 0 {
-		return nil, sdk.Wrapf("denom is required")
+func (mc mtClient) QueryMTs(denomID string) ([]QueryMTResp, sdk.Error) {
+	if len(denomID) == 0 {
+		return nil, sdk.Wrapf("denomID is required")
 	}
 
 	conn, err := mc.GenConn()
@@ -273,7 +273,7 @@ func (mc mtClient) QueryMTs(denom string) ([]QueryMTResp, sdk.Error) {
 	res, err := NewQueryClient(conn).MTs(
 		context.Background(),
 		&QueryMTsRequest{
-			DenomId: denom,
+			DenomId: denomID,
 		},
 	)
 	if err != nil {
@@ -283,9 +283,9 @@ func (mc mtClient) QueryMTs(denom string) ([]QueryMTResp, sdk.Error) {
 	return mts(res.Mts).Convert().([]QueryMTResp), nil
 }
 
-func (mc mtClient) QueryBalances(denom, owner string) ([]QueryBalanceResp, sdk.Error) {
-	if len(denom) == 0 {
-		return nil, sdk.Wrapf("denom is required")
+func (mc mtClient) QueryBalances(denomID, owner string) ([]QueryBalanceResp, sdk.Error) {
+	if len(denomID) == 0 {
+		return nil, sdk.Wrapf("denomID is required")
 	}
 
 	if err := sdk.ValidateAccAddress(owner); err != nil {
@@ -300,7 +300,7 @@ func (mc mtClient) QueryBalances(denom, owner string) ([]QueryBalanceResp, sdk.E
 	res, err := NewQueryClient(conn).Balances(
 		context.Background(),
 		&QueryBalancesRequest{
-			DenomId: denom,
+			DenomId: denomID,
 			Owner:   owner,
 		},
 	)
