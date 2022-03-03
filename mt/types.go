@@ -18,40 +18,52 @@ var (
 	_ sdk.Msg = &MsgTransferDenom{}
 )
 
-func (m *MsgMintMT) Route() string {
-	//TODO implement me
-	panic("implement me")
-}
 
-func (m *MsgMintMT) Type() string {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (m *MsgMintMT) ValidateBasic() error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (m *MsgMintMT) GetSignBytes() []byte {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (m *MsgMintMT) GetSigners() []sdk.AccAddress {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (m *MsgIssueDenom) Route() string {
+func (m MsgMintMT) Route() string {
 	return ModuleName
 }
 
-func (m *MsgIssueDenom) Type() string {
+func (m MsgMintMT) Type() string {
+	return "mint_mt"
+}
+
+func (m MsgMintMT) ValidateBasic() error {
+	if len(m.Sender) == 0 {
+		return sdk.Wrapf("missing sender address")
+	}
+	if err := sdk.ValidateAccAddress(m.Sender); err != nil {
+		return sdk.Wrap(err)
+	}
+
+	denom := strings.TrimSpace(m.DenomId)
+	if len(denom) == 0 {
+		return sdk.Wrapf("missing denom")
+	}
+
+	return nil
+}
+
+func (m MsgMintMT) GetSignBytes() []byte {
+	bz, err := ModuleCdc.MarshalJSON(&m)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(bz)
+}
+
+func (m MsgMintMT) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
+}
+
+func (m MsgIssueDenom) Route() string {
+	return ModuleName
+}
+
+func (m MsgIssueDenom) Type() string {
 	return "issue_denom"
 }
 
-func (m *MsgIssueDenom) ValidateBasic() error {
+func (m MsgIssueDenom) ValidateBasic() error {
 	if len(m.Sender) == 0 {
 		return sdk.Wrapf("missing sender address")
 	}
@@ -66,41 +78,56 @@ func (m *MsgIssueDenom) ValidateBasic() error {
 	return nil
 }
 
-func (m *MsgIssueDenom) GetSignBytes() []byte {
-	bz, err := ModuleCdc.MarshalJSON(m)
+func (m MsgIssueDenom) GetSignBytes() []byte {
+	bz, err := ModuleCdc.MarshalJSON(&m)
 	if err != nil {
 		panic(err)
 	}
 	return sdk.MustSortJSON(bz)
 }
 
-func (m *MsgIssueDenom) GetSigners() []sdk.AccAddress {
+func (m MsgIssueDenom) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 
-func (m *MsgEditMT) Route() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgEditMT) Route() string {
+	return ModuleName
 }
 
-func (m *MsgEditMT) Type() string {
-	//TODO implement me
-	panic("implement me")
+func (m MsgEditMT) Type() string {
+	return "edit_mt"
 }
 
-func (m *MsgEditMT) ValidateBasic() error {
-	//TODO implement me
-	panic("implement me")
+func (m MsgEditMT) ValidateBasic() error {
+	if len(m.Sender) == 0 {
+		return sdk.Wrapf("missing sender address")
+	}
+	if err := sdk.ValidateAccAddress(m.Sender); err != nil {
+		return sdk.Wrap(err)
+	}
+
+	denom := strings.TrimSpace(m.DenomId)
+	if len(denom) == 0 {
+		return sdk.Wrapf("missing denom")
+	}
+
+	tokenID := strings.TrimSpace(m.Id)
+	if len(tokenID) == 0 {
+		return sdk.Wrapf("missing mtID")
+	}
+	return nil
 }
 
-func (m *MsgEditMT) GetSignBytes() []byte {
-	//TODO implement me
-	panic("implement me")
+func (m MsgEditMT) GetSignBytes() []byte {
+	bz, err := ModuleCdc.MarshalJSON(&m)
+	if err != nil {
+		panic(err)
+	}
+	return sdk.MustSortJSON(bz)
 }
 
-func (m *MsgEditMT) GetSigners() []sdk.AccAddress {
-	//TODO implement me
-	panic("implement me")
+func (m MsgEditMT) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 
 func (m MsgTransferMT) Route() string {
@@ -133,7 +160,7 @@ func (m MsgTransferMT) ValidateBasic() error {
 
 	tokenID := strings.TrimSpace(m.Id)
 	if len(tokenID) == 0 {
-		return sdk.Wrapf("missing ID")
+		return sdk.Wrapf("missing mtID")
 	}
 
 	if m.Amount <= 0 {
