@@ -35,41 +35,29 @@ type TransferDenomRequest struct {
 
 type MintMTRequest struct {
 	ID        string `json:"id"`
-	Denom     string `json:"denom"`
+	DenomID   string `json:"denom_id"`
 	Amount    uint64 `json:"amount"`
 	Data      []byte `json:"data"`
 	Recipient string `json:"recipient"`
 }
 
 type EditMTRequest struct {
-	ID    string `json:"id"`
-	Denom string `json:"denom"`
-	Data  []byte `json:"data"`
+	ID      string `json:"id"`
+	DenomID string `json:"denom_id"`
+	Data    []byte `json:"data"`
 }
 
 type TransferMTRequest struct {
 	ID        string `json:"id"`
-	Denom     string `json:"denom"`
+	DenomID   string `json:"denom_id"`
 	Amount    uint64 `json:"amount"`
 	Recipient string `json:"recipient"`
 }
 
 type BurnMTRequest struct {
-	ID     string `json:"id"`
-	Denom  string `json:"denom"`
-	Amount uint64 `json:"amount"`
-}
-
-
-// IDC defines a set of mt ids that belong to a specific
-type IDC struct {
-	Denom    string   `json:"denom" yaml:"denom"`
-	TokenIDs []string `json:"token_ids" yaml:"token_ids"`
-}
-
-type QueryOwnerResp struct {
-	Address string `json:"address" yaml:"address"`
-	IDCs    []IDC  `json:"idcs" yaml:"idcs"`
+	ID      string `json:"id"`
+	DenomID string `json:"denom_id"`
+	Amount  uint64 `json:"amount"`
 }
 
 // QueryMTResp defines a multi token

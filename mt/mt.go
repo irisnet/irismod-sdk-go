@@ -57,7 +57,7 @@ func (mc mtClient) MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultT
 
 	msg := &MsgMintMT{
 		Id:        request.ID,
-		DenomId:   request.Denom,
+		DenomId:   request.DenomID,
 		Amount:    request.Amount,
 		Data:      request.Data,
 		Sender:    sender.String(),
@@ -74,7 +74,7 @@ func (mc mtClient) EditMT(request EditMTRequest, baseTx sdk.BaseTx) (sdk.ResultT
 
 	msg := &MsgEditMT{
 		Id:      request.ID,
-		DenomId: request.Denom,
+		DenomId: request.DenomID,
 		Data:    request.Data,
 		Sender:  sender.String(),
 	}
@@ -93,7 +93,7 @@ func (mc mtClient) TransferMT(request TransferMTRequest, baseTx sdk.BaseTx) (sdk
 
 	msg := &MsgTransferMT{
 		Id:        request.ID,
-		DenomId:   request.Denom,
+		DenomId:   request.DenomID,
 		Amount:    request.Amount,
 		Sender:    sender.String(),
 		Recipient: request.Recipient,
@@ -109,7 +109,7 @@ func (mc mtClient) BurnMT(request BurnMTRequest, baseTx sdk.BaseTx) (sdk.ResultT
 
 	msg := &MsgBurnMT{
 		Id:      request.ID,
-		DenomId: request.Denom,
+		DenomId: request.DenomID,
 		Amount:  request.Amount,
 		Sender:  sender.String(),
 	}
