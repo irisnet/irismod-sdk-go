@@ -29,6 +29,8 @@ import (
 	"github.com/irisnet/irismod-sdk-go/gov"
 
 	"github.com/irisnet/irismod-sdk-go/coinswap"
+
+	"github.com/irisnet/irismod-sdk-go/mt"
 )
 
 type Client struct {
@@ -48,6 +50,7 @@ type Client struct {
 	Oracle  oracle.Client
 	HTLC    htlc.Client
 	Swap    coinswap.Client
+	MT mt.Client
 }
 
 func NewClient(cfg types.ClientConfig) Client {
@@ -66,6 +69,7 @@ func NewClient(cfg types.ClientConfig) Client {
 	oracleClient := oracle.NewClient(baseClient, encodingConfig.Marshaler)
 	htlcClient := htlc.NewClient(baseClient, encodingConfig.Marshaler)
 	swapClient := coinswap.NewClient(baseClient, encodingConfig.Marshaler, bankClient.TotalSupply)
+	mtClient := mt.NewClient(baseClient, encodingConfig.Marshaler)
 
 	client := &Client{
 		logger:         baseClient.Logger(),
@@ -83,6 +87,7 @@ func NewClient(cfg types.ClientConfig) Client {
 		Oracle:         oracleClient,
 		HTLC:           htlcClient,
 		Swap:           swapClient,
+		MT: mtClient,
 	}
 
 	client.RegisterModule(
@@ -97,6 +102,7 @@ func NewClient(cfg types.ClientConfig) Client {
 		oracleClient,
 		htlcClient,
 		swapClient,
+		mtClient,
 	)
 	return *client
 }
