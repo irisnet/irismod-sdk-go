@@ -10,4 +10,7 @@ require (
 	google.golang.org/grpc v1.42.0
 )
 
-replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
+replace (
+	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
+	github.com/tendermint/tendermint => github.com/bianjieai/tendermint v0.34.1-irita-210113
+)
