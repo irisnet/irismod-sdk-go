@@ -47,10 +47,10 @@ type Client struct {
 	Record  record.Client
 	Random  random.Client
 	NFT     nft.Client
+	MT      mt.Client
 	Oracle  oracle.Client
 	HTLC    htlc.Client
 	Swap    coinswap.Client
-	MT mt.Client
 }
 
 func NewClient(cfg types.ClientConfig) Client {
@@ -87,7 +87,7 @@ func NewClient(cfg types.ClientConfig) Client {
 		Oracle:         oracleClient,
 		HTLC:           htlcClient,
 		Swap:           swapClient,
-		MT: mtClient,
+		MT:             mtClient,
 	}
 
 	client.RegisterModule(
