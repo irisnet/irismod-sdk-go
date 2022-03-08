@@ -451,8 +451,8 @@ github.com/irisnet/irismod-sdk-go/gov v0.0.0-20210720100738-ddc220cd5bd1 h1:KM6D
 github.com/irisnet/irismod-sdk-go/gov v0.0.0-20210720100738-ddc220cd5bd1/go.mod h1:oeICSi4ylvH57wBGZWkGs6v4l9r1K9O9691ynBPJ2aQ=
 github.com/irisnet/irismod-sdk-go/htlc v0.0.0-20210720100738-ddc220cd5bd1 h1:pVf9dESEyQdU7dQiVI4vAgBbOFiWtbnd/+ytWD2algY=
 github.com/irisnet/irismod-sdk-go/htlc v0.0.0-20210720100738-ddc220cd5bd1/go.mod h1:rtZZ1wiRcaqG9KvDnOvh13Wtq+H54jx0jN8Wts5s7oI=
-github.com/irisnet/irismod-sdk-go/mt v0.0.0-20220304064544-94b0c6025bfc h1:GgDQ2w4A5cuEg+kvSuzkTwNtX5xUo0wiCxvy+2ajw8o=
-github.com/irisnet/irismod-sdk-go/mt v0.0.0-20220304064544-94b0c6025bfc/go.mod h1:crbImdW1GqE1JiYNAtYQG0UAfyQjpkjI1ILbD+0doCs=
+github.com/irisnet/irismod-sdk-go/mt v0.0.0-20220304092109-d22616e3da29 h1:N0i08Gwyk/gf4lo7rrXQut87jtfrXvkMCGyhX9RaZIE=
+github.com/irisnet/irismod-sdk-go/mt v0.0.0-20220304092109-d22616e3da29/go.mod h1:crbImdW1GqE1JiYNAtYQG0UAfyQjpkjI1ILbD+0doCs=
 github.com/irisnet/irismod-sdk-go/nft v0.0.0-20210726064324-b35f8f5259eb h1:fLclT7cfY1AQVKGYqLK7zJrTdChZTH2C4PMtr3KPJgI=
 github.com/irisnet/irismod-sdk-go/nft v0.0.0-20210726064324-b35f8f5259eb/go.mod h1:m3/Te6sMvO9PansYSvcKE0m+/ZPyC/cTjwWbJN6fTfo=
 github.com/irisnet/irismod-sdk-go/oracle v0.0.0-20210720100738-ddc220cd5bd1 h1:jrOk0BcDCuXKl2myhNsmN4GT/VL9nmosAH9RjY/vJ2w=

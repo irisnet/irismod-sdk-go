@@ -8,7 +8,7 @@ require (
 	github.com/irisnet/irismod-sdk-go/coinswap v0.0.0-20210720100738-ddc220cd5bd1
 	github.com/irisnet/irismod-sdk-go/gov v0.0.0-20210720100738-ddc220cd5bd1
 	github.com/irisnet/irismod-sdk-go/htlc v0.0.0-20210720100738-ddc220cd5bd1
-	github.com/irisnet/irismod-sdk-go/mt v0.0.0-20220304064544-94b0c6025bfc
+	github.com/irisnet/irismod-sdk-go/mt v0.0.0-20220304092109-d22616e3da29
 	github.com/irisnet/irismod-sdk-go/nft v0.0.0-20210726064324-b35f8f5259eb
 	github.com/irisnet/irismod-sdk-go/oracle v0.0.0-20210720100738-ddc220cd5bd1
 	github.com/irisnet/irismod-sdk-go/random v0.0.0-20210720100738-ddc220cd5bd1

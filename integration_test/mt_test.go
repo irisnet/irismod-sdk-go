@@ -2,156 +2,128 @@ package integrationtest
 
 import (
 	"fmt"
-	"github.com/irisnet/irismod-sdk-go/mt"
-	"strings"
-
 	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/irismod-sdk-go/mt"
 	"github.com/stretchr/testify/require"
+	"strings"
 )
 
 func (s IntegrationTestSuite) TestMT() {
-
+	dec := sdk.NewDecCoin("upoint", sdk.NewInt(100000))
+	fee := sdk.NewDecCoins(dec)
 	baseTx := sdk.BaseTx{
 		From:     s.Account().Name,
-		Gas:      200000,
+		Gas:      1000000000,
 		Memo:     "test",
+		Fee:      fee,
 		Mode:     sdk.Commit,
 		Password: s.Account().Password,
 	}
 
 	denomName := strings.ToLower(s.RandStringOfLength(4))
 	dataStr := strings.ToLower(s.RandStringOfLength(10))
-	data := []byte(dataStr)
+	denomData := []byte(dataStr)
 	issueReq := mt.IssueDenomRequest{
 		Name: denomName,
-		Data: data,
+		Data: denomData,
 	}
-
-	//msg := &mt.MsgIssueDenom{
-	//	Name:   denomName,
-	//	Data:   data,
-	//	Sender: addr,
-	//}
-	//txhash, err := s.BuildTxHash([]sdk.Msg{msg}, baseTx)
-	//require.NoError(s.T(), err)
-	//require.NotEmpty(s.T(), txhash)
-	//fmt.Println(txhash)
 
 	res, err := s.MT.IssueDenom(issueReq, baseTx)
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), res.Hash)
 	fmt.Println(res.Hash)
-	//res.Data
-	//
-	//transferReq := mt.TransferDenomRequest{
-	//	ID:
-	//}
-	//
-	//tokenID := strings.ToLower(s.RandStringOfLength(7))
-	//tokenName := strings.ToLower(s.RandStringOfLength(7))
-	//tokenData := strings.ToLower(s.RandStringOfLength(7))
-	//mintReq := mt.MintNFTRequest{
-	//	Denom: denomID,
-	//	ID:    tokenID,
-	//	Name:  tokenName,
-	//	URI:   fmt.Sprintf("https://%s", s.RandStringOfLength(10)),
-	//	Data:  tokenData,
-	//}
-	//res, err = s.NFT.MintNFT(mintReq, baseTx)
-	//require.NoError(s.T(), err)
-	//require.NotEmpty(s.T(), res.Hash)
-	//
-	//editReq := nft.EditNFTRequest{
-	//	Denom: mintReq.Denom,
-	//	ID:    mintReq.ID,
-	//	URI:   fmt.Sprintf("https://%s", s.RandStringOfLength(10)),
-	//}
-	//res, err = s.NFT.EditNFT(editReq, baseTx)
-	//require.NoError(s.T(), err)
-	//require.NotEmpty(s.T(), res.Hash)
-	//
-	//nftRes, err := s.NFT.QueryNFT(mintReq.Denom, mintReq.ID)
-	//require.NoError(s.T(), err)
-	//require.Equal(s.T(), editReq.URI, nftRes.URI)
-	//
-	//supply, err := s.NFT.QuerySupply(mintReq.Denom, nftRes.Creator)
-	//require.NoError(s.T(), err)
-	//require.Equal(s.T(), uint64(1), supply)
-	//
-	//owner, err := s.NFT.QueryOwner(nftRes.Creator, mintReq.Denom)
-	//require.NoError(s.T(), err)
-	//require.Len(s.T(), owner.IDCs, 1)
-	//require.Len(s.T(), owner.IDCs[0].TokenIDs, 1)
-	//require.Equal(s.T(), tokenID, owner.IDCs[0].TokenIDs[0])
-	//
-	//uName := s.RandStringOfLength(10)
-	//pwd := "11111111"
-	//
-	//recipient, _, err := s.Add(uName, pwd)
-	//require.NoError(s.T(), err)
-	//
-	//transferReq := nft.TransferNFTRequest{
-	//	Recipient: recipient,
-	//	Denom:     mintReq.Denom,
-	//	ID:        mintReq.ID,
-	//	URI:       fmt.Sprintf("https://%s", s.RandStringOfLength(10)),
-	//}
-	//res, err = s.NFT.TransferNFT(transferReq, baseTx)
-	//require.NoError(s.T(), err)
-	//require.NotEmpty(s.T(), res.Hash)
-	//
-	//owner, err = s.NFT.QueryOwner(transferReq.Recipient, mintReq.Denom)
-	//require.NoError(s.T(), err)
-	//require.Len(s.T(), owner.IDCs, 1)
-	//require.Len(s.T(), owner.IDCs[0].TokenIDs, 1)
-	//require.Equal(s.T(), tokenID, owner.IDCs[0].TokenIDs[0])
-	//
-	//supply, err = s.NFT.QuerySupply(mintReq.Denom, transferReq.Recipient)
-	//require.NoError(s.T(), err)
-	//require.Equal(s.T(), uint64(1), supply)
-	//
-	//denoms, err := s.NFT.QueryDenoms()
-	//require.NoError(s.T(), err)
-	//require.NotEmpty(s.T(), denoms)
-	//
-	//d, err := s.NFT.QueryDenom(denomID)
-	//require.NoError(s.T(), err)
-	//require.Equal(s.T(), denomID, d.ID)
-	//require.Equal(s.T(), denomName, d.Name)
-	//require.Equal(s.T(), schema, d.Schema)
-	//
-	//col, err := s.NFT.QueryCollection(denomID)
-	//require.NoError(s.T(), err)
-	//require.EqualValues(s.T(), d, col.Denom)
-	//require.Len(s.T(), col.NFTs, 1)
-	//require.Equal(s.T(), mintReq.ID, col.NFTs[0].ID)
-	//
-	//burnReq := nft.BurnNFTRequest{
-	//	Denom: mintReq.Denom,
-	//	ID:    mintReq.ID,
-	//}
-	//
-	//amount, e := sdk.ParseDecCoins("10iris")
-	//require.NoError(s.T(), e)
-	//_, err = s.Bank.Send(recipient, amount, baseTx)
-	//require.NoError(s.T(), err)
-	//
-	//baseTx.From = uName
-	//baseTx.Password = pwd
-	//res, err = s.NFT.BurnNFT(burnReq, baseTx)
-	//require.NoError(s.T(), err)
-	//require.NotEmpty(s.T(), res.Hash)
-	//
-	//supply, err = s.NFT.QuerySupply(mintReq.Denom, transferReq.Recipient)
-	//require.NoError(s.T(), err)
-	//require.Equal(s.T(), uint64(0), supply)
+	denomID, err2 := res.Events.GetValue("issue_denom", "denom_id")
+	require.NoError(s.T(), err2)
+	require.NotEmpty(s.T(), denomID)
 
-	//test TransferDenom
-	//transferDenomReq := nft.TransferDenomRequest{
-	//	Recipient: recipient,
-	//	ID:        mintReq.ID,
-	//}
-	//res, err = s.NFT.TransferDenom(transferDenomReq, baseTx)
+	mintMTData := []byte(strings.ToLower(s.RandStringOfLength(7)))
+	mtRecipient := s.Account().Address.String()
+	amount := uint64(10)
+	mintReq := mt.MintMTRequest{
+		DenomID:   denomID,
+		Amount:    amount,
+		Data:      mintMTData,
+		Recipient: mtRecipient,
+	}
+	res, err = s.MT.MintMT(mintReq, baseTx)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), res.Hash)
+	mtID, err2 := res.Events.GetValue("mint_mt", "mt_id")
+	require.NoError(s.T(), err2)
+
+	editMTData := []byte(strings.ToLower(s.RandStringOfLength(8)))
+	editReq := mt.EditMTRequest{
+		DenomID: denomID,
+		ID:      mtID,
+		Data:    editMTData,
+	}
+	res, err = s.MT.EditMT(editReq, baseTx)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), res.Hash)
+
+	transferMTRecipient := s.randAccounts[3].Address.String()
+	transferAmount := uint64(5)
+	transferMTReq := mt.TransferMTRequest{
+		ID:        mtID,
+		DenomID:   mintReq.DenomID,
+		Amount:    transferAmount,
+		Recipient: transferMTRecipient,
+	}
+	res, err = s.MT.TransferMT(transferMTReq, baseTx)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), res.Hash)
+
+	//supply, err := s.MT.QuerySupply(mintReq.DenomID, transferMTRecipient)
 	//require.NoError(s.T(), err)
-	//require.NotEmpty(s.T(), res.Hash)
+	//require.Equal(s.T(), uint64(1), supply)
+
+	denom, err := s.MT.QueryDenom(denomID)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), denom)
+
+	denoms, err := s.MT.QueryDenoms()
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), denoms)
+
+	mtSupply, err := s.MT.QueryMTSupply(denomID, mtID)
+	require.NoError(s.T(), err)
+	require.Equal(s.T(), uint64(10), mtSupply)
+
+	mtSingle, err := s.MT.QueryMT(denomID, mtID)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), mtSingle)
+	require.Equal(s.T(), mtSingle.Data, editMTData)
+
+	mts, err := s.MT.QueryMTs(denomID)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), mts)
+
+	balances, err := s.MT.QueryBalances(denomID, transferMTRecipient)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), balances)
+	require.Equal(s.T(), balances[0].Amount, amount-transferAmount)
+
+	//burnMTReq := s.Account().Address.String()
+	burnMTReq := mt.BurnMTRequest{
+		ID:      mtID,
+		DenomID: denomID,
+		Amount:  amount - transferAmount,
+	}
+	res, err = s.MT.BurnMT(burnMTReq, baseTx)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), res.Hash)
+
+	mtSupplyCheck, err := s.MT.QueryMTSupply(denomID, mtID)
+	require.NoError(s.T(), err)
+	require.Equal(s.T(), transferAmount, mtSupplyCheck)
+
+	recipient := s.randAccounts[2].Address.String()
+	transferReq := mt.TransferDenomRequest{
+		ID:        denomID,
+		Recipient: recipient,
+	}
+	res, err = s.MT.TransferDenom(transferReq, baseTx)
+	require.NoError(s.T(), err)
+	require.NotEmpty(s.T(), res.Hash)
+	fmt.Println(res.Hash)
 }
