@@ -35,10 +35,15 @@ func (nc nftClient) IssueDenom(request IssueDenomRequest, baseTx sdk.BaseTx) (sd
 	}
 
 	msg := &MsgIssueDenom{
-		Id:     request.ID,
-		Name:   request.Name,
-		Schema: request.Schema,
-		Sender: sender.String(),
+		Id:          request.ID,
+		Name:        request.Name,
+		Schema:      request.Schema,
+		Sender:      sender.String(),
+		Symbol:      request.Symbol,
+		Description: request.Description,
+		Uri:         request.Uri,
+		UriHash:     request.UriHash,
+		Data:        request.Data,
 	}
 	return nc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
@@ -65,6 +70,7 @@ func (nc nftClient) MintNFT(request MintNFTRequest, baseTx sdk.BaseTx) (sdk.Resu
 		Data:      request.Data,
 		Sender:    sender.String(),
 		Recipient: recipient,
+		UriHash:   request.URIHash,
 	}
 	return nc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
@@ -80,6 +86,7 @@ func (nc nftClient) EditNFT(request EditNFTRequest, baseTx sdk.BaseTx) (sdk.Resu
 		Name:    request.Name,
 		DenomId: request.Denom,
 		URI:     request.URI,
+		UriHash: request.URIHash,
 		Data:    request.Data,
 		Sender:  sender.String(),
 	}
@@ -104,6 +111,7 @@ func (nc nftClient) TransferNFT(request TransferNFTRequest, baseTx sdk.BaseTx) (
 		Data:      request.Data,
 		Sender:    sender.String(),
 		Recipient: request.Recipient,
+		UriHash:   request.URIHash,
 	}
 	return nc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
