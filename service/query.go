@@ -23,8 +23,8 @@ func (s serviceClient) queryRequestContextByTxQuery(reqCtxID string) (RequestCon
 		return RequestContext{}, err
 	}
 
-	if int64(len(txInfo.Tx.GetMsgs())) > msgIndex {
-		msg := txInfo.Tx.GetMsgs()[msgIndex]
+	if int64(len(txInfo.Tx.Body.Msgs)) > msgIndex {
+		msg := txInfo.Tx.Body.Msgs[msgIndex]
 		if msg, ok := msg.(*MsgCallService); ok {
 			return RequestContext{
 				ServiceName:        msg.ServiceName,
@@ -141,7 +141,7 @@ func (s serviceClient) queryResponseByTxQuery(requestID string) (Response, error
 		return Response{}, err
 	}
 
-	for _, msg := range result.Txs[0].Tx.GetMsgs() {
+	for _, msg := range result.Txs[0].Tx.Body.Msgs {
 		if responseMsg, ok := msg.(*MsgRespondService); ok {
 			if responseMsg.RequestId != requestID {
 				continue
