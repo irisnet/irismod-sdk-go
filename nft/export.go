@@ -1,6 +1,9 @@
 package nft
 
-import sdk "github.com/irisnet/core-sdk-go/types"
+import (
+	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/core-sdk-go/types/query"
+)
 
 // expose NFT module api for user
 type Client interface {
@@ -14,10 +17,10 @@ type Client interface {
 	TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 
 	QuerySupply(denomID, creator string) (uint64, sdk.Error)
-	QueryOwner(creator, denomID string) (QueryOwnerResp, sdk.Error)
-	QueryCollection(denomID string) (QueryCollectionResp, sdk.Error)
+	QueryOwner(creator, denomID string, pagination *query.PageRequest) (QueryOwnerResp, sdk.Error)
+	QueryCollection(denomID string, pagination *query.PageRequest) (QueryCollectionResp, sdk.Error)
 	QueryDenom(denomID string) (QueryDenomResp, sdk.Error)
-	QueryDenoms() ([]QueryDenomResp, sdk.Error)
+	QueryDenoms(pagination *query.PageRequest) ([]QueryDenomResp, sdk.Error)
 	QueryNFT(denomID, tokenID string) (QueryNFTResp, sdk.Error)
 }
 
