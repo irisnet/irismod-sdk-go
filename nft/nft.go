@@ -188,13 +188,13 @@ func (nc nftClient) QueryOwner(creator, denom string, pagination *query.PageRequ
 	if err != nil {
 		return QueryOwnerResp{}, sdk.Wrap(err)
 	}
-	pagination = tidyPagination(pagination)
+
 	res, err := NewQueryClient(conn).Owner(
 		context.Background(),
 		&QueryOwnerRequest{
 			Owner:      creator,
 			DenomId:    denom,
-			Pagination: pagination,
+			Pagination: tidyPagination(pagination),
 		},
 	)
 	if err != nil {
@@ -214,10 +214,10 @@ func (nc nftClient) QueryCollection(denom string, pagination *query.PageRequest)
 	if err != nil {
 		return QueryCollectionResp{}, sdk.Wrap(err)
 	}
-	pagination = tidyPagination(pagination)
+
 	res, err := NewQueryClient(conn).Collection(
 		context.Background(),
-		&QueryCollectionRequest{DenomId: denom, Pagination: pagination},
+		&QueryCollectionRequest{DenomId: denom, Pagination: tidyPagination(pagination)},
 	)
 	if err != nil {
 		return QueryCollectionResp{}, sdk.Wrap(err)
@@ -232,11 +232,11 @@ func (nc nftClient) QueryDenoms(pagination *query.PageRequest) ([]QueryDenomResp
 	if err != nil {
 		return nil, sdk.Wrap(err)
 	}
-	pagination = tidyPagination(pagination)
+
 	res, err := NewQueryClient(conn).Denoms(
 		context.Background(),
 		&QueryDenomsRequest{
-			Pagination: pagination,
+			Pagination: tidyPagination(pagination),
 		},
 	)
 	if err != nil {
