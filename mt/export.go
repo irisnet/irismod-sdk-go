@@ -2,6 +2,7 @@ package mt
 
 import (
 	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/core-sdk-go/types/query"
 )
 
 type Client interface {
@@ -15,10 +16,10 @@ type Client interface {
 	BurnMT(request BurnMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 
 	QuerySupply(denomID, creator string) (uint64, sdk.Error)
-	QueryDenoms() ([]QueryDenomResp, sdk.Error)
+	QueryDenoms(pageReq *query.PageRequest) ([]QueryDenomResp, sdk.Error)
 	QueryDenom(denomID string) (QueryDenomResp, sdk.Error)
 	QueryMTSupply(denomID, mtID string) (uint64, sdk.Error)
-	QueryMTs(denomID string) ([]QueryMTResp, sdk.Error)
+	QueryMTs(denomID string, pageReq *query.PageRequest) ([]QueryMTResp, sdk.Error)
 	QueryMT(denomID, mtID string) (QueryMTResp, sdk.Error)
 	QueryBalances(denomID, owner string) ([]QueryBalanceResp, sdk.Error)
 }

@@ -488,11 +488,16 @@ func (s serviceClient) QueryServiceBindings(serviceName string, pageReq *query.P
 		return nil, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return nil, e
+	}
+
 	resp, err := NewQueryClient(conn).Bindings(
 		context.Background(),
 		&QueryBindingsRequest{
 			ServiceName: serviceName,
-			Pagination:  pageReq,
+			Pagination:  pagination,
 		},
 	)
 	if err != nil {
@@ -540,12 +545,17 @@ func (s serviceClient) QueryServiceRequests(serviceName string, provider string,
 		return nil, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return nil, e
+	}
+
 	resp, err := NewQueryClient(conn).Requests(
 		context.Background(),
 		&QueryRequestsRequest{
 			ServiceName: serviceName,
 			Provider:    provider,
-			Pagination:  pageReq,
+			Pagination:  pagination,
 		},
 	)
 	if err != nil {
@@ -563,12 +573,17 @@ func (s serviceClient) QueryRequestsByReqCtx(reqCtxID string, batchCounter uint6
 		return nil, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return nil, e
+	}
+
 	resp, err := NewQueryClient(conn).RequestsByReqCtx(
 		context.Background(),
 		&QueryRequestsByReqCtxRequest{
 			RequestContextId: reqCtxID,
 			BatchCounter:     batchCounter,
-			Pagination:       pageReq,
+			Pagination:       pagination,
 		},
 	)
 	if err != nil {
@@ -611,12 +626,17 @@ func (s serviceClient) QueryServiceResponses(reqCtxID string, batchCounter uint6
 		return nil, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return nil, e
+	}
+
 	resp, err := NewQueryClient(conn).Responses(
 		context.Background(),
 		&QueryResponsesRequest{
 			RequestContextId: reqCtxID,
 			BatchCounter:     batchCounter,
-			Pagination:       pageReq,
+			Pagination:       pagination,
 		},
 	)
 	if err != nil {

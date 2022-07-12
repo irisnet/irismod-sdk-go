@@ -5,6 +5,7 @@ import (
 	"github.com/irisnet/core-sdk-go/common/codec"
 	"github.com/irisnet/core-sdk-go/common/codec/types"
 	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/core-sdk-go/types/query"
 )
 
 type mtClient struct {
@@ -212,16 +213,23 @@ func (mc mtClient) QueryDenom(denomID string) (QueryDenomResp, sdk.Error) {
 	return res.Denom.Convert().(QueryDenomResp), nil
 }
 
-func (mc mtClient) QueryDenoms() ([]QueryDenomResp, sdk.Error) {
+func (mc mtClient) QueryDenoms(pageReq *query.PageRequest) ([]QueryDenomResp, sdk.Error) {
 	conn, err := mc.GenConn()
 
 	if err != nil {
 		return nil, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return nil, e
+	}
+
 	res, err := NewQueryClient(conn).Denoms(
 		context.Background(),
-		&QueryDenomsRequest{},
+		&QueryDenomsRequest{
+			Pagination: pagination,
+		},
 	)
 	if err != nil {
 		return nil, sdk.Wrap(err)
@@ -259,7 +267,7 @@ func (mc mtClient) QueryMT(denomID, mtID string) (QueryMTResp, sdk.Error) {
 	return res.Mt.Convert().(QueryMTResp), nil
 }
 
-func (mc mtClient) QueryMTs(denomID string) ([]QueryMTResp, sdk.Error) {
+func (mc mtClient) QueryMTs(denomID string, pageReq *query.PageRequest) ([]QueryMTResp, sdk.Error) {
 	if len(denomID) == 0 {
 		return nil, sdk.Wrapf("denomID is required")
 	}
@@ -270,10 +278,16 @@ func (mc mtClient) QueryMTs(denomID string) ([]QueryMTResp, sdk.Error) {
 		return nil, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return nil, e
+	}
+
 	res, err := NewQueryClient(conn).MTs(
 		context.Background(),
 		&QueryMTsRequest{
-			DenomId: denomID,
+			DenomId:    denomID,
+			Pagination: pagination,
 		},
 	)
 	if err != nil {
