@@ -174,7 +174,7 @@ func (nc nftClient) QuerySupply(denom, creator string) (uint64, sdk.Error) {
 	return res.Amount, nil
 }
 
-func (nc nftClient) QueryOwner(creator, denom string, pagination *query.PageRequest) (QueryOwnerResp, sdk.Error) {
+func (nc nftClient) QueryOwner(creator, denom string, pageReq *query.PageRequest) (QueryOwnerResp, sdk.Error) {
 	if len(denom) == 0 {
 		return QueryOwnerResp{}, sdk.Wrapf("denom is required")
 	}
@@ -189,12 +189,16 @@ func (nc nftClient) QueryOwner(creator, denom string, pagination *query.PageRequ
 		return QueryOwnerResp{}, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return QueryOwnerResp{}, e
+	}
 	res, err := NewQueryClient(conn).Owner(
 		context.Background(),
 		&QueryOwnerRequest{
 			Owner:      creator,
 			DenomId:    denom,
-			Pagination: tidyPagination(pagination),
+			Pagination: pagination,
 		},
 	)
 	if err != nil {
@@ -204,7 +208,7 @@ func (nc nftClient) QueryOwner(creator, denom string, pagination *query.PageRequ
 	return res.Owner.Convert().(QueryOwnerResp), nil
 }
 
-func (nc nftClient) QueryCollection(denom string, pagination *query.PageRequest) (QueryCollectionResp, sdk.Error) {
+func (nc nftClient) QueryCollection(denom string, pageReq *query.PageRequest) (QueryCollectionResp, sdk.Error) {
 	if len(denom) == 0 {
 		return QueryCollectionResp{}, sdk.Wrapf("denom is required")
 	}
@@ -215,9 +219,14 @@ func (nc nftClient) QueryCollection(denom string, pagination *query.PageRequest)
 		return QueryCollectionResp{}, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return QueryCollectionResp{}, e
+	}
+
 	res, err := NewQueryClient(conn).Collection(
 		context.Background(),
-		&QueryCollectionRequest{DenomId: denom, Pagination: tidyPagination(pagination)},
+		&QueryCollectionRequest{DenomId: denom, Pagination: pagination},
 	)
 	if err != nil {
 		return QueryCollectionResp{}, sdk.Wrap(err)
@@ -226,17 +235,22 @@ func (nc nftClient) QueryCollection(denom string, pagination *query.PageRequest)
 	return res.Collection.Convert().(QueryCollectionResp), nil
 }
 
-func (nc nftClient) QueryDenoms(pagination *query.PageRequest) ([]QueryDenomResp, sdk.Error) {
+func (nc nftClient) QueryDenoms(pageReq *query.PageRequest) ([]QueryDenomResp, sdk.Error) {
 	conn, err := nc.GenConn()
 
 	if err != nil {
 		return nil, sdk.Wrap(err)
 	}
 
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return nil, e
+	}
+
 	res, err := NewQueryClient(conn).Denoms(
 		context.Background(),
 		&QueryDenomsRequest{
-			Pagination: tidyPagination(pagination),
+			Pagination: pagination,
 		},
 	)
 	if err != nil {
@@ -291,12 +305,4 @@ func (nc nftClient) QueryNFT(denom, tokenID string) (QueryNFTResp, sdk.Error) {
 	}
 
 	return res.NFT.Convert().(QueryNFTResp), nil
-}
-
-func tidyPagination(pagination *query.PageRequest) *query.PageRequest {
-	pagination.CountTotal = false
-	if pagination.Limit == 0 || pagination.Limit > 100 {
-		pagination.Limit = 100
-	}
-	return pagination
 }

@@ -3,9 +3,8 @@ module github.com/irisnet/irismod-sdk-go/mt
 go 1.16
 
 require (
-	github.com/cosmos/cosmos-sdk v0.44.3
 	github.com/gogo/protobuf v1.3.3
-	github.com/irisnet/core-sdk-go v0.0.0-20220515104139-554292f91a1a
+	github.com/irisnet/core-sdk-go v0.0.0-20220712024726-6d9d3db01194
 	github.com/tendermint/tendermint v0.34.19 // indirect
 	google.golang.org/genproto v0.0.0-20211116182654-e63d96a377c4
 	google.golang.org/grpc v1.41.0

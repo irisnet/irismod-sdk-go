@@ -8,10 +8,10 @@ import (
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+	_ "github.com/golang/protobuf/ptypes/duration"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
 	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
-	_ "google.golang.org/protobuf/types/known/durationpb"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -128,15 +128,15 @@ var xxx_messageInfo_ServiceDefinition proto.InternalMessageInfo
 
 // ServiceBinding defines a standard for service binding.
 type ServiceBinding struct {
-	ServiceName  string                                     `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Provider     string                                     `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
-	Deposit      github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,3,rep,name=deposit,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"deposit"`
-	Pricing      string                                     `protobuf:"bytes,4,opt,name=pricing,proto3" json:"pricing,omitempty"`
-	QoS          uint64                                     `protobuf:"varint,5,opt,name=qos,proto3" json:"qos,omitempty"`
-	Options      string                                     `protobuf:"bytes,6,opt,name=options,proto3" json:"options,omitempty"`
-	Available    bool                                       `protobuf:"varint,7,opt,name=available,proto3" json:"available,omitempty"`
-	DisabledTime time.Time                                  `protobuf:"bytes,8,opt,name=disabled_time,json=disabledTime,proto3,stdtime" json:"disabled_time" yaml:"disabled_time"`
-	Owner        string                                     `protobuf:"bytes,9,opt,name=owner,proto3" json:"owner,omitempty"`
+	ServiceName  string       `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Provider     string       `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	Deposit      []types.Coin `protobuf:"bytes,3,rep,name=deposit,proto3" json:"deposit"`
+	Pricing      string       `protobuf:"bytes,4,opt,name=pricing,proto3" json:"pricing,omitempty"`
+	QoS          uint64       `protobuf:"varint,5,opt,name=qos,proto3" json:"qos,omitempty"`
+	Options      string       `protobuf:"bytes,6,opt,name=options,proto3" json:"options,omitempty"`
+	Available    bool         `protobuf:"varint,7,opt,name=available,proto3" json:"available,omitempty"`
+	DisabledTime time.Time    `protobuf:"bytes,8,opt,name=disabled_time,json=disabledTime,proto3,stdtime" json:"disabled_time" yaml:"disabled_time"`
+	Owner        string       `protobuf:"bytes,9,opt,name=owner,proto3" json:"owner,omitempty"`
 }
 
 func (m *ServiceBinding) Reset()         { *m = ServiceBinding{} }
@@ -174,23 +174,23 @@ var xxx_messageInfo_ServiceBinding proto.InternalMessageInfo
 
 // RequestContext defines a standard for request context.
 type RequestContext struct {
-	ServiceName            string                                     `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Providers              []string                                   `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
-	Consumer               string                                     `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	Input                  string                                     `protobuf:"bytes,4,opt,name=input,proto3" json:"input,omitempty"`
-	ServiceFeeCap          github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,5,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
-	ModuleName             string                                     `protobuf:"bytes,6,opt,name=module_name,json=moduleName,proto3" json:"module_name,omitempty" yaml:"module_name"`
-	Timeout                int64                                      `protobuf:"varint,7,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	Repeated               bool                                       `protobuf:"varint,8,opt,name=repeated,proto3" json:"repeated,omitempty"`
-	RepeatedFrequency      uint64                                     `protobuf:"varint,9,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
-	RepeatedTotal          int64                                      `protobuf:"varint,10,opt,name=repeated_total,json=repeatedTotal,proto3" json:"repeated_total,omitempty" yaml:"repeated_total"`
-	BatchCounter           uint64                                     `protobuf:"varint,11,opt,name=batch_counter,json=batchCounter,proto3" json:"batch_counter,omitempty" yaml:"batch_counter"`
-	BatchRequestCount      uint32                                     `protobuf:"varint,12,opt,name=batch_request_count,json=batchRequestCount,proto3" json:"batch_request_count,omitempty" yaml:"batch_request_count"`
-	BatchResponseCount     uint32                                     `protobuf:"varint,13,opt,name=batch_response_count,json=batchResponseCount,proto3" json:"batch_response_count,omitempty" yaml:"batch_response_count"`
-	BatchResponseThreshold uint32                                     `protobuf:"varint,14,opt,name=batch_response_threshold,json=batchResponseThreshold,proto3" json:"batch_response_threshold,omitempty" yaml:"batch_response_threshold"`
-	ResponseThreshold      uint32                                     `protobuf:"varint,15,opt,name=response_threshold,json=responseThreshold,proto3" json:"response_threshold,omitempty" yaml:"response_threshold"`
-	BatchState             RequestContextBatchState                   `protobuf:"varint,16,opt,name=batch_state,json=batchState,proto3,enum=irismod.service.RequestContextBatchState" json:"batch_state,omitempty" yaml:"batch_state"`
-	State                  RequestContextState                        `protobuf:"varint,17,opt,name=state,proto3,enum=irismod.service.RequestContextState" json:"state,omitempty"`
+	ServiceName            string                   `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Providers              []string                 `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
+	Consumer               string                   `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	Input                  string                   `protobuf:"bytes,4,opt,name=input,proto3" json:"input,omitempty"`
+	ServiceFeeCap          []types.Coin             `protobuf:"bytes,5,rep,name=service_fee_cap,json=serviceFeeCap,proto3" json:"service_fee_cap" yaml:"service_fee_cap"`
+	ModuleName             string                   `protobuf:"bytes,6,opt,name=module_name,json=moduleName,proto3" json:"module_name,omitempty" yaml:"module_name"`
+	Timeout                int64                    `protobuf:"varint,7,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	Repeated               bool                     `protobuf:"varint,8,opt,name=repeated,proto3" json:"repeated,omitempty"`
+	RepeatedFrequency      uint64                   `protobuf:"varint,9,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
+	RepeatedTotal          int64                    `protobuf:"varint,10,opt,name=repeated_total,json=repeatedTotal,proto3" json:"repeated_total,omitempty" yaml:"repeated_total"`
+	BatchCounter           uint64                   `protobuf:"varint,11,opt,name=batch_counter,json=batchCounter,proto3" json:"batch_counter,omitempty" yaml:"batch_counter"`
+	BatchRequestCount      uint32                   `protobuf:"varint,12,opt,name=batch_request_count,json=batchRequestCount,proto3" json:"batch_request_count,omitempty" yaml:"batch_request_count"`
+	BatchResponseCount     uint32                   `protobuf:"varint,13,opt,name=batch_response_count,json=batchResponseCount,proto3" json:"batch_response_count,omitempty" yaml:"batch_response_count"`
+	BatchResponseThreshold uint32                   `protobuf:"varint,14,opt,name=batch_response_threshold,json=batchResponseThreshold,proto3" json:"batch_response_threshold,omitempty" yaml:"batch_response_threshold"`
+	ResponseThreshold      uint32                   `protobuf:"varint,15,opt,name=response_threshold,json=responseThreshold,proto3" json:"response_threshold,omitempty" yaml:"response_threshold"`
+	BatchState             RequestContextBatchState `protobuf:"varint,16,opt,name=batch_state,json=batchState,proto3,enum=irismod.service.RequestContextBatchState" json:"batch_state,omitempty" yaml:"batch_state"`
+	State                  RequestContextState      `protobuf:"varint,17,opt,name=state,proto3,enum=irismod.service.RequestContextState" json:"state,omitempty"`
 }
 
 func (m *RequestContext) Reset()         { *m = RequestContext{} }
@@ -228,16 +228,16 @@ var xxx_messageInfo_RequestContext proto.InternalMessageInfo
 
 // Request defines a standard for request.
 type Request struct {
-	Id                         string                                     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ServiceName                string                                     `protobuf:"bytes,2,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Provider                   string                                     `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
-	Consumer                   string                                     `protobuf:"bytes,4,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	Input                      string                                     `protobuf:"bytes,5,opt,name=input,proto3" json:"input,omitempty"`
-	ServiceFee                 github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,6,rep,name=service_fee,json=serviceFee,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"service_fee" yaml:"service_fee"`
-	RequestHeight              int64                                      `protobuf:"varint,7,opt,name=request_height,json=requestHeight,proto3" json:"request_height,omitempty" yaml:"request_height"`
-	ExpirationHeight           int64                                      `protobuf:"varint,8,opt,name=expiration_height,json=expirationHeight,proto3" json:"expiration_height,omitempty" yaml:"expiration_height"`
-	RequestContextId           string                                     `protobuf:"bytes,9,opt,name=request_context_id,json=requestContextId,proto3" json:"request_context_id,omitempty" yaml:"request_context_id"`
-	RequestContextBatchCounter uint64                                     `protobuf:"varint,10,opt,name=request_context_batch_counter,json=requestContextBatchCounter,proto3" json:"request_context_batch_counter,omitempty" yaml:"request_context_batch_counter"`
+	Id                         string       `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ServiceName                string       `protobuf:"bytes,2,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Provider                   string       `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
+	Consumer                   string       `protobuf:"bytes,4,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	Input                      string       `protobuf:"bytes,5,opt,name=input,proto3" json:"input,omitempty"`
+	ServiceFee                 []types.Coin `protobuf:"bytes,6,rep,name=service_fee,json=serviceFee,proto3" json:"service_fee" yaml:"service_fee"`
+	RequestHeight              int64        `protobuf:"varint,7,opt,name=request_height,json=requestHeight,proto3" json:"request_height,omitempty" yaml:"request_height"`
+	ExpirationHeight           int64        `protobuf:"varint,8,opt,name=expiration_height,json=expirationHeight,proto3" json:"expiration_height,omitempty" yaml:"expiration_height"`
+	RequestContextId           string       `protobuf:"bytes,9,opt,name=request_context_id,json=requestContextId,proto3" json:"request_context_id,omitempty" yaml:"request_context_id"`
+	RequestContextBatchCounter uint64       `protobuf:"varint,10,opt,name=request_context_batch_counter,json=requestContextBatchCounter,proto3" json:"request_context_batch_counter,omitempty" yaml:"request_context_batch_counter"`
 }
 
 func (m *Request) Reset()         { *m = Request{} }
@@ -275,12 +275,12 @@ var xxx_messageInfo_Request proto.InternalMessageInfo
 
 // CompactRequest defines a standard for compact request.
 type CompactRequest struct {
-	RequestContextId           string                                     `protobuf:"bytes,1,opt,name=request_context_id,json=requestContextId,proto3" json:"request_context_id,omitempty" yaml:"request_context_id"`
-	RequestContextBatchCounter uint64                                     `protobuf:"varint,2,opt,name=request_context_batch_counter,json=requestContextBatchCounter,proto3" json:"request_context_batch_counter,omitempty" yaml:"request_context_batch_counter"`
-	Provider                   string                                     `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
-	ServiceFee                 github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,4,rep,name=service_fee,json=serviceFee,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"service_fee" yaml:"service_fee"`
-	RequestHeight              int64                                      `protobuf:"varint,5,opt,name=request_height,json=requestHeight,proto3" json:"request_height,omitempty" yaml:"request_height"`
-	ExpirationHeight           int64                                      `protobuf:"varint,6,opt,name=expiration_height,json=expirationHeight,proto3" json:"expiration_height,omitempty" yaml:"expiration_height"`
+	RequestContextId           string       `protobuf:"bytes,1,opt,name=request_context_id,json=requestContextId,proto3" json:"request_context_id,omitempty" yaml:"request_context_id"`
+	RequestContextBatchCounter uint64       `protobuf:"varint,2,opt,name=request_context_batch_counter,json=requestContextBatchCounter,proto3" json:"request_context_batch_counter,omitempty" yaml:"request_context_batch_counter"`
+	Provider                   string       `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
+	ServiceFee                 []types.Coin `protobuf:"bytes,4,rep,name=service_fee,json=serviceFee,proto3" json:"service_fee" yaml:"service_fee"`
+	RequestHeight              int64        `protobuf:"varint,5,opt,name=request_height,json=requestHeight,proto3" json:"request_height,omitempty" yaml:"request_height"`
+	ExpirationHeight           int64        `protobuf:"varint,6,opt,name=expiration_height,json=expirationHeight,proto3" json:"expiration_height,omitempty" yaml:"expiration_height"`
 }
 
 func (m *CompactRequest) Reset()         { *m = CompactRequest{} }
@@ -361,9 +361,9 @@ var xxx_messageInfo_Response proto.InternalMessageInfo
 
 // Pricing defines a standard for service pricing.
 type Pricing struct {
-	Price              github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,6,rep,name=price,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"price"`
-	PromotionsByTime   []PromotionByTime                          `protobuf:"bytes,2,rep,name=promotions_by_time,json=promotionsByTime,proto3" json:"promotions_by_time" yaml:"promotions_by_time"`
-	PromotionsByVolume []PromotionByVolume                        `protobuf:"bytes,3,rep,name=promotions_by_volume,json=promotionsByVolume,proto3" json:"promotions_by_volume" yaml:"promotions_by_volume"`
+	Price              []types.Coin        `protobuf:"bytes,6,rep,name=price,proto3" json:"price"`
+	PromotionsByTime   []PromotionByTime   `protobuf:"bytes,2,rep,name=promotions_by_time,json=promotionsByTime,proto3" json:"promotions_by_time" yaml:"promotions_by_time"`
+	PromotionsByVolume []PromotionByVolume `protobuf:"bytes,3,rep,name=promotions_by_volume,json=promotionsByVolume,proto3" json:"promotions_by_volume" yaml:"promotions_by_volume"`
 }
 
 func (m *Pricing) Reset()         { *m = Pricing{} }
@@ -480,15 +480,15 @@ var xxx_messageInfo_PromotionByVolume proto.InternalMessageInfo
 
 // service parameters
 type Params struct {
-	MaxRequestTimeout    int64                                      `protobuf:"varint,1,opt,name=max_request_timeout,json=maxRequestTimeout,proto3" json:"max_request_timeout,omitempty" yaml:"max_request_timeout"`
-	MinDepositMultiple   int64                                      `protobuf:"varint,2,opt,name=min_deposit_multiple,json=minDepositMultiple,proto3" json:"min_deposit_multiple,omitempty" yaml:"min_deposit_multiple"`
-	MinDeposit           github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,3,rep,name=min_deposit,json=minDeposit,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"min_deposit"`
-	ServiceFeeTax        github_com_irisnet_core_sdk_go_types.Dec   `protobuf:"bytes,4,opt,name=service_fee_tax,json=serviceFeeTax,proto3,customtype=github.com/irisnet/core-sdk-go/types.Dec" json:"service_fee_tax" yaml:"service_fee_tax"`
-	SlashFraction        github_com_irisnet_core_sdk_go_types.Dec   `protobuf:"bytes,5,opt,name=slash_fraction,json=slashFraction,proto3,customtype=github.com/irisnet/core-sdk-go/types.Dec" json:"slash_fraction" yaml:"slash_fraction"`
-	ComplaintRetrospect  time.Duration                              `protobuf:"bytes,6,opt,name=complaint_retrospect,json=complaintRetrospect,proto3,stdduration" json:"complaint_retrospect" yaml:"complaint_retrospect"`
-	ArbitrationTimeLimit time.Duration                              `protobuf:"bytes,7,opt,name=arbitration_time_limit,json=arbitrationTimeLimit,proto3,stdduration" json:"arbitration_time_limit" yaml:"arbitration_time_limit"`
-	TxSizeLimit          uint64                                     `protobuf:"varint,8,opt,name=tx_size_limit,json=txSizeLimit,proto3" json:"tx_size_limit,omitempty" yaml:"tx_size_limit"`
-	BaseDenom            string                                     `protobuf:"bytes,9,opt,name=base_denom,json=baseDenom,proto3" json:"base_denom,omitempty" yaml:"base_denom"`
+	MaxRequestTimeout    int64                                    `protobuf:"varint,1,opt,name=max_request_timeout,json=maxRequestTimeout,proto3" json:"max_request_timeout,omitempty" yaml:"max_request_timeout"`
+	MinDepositMultiple   int64                                    `protobuf:"varint,2,opt,name=min_deposit_multiple,json=minDepositMultiple,proto3" json:"min_deposit_multiple,omitempty" yaml:"min_deposit_multiple"`
+	MinDeposit           []types.Coin                             `protobuf:"bytes,3,rep,name=min_deposit,json=minDeposit,proto3" json:"min_deposit"`
+	ServiceFeeTax        github_com_irisnet_core_sdk_go_types.Dec `protobuf:"bytes,4,opt,name=service_fee_tax,json=serviceFeeTax,proto3,customtype=github.com/irisnet/core-sdk-go/types.Dec" json:"service_fee_tax" yaml:"service_fee_tax"`
+	SlashFraction        github_com_irisnet_core_sdk_go_types.Dec `protobuf:"bytes,5,opt,name=slash_fraction,json=slashFraction,proto3,customtype=github.com/irisnet/core-sdk-go/types.Dec" json:"slash_fraction" yaml:"slash_fraction"`
+	ComplaintRetrospect  time.Duration                            `protobuf:"bytes,6,opt,name=complaint_retrospect,json=complaintRetrospect,proto3,stdduration" json:"complaint_retrospect" yaml:"complaint_retrospect"`
+	ArbitrationTimeLimit time.Duration                            `protobuf:"bytes,7,opt,name=arbitration_time_limit,json=arbitrationTimeLimit,proto3,stdduration" json:"arbitration_time_limit" yaml:"arbitration_time_limit"`
+	TxSizeLimit          uint64                                   `protobuf:"varint,8,opt,name=tx_size_limit,json=txSizeLimit,proto3" json:"tx_size_limit,omitempty" yaml:"tx_size_limit"`
+	BaseDenom            string                                   `protobuf:"bytes,9,opt,name=base_denom,json=baseDenom,proto3" json:"base_denom,omitempty" yaml:"base_denom"`
 }
 
 func (m *Params) Reset()      { *m = Params{} }
@@ -2090,10 +2090,7 @@ func (m *ServiceDefinition) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -2409,10 +2406,7 @@ func (m *ServiceBinding) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -2866,10 +2860,7 @@ func (m *RequestContext) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3202,10 +3193,7 @@ func (m *Request) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3410,10 +3398,7 @@ func (m *CompactRequest) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3642,10 +3627,7 @@ func (m *Response) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3797,10 +3779,7 @@ func (m *Pricing) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -3950,10 +3929,7 @@ func (m *PromotionByTime) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -4056,10 +4032,7 @@ func (m *PromotionByVolume) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {
@@ -4366,10 +4339,7 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			if err != nil {
 				return err
 			}
-			if skippy < 0 {
-				return ErrInvalidLengthService
-			}
-			if (iNdEx + skippy) < 0 {
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
 				return ErrInvalidLengthService
 			}
 			if (iNdEx + skippy) > l {

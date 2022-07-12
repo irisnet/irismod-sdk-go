@@ -5,6 +5,7 @@ package token
 
 import (
 	"context"
+	"github.com/irisnet/core-sdk-go/types/query"
 	"strconv"
 
 	"github.com/irisnet/core-sdk-go/common/codec"
@@ -135,13 +136,18 @@ func (t tokenClient) QueryToken(denom string) (sdk.Token, error) {
 	return ts[0], nil
 }
 
-func (t tokenClient) QueryTokens(owner string) (sdk.Tokens, error) {
+func (t tokenClient) QueryTokens(owner string, pageReq *query.PageRequest) (sdk.Tokens, error) {
 	var ownerAddr string
 	if len(owner) > 0 {
 		if err := sdk.ValidateAccAddress(owner); err != nil {
 			return nil, sdk.Wrap(err)
 		}
 		ownerAddr = owner
+	}
+
+	pagination, e := query.FormatPageRequest(pageReq)
+	if e != nil {
+		return sdk.Tokens{}, e
 	}
 
 	conn, err := t.GenConn()
@@ -151,7 +157,8 @@ func (t tokenClient) QueryTokens(owner string) (sdk.Tokens, error) {
 	}
 
 	request := &QueryTokensRequest{
-		Owner: ownerAddr,
+		Owner:      ownerAddr,
+		Pagination: pagination,
 	}
 
 	res, err := NewQueryClient(conn).Tokens(context.Background(), request)
