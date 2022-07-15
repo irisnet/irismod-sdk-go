@@ -7,6 +7,7 @@ import (
 	fmt "fmt"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
+	github_com_irisnet_core_sdk_go_types "github.com/irisnet/core-sdk-go/types"
 	types "github.com/irisnet/core-sdk-go/types"
 	io "io"
 	math "math"
@@ -69,13 +70,13 @@ var xxx_messageInfo_MsgDefineService proto.InternalMessageInfo
 
 // MsgBindService defines an SDK message for binding to an existing service.
 type MsgBindService struct {
-	ServiceName string       `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Provider    string       `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
-	Deposit     []types.Coin `protobuf:"bytes,3,rep,name=deposit,proto3" json:"deposit"`
-	Pricing     string       `protobuf:"bytes,4,opt,name=pricing,proto3" json:"pricing,omitempty"`
-	QoS         uint64       `protobuf:"varint,5,opt,name=qos,proto3" json:"qos,omitempty"`
-	Options     string       `protobuf:"bytes,6,opt,name=options,proto3" json:"options,omitempty"`
-	Owner       string       `protobuf:"bytes,7,opt,name=owner,proto3" json:"owner,omitempty"`
+	ServiceName string                                     `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Provider    string                                     `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	Deposit     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,3,rep,name=deposit,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"deposit"`
+	Pricing     string                                     `protobuf:"bytes,4,opt,name=pricing,proto3" json:"pricing,omitempty"`
+	QoS         uint64                                     `protobuf:"varint,5,opt,name=qos,proto3" json:"qos,omitempty"`
+	Options     string                                     `protobuf:"bytes,6,opt,name=options,proto3" json:"options,omitempty"`
+	Owner       string                                     `protobuf:"bytes,7,opt,name=owner,proto3" json:"owner,omitempty"`
 }
 
 func (m *MsgBindService) Reset()         { *m = MsgBindService{} }
@@ -113,13 +114,13 @@ var xxx_messageInfo_MsgBindService proto.InternalMessageInfo
 
 // MsgUpdateServiceBinding defines an SDK message for updating an existing service binding.
 type MsgUpdateServiceBinding struct {
-	ServiceName string       `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Provider    string       `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
-	Deposit     []types.Coin `protobuf:"bytes,3,rep,name=deposit,proto3" json:"deposit"`
-	Pricing     string       `protobuf:"bytes,4,opt,name=pricing,proto3" json:"pricing,omitempty"`
-	QoS         uint64       `protobuf:"varint,5,opt,name=qos,proto3" json:"qos,omitempty"`
-	Options     string       `protobuf:"bytes,6,opt,name=options,proto3" json:"options,omitempty"`
-	Owner       string       `protobuf:"bytes,7,opt,name=owner,proto3" json:"owner,omitempty"`
+	ServiceName string                                     `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Provider    string                                     `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	Deposit     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,3,rep,name=deposit,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"deposit"`
+	Pricing     string                                     `protobuf:"bytes,4,opt,name=pricing,proto3" json:"pricing,omitempty"`
+	QoS         uint64                                     `protobuf:"varint,5,opt,name=qos,proto3" json:"qos,omitempty"`
+	Options     string                                     `protobuf:"bytes,6,opt,name=options,proto3" json:"options,omitempty"`
+	Owner       string                                     `protobuf:"bytes,7,opt,name=owner,proto3" json:"owner,omitempty"`
 }
 
 func (m *MsgUpdateServiceBinding) Reset()         { *m = MsgUpdateServiceBinding{} }
@@ -236,10 +237,10 @@ var xxx_messageInfo_MsgDisableServiceBinding proto.InternalMessageInfo
 
 // MsgEnableServiceBinding defines an SDK message to enable a service binding.
 type MsgEnableServiceBinding struct {
-	ServiceName string       `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Provider    string       `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
-	Deposit     []types.Coin `protobuf:"bytes,3,rep,name=deposit,proto3" json:"deposit"`
-	Owner       string       `protobuf:"bytes,4,opt,name=owner,proto3" json:"owner,omitempty"`
+	ServiceName string                                     `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Provider    string                                     `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
+	Deposit     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,3,rep,name=deposit,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"deposit"`
+	Owner       string                                     `protobuf:"bytes,4,opt,name=owner,proto3" json:"owner,omitempty"`
 }
 
 func (m *MsgEnableServiceBinding) Reset()         { *m = MsgEnableServiceBinding{} }
@@ -317,15 +318,15 @@ var xxx_messageInfo_MsgRefundServiceDeposit proto.InternalMessageInfo
 
 // MsgCallService defines an SDK message to initiate a service request context.
 type MsgCallService struct {
-	ServiceName       string       `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
-	Providers         []string     `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
-	Consumer          string       `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	Input             string       `protobuf:"bytes,4,opt,name=input,proto3" json:"input,omitempty"`
-	ServiceFeeCap     []types.Coin `protobuf:"bytes,5,rep,name=service_fee_cap,json=serviceFeeCap,proto3" json:"service_fee_cap" yaml:"service_fee_cap"`
-	Timeout           int64        `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	Repeated          bool         `protobuf:"varint,7,opt,name=repeated,proto3" json:"repeated,omitempty"`
-	RepeatedFrequency uint64       `protobuf:"varint,8,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
-	RepeatedTotal     int64        `protobuf:"varint,9,opt,name=repeated_total,json=repeatedTotal,proto3" json:"repeated_total,omitempty" yaml:"repeated_total"`
+	ServiceName       string                                     `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty" yaml:"service_name"`
+	Providers         []string                                   `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
+	Consumer          string                                     `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	Input             string                                     `protobuf:"bytes,4,opt,name=input,proto3" json:"input,omitempty"`
+	ServiceFeeCap     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,5,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
+	Timeout           int64                                      `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	Repeated          bool                                       `protobuf:"varint,7,opt,name=repeated,proto3" json:"repeated,omitempty"`
+	RepeatedFrequency uint64                                     `protobuf:"varint,8,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
+	RepeatedTotal     int64                                      `protobuf:"varint,9,opt,name=repeated_total,json=repeatedTotal,proto3" json:"repeated_total,omitempty" yaml:"repeated_total"`
 }
 
 func (m *MsgCallService) Reset()         { *m = MsgCallService{} }
@@ -559,13 +560,13 @@ var xxx_messageInfo_MsgKillRequestContext proto.InternalMessageInfo
 
 // MsgUpdateRequestContext defines an SDK message to update a service request context.
 type MsgUpdateRequestContext struct {
-	RequestContextId  string       `protobuf:"bytes,1,opt,name=request_context_id,json=requestContextId,proto3" json:"request_context_id,omitempty" yaml:"request_context_id"`
-	Providers         []string     `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
-	Consumer          string       `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	ServiceFeeCap     []types.Coin `protobuf:"bytes,4,rep,name=service_fee_cap,json=serviceFeeCap,proto3" json:"service_fee_cap" yaml:"service_fee_cap"`
-	Timeout           int64        `protobuf:"varint,5,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	RepeatedFrequency uint64       `protobuf:"varint,6,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
-	RepeatedTotal     int64        `protobuf:"varint,7,opt,name=repeated_total,json=repeatedTotal,proto3" json:"repeated_total,omitempty" yaml:"repeated_total"`
+	RequestContextId  string                                     `protobuf:"bytes,1,opt,name=request_context_id,json=requestContextId,proto3" json:"request_context_id,omitempty" yaml:"request_context_id"`
+	Providers         []string                                   `protobuf:"bytes,2,rep,name=providers,proto3" json:"providers,omitempty"`
+	Consumer          string                                     `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	ServiceFeeCap     github_com_irisnet_core_sdk_go_types.Coins `protobuf:"bytes,4,rep,name=service_fee_cap,json=serviceFeeCap,proto3,castrepeated=github.com/irisnet/core-sdk-go/types.Coins" json:"service_fee_cap" yaml:"service_fee_cap"`
+	Timeout           int64                                      `protobuf:"varint,5,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	RepeatedFrequency uint64                                     `protobuf:"varint,6,opt,name=repeated_frequency,json=repeatedFrequency,proto3" json:"repeated_frequency,omitempty" yaml:"repeated_frequency"`
+	RepeatedTotal     int64                                      `protobuf:"varint,7,opt,name=repeated_total,json=repeatedTotal,proto3" json:"repeated_total,omitempty" yaml:"repeated_total"`
 }
 
 func (m *MsgUpdateRequestContext) Reset()         { *m = MsgUpdateRequestContext{} }
