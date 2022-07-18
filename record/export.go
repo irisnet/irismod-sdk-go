@@ -8,7 +8,7 @@ import (
 type Client interface {
 	sdk.Module
 
-	CreateRecord(request CreateRecordRequest, baseTx sdk.BaseTx) (string, sdk.Error)
+	CreateRecord(request CreateRecordRequest, baseTx sdk.BaseTx) (CreateRecordResp, sdk.Error)
 	QueryRecord(request QueryRecordReq) (QueryRecordResp, sdk.Error)
 }
 
@@ -32,4 +32,12 @@ type Data struct {
 	TxHash   string    `json:"tx_hash" yaml:"tx_hash"`
 	Contents []Content `json:"contents" yaml:"contents"`
 	Creator  string    `json:"creator" yaml:"creator"`
+}
+
+type CreateRecordResp struct {
+	RecordId  string `json:"record_id"`
+	Hash      string `json:"hash"`
+	GasWanted int64  `json:"gas_wanted"`
+	GasUsed   int64  `json:"gas_used"`
+	Height    int64  `json:"height"`
 }
