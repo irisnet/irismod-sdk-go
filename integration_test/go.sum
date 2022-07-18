@@ -459,8 +459,8 @@ github.com/irisnet/irismod-sdk-go/oracle v0.0.0-20210720100738-ddc220cd5bd1 h1:j
 github.com/irisnet/irismod-sdk-go/oracle v0.0.0-20210720100738-ddc220cd5bd1/go.mod h1:yesNstZe4FTNlXa9UGFbk2aNpo0xGdn9XyTJApWfA4c=
 github.com/irisnet/irismod-sdk-go/random v0.0.0-20210720100738-ddc220cd5bd1 h1:D/Wow/89l9BPujKrYkxKmrlzgnxlrzNOCItTB8mqMrE=
 github.com/irisnet/irismod-sdk-go/random v0.0.0-20210720100738-ddc220cd5bd1/go.mod h1:HHDpKggtH02qemmgBgiGEp4AamXajTYxIVhZweVyuOI=
-github.com/irisnet/irismod-sdk-go/record v0.0.0-20210720100738-ddc220cd5bd1 h1:S4dWTk94HfU+P3Dgz5eNgxczY3iqDqc1sJcV4nH4bFw=
-github.com/irisnet/irismod-sdk-go/record v0.0.0-20210720100738-ddc220cd5bd1/go.mod h1:TICxg17bbvv3xG/EVAH0z3ATppDZ/X0FJAVg10H4tZ4=
+github.com/irisnet/irismod-sdk-go/record v0.0.0-20220718032653-39c7f0c45b28 h1:XR4NudeuIndvAjeeRrjzjcI6PbxIxOmVFZMTfmhhMJE=
+github.com/irisnet/irismod-sdk-go/record v0.0.0-20220718032653-39c7f0c45b28/go.mod h1:TICxg17bbvv3xG/EVAH0z3ATppDZ/X0FJAVg10H4tZ4=
 github.com/irisnet/irismod-sdk-go/service v0.0.0-20210720100133-4b2a0a8cc4f1 h1:sjh9ueoPQ6PmEs/F8jOfupKUIAN8huUHFFxgHSiqHMU=
 github.com/irisnet/irismod-sdk-go/service v0.0.0-20210720100133-4b2a0a8cc4f1/go.mod h1:pWHmReO3iX+cHWp6XyrBoacDSkEZNp3Dl1nHlIRGkLQ=
 github.com/irisnet/irismod-sdk-go/staking v0.0.0-20210720100738-ddc220cd5bd1 h1:+TqXZGG2NhS5XSpn9DOIH8ct2EZh7A/6uf4UcGz7pcI=

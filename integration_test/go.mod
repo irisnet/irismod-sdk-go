@@ -12,7 +12,7 @@ require (
 	github.com/irisnet/irismod-sdk-go/nft v0.0.0-20210726064324-b35f8f5259eb
 	github.com/irisnet/irismod-sdk-go/oracle v0.0.0-20210720100738-ddc220cd5bd1
 	github.com/irisnet/irismod-sdk-go/random v0.0.0-20210720100738-ddc220cd5bd1
-	github.com/irisnet/irismod-sdk-go/record v0.0.0-20210720100738-ddc220cd5bd1
+	github.com/irisnet/irismod-sdk-go/record v0.0.0-20220718032653-39c7f0c45b28
 	github.com/irisnet/irismod-sdk-go/service v0.0.0-20210720100133-4b2a0a8cc4f1
 	github.com/irisnet/irismod-sdk-go/staking v0.0.0-20210720100738-ddc220cd5bd1
 	github.com/irisnet/irismod-sdk-go/token v0.0.0-20210720100738-ddc220cd5bd1
