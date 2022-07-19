@@ -28,10 +28,11 @@ func (r recordClient) RegisterInterfaceTypes(registry types.InterfaceRegistry) {
 	RegisterInterfaces(registry)
 }
 
-func (r recordClient) CreateRecord(request CreateRecordRequest, baseTx sdk.BaseTx) (string, sdk.Error) {
+func (r recordClient) CreateRecord(request CreateRecordRequest, baseTx sdk.BaseTx) (CreateRecordResp, sdk.Error) {
 	creator, err := r.QueryAddress(baseTx.From, baseTx.Password)
+	createRecordResp := CreateRecordResp{}
 	if err != nil {
-		return "", sdk.Wrap(err)
+		return createRecordResp, sdk.Wrap(err)
 	}
 
 	msg := &MsgCreateRecord{
@@ -41,15 +42,21 @@ func (r recordClient) CreateRecord(request CreateRecordRequest, baseTx sdk.BaseT
 
 	res, err := r.BuildAndSend([]sdk.Msg{msg}, baseTx)
 	if err != nil {
-		return "", err
+		return createRecordResp, err
 	}
-
-	recordID, er := res.Events.GetValue(eventTypeCreateRecord, attributeKeyRecordID)
-	if er != nil {
-		return "", sdk.Wrap(er)
+	if res.Events != nil {
+		recordID, er := res.Events.GetValue(eventTypeCreateRecord, attributeKeyRecordID)
+		if er != nil {
+			return createRecordResp, sdk.Wrap(er)
+		}
+		createRecordResp.RecordId = recordID
 	}
+	createRecordResp.Hash = res.Hash
+	createRecordResp.Height = res.Height
+	createRecordResp.GasUsed = res.GasUsed
+	createRecordResp.GasWanted = res.GasWanted
 
-	return recordID, nil
+	return createRecordResp, nil
 }
 
 func (r recordClient) QueryRecord(request QueryRecordReq) (QueryRecordResp, sdk.Error) {

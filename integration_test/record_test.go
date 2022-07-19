@@ -2,11 +2,10 @@ package integrationtest
 
 import (
 	"fmt"
-
-	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/irismod-sdk-go/record"
 	"github.com/stretchr/testify/require"
 
-	"github.com/irisnet/irismod-sdk-go/record"
+	sdk "github.com/irisnet/core-sdk-go/types"
 )
 
 func (s IntegrationTestSuite) TestRecord() {
@@ -14,7 +13,7 @@ func (s IntegrationTestSuite) TestRecord() {
 		From:     s.Account().Name,
 		Gas:      200000,
 		Memo:     "test",
-		Mode:     sdk.Commit,
+		Mode:     sdk.Sync,
 		Password: s.Account().Password,
 	}
 
@@ -33,21 +32,29 @@ func (s IntegrationTestSuite) TestRecord() {
 		Contents: contents,
 	}
 
-	recordID, err := s.Record.CreateRecord(req, baseTx)
-	require.NoError(s.T(), err)
-	require.NotEmpty(s.T(), recordID)
-
-	request := record.QueryRecordReq{
-		RecordID: recordID,
-		Prove:    true,
-		Height:   0,
+	resp, err := s.Record.CreateRecord(req, baseTx)
+	if err != nil {
+		panic(err)
 	}
-
-	result, err := s.Record.QueryRecord(request)
 	require.NoError(s.T(), err)
-	require.NotEmpty(s.T(), result.Record.Contents)
+	require.NotEmpty(s.T(), resp.Hash)
 
-	for i := 0; i < num; i++ {
-		require.EqualValues(s.T(), contents[i], result.Record.Contents[i])
+	if resp.RecordId != "" {
+		request := record.QueryRecordReq{
+			RecordID: resp.RecordId,
+			Prove:    true,
+			Height:   resp.Height,
+		}
+
+		result, err := s.Record.QueryRecord(request)
+		if err != nil {
+			panic(err)
+		}
+		require.NoError(s.T(), err)
+		require.NotEmpty(s.T(), result.Record.Contents)
+
+		for i := 0; i < num; i++ {
+			require.EqualValues(s.T(), contents[i], result.Record.Contents[i])
+		}
 	}
 }
