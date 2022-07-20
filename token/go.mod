@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/gogo/protobuf v1.3.3
-	github.com/irisnet/core-sdk-go v0.0.0-20220712024726-6d9d3db01194
+	github.com/irisnet/core-sdk-go v0.0.0-20220720085949-4d825adb8054
 	github.com/regen-network/cosmos-proto v0.3.1
 	github.com/tendermint/tendermint v0.34.19 // indirect
 	google.golang.org/genproto v0.0.0-20211116182654-e63d96a377c4
