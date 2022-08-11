@@ -42,6 +42,7 @@ func (mc mtClient) IssueDenom(request IssueDenomRequest, baseTx sdk.BaseTx) (sdk
 	return mc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
+// MintMT create new MT
 func (mc mtClient) MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
 	sender, err := mc.QueryAddress(baseTx.From, baseTx.Password)
 	if err != nil {
@@ -66,7 +67,8 @@ func (mc mtClient) MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultT
 	return mc.BuildAndSend([]sdk.Msg{msg}, baseTx)
 }
 
-func (mc mtClient) AddIssueMT(request AddIssueMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+// AddMT issuing additional MT
+func (mc mtClient) AddMT(request AddMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
 	sender, err := mc.QueryAddress(baseTx.From, baseTx.Password)
 	if err != nil {
 		return sdk.ResultTx{}, sdk.Wrap(err)
