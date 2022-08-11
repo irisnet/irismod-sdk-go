@@ -57,10 +57,33 @@ func (mc mtClient) MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultT
 	}
 
 	msg := &MsgMintMT{
-		Id:        request.ID,
 		DenomId:   request.DenomID,
 		Amount:    request.Amount,
 		Data:      request.Data,
+		Sender:    sender.String(),
+		Recipient: recipient,
+	}
+	return mc.BuildAndSend([]sdk.Msg{msg}, baseTx)
+}
+
+func (mc mtClient) AddIssueMT(request AddIssueMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error) {
+	sender, err := mc.QueryAddress(baseTx.From, baseTx.Password)
+	if err != nil {
+		return sdk.ResultTx{}, sdk.Wrap(err)
+	}
+
+	var recipient = sender.String()
+	if len(request.Recipient) > 0 {
+		if err := sdk.ValidateAccAddress(request.Recipient); err != nil {
+			return sdk.ResultTx{}, sdk.Wrap(err)
+		}
+		recipient = request.Recipient
+	}
+
+	msg := &MsgMintMT{
+		Id:        request.ID,
+		DenomId:   request.DenomID,
+		Amount:    request.Amount,
 		Sender:    sender.String(),
 		Recipient: recipient,
 	}

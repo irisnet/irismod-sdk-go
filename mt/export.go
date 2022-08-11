@@ -11,6 +11,7 @@ type Client interface {
 	IssueDenom(request IssueDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	TransferDenom(request TransferDenomRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
+	AddIssueMT(request AddIssueMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	EditMT(request EditMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	TransferMT(request TransferMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	BurnMT(request BurnMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
@@ -35,10 +36,16 @@ type TransferDenomRequest struct {
 }
 
 type MintMTRequest struct {
-	ID        string `json:"id"`
 	DenomID   string `json:"denom_id"`
 	Amount    uint64 `json:"amount"`
 	Data      []byte `json:"data"`
+	Recipient string `json:"recipient"`
+}
+
+type AddIssueMTRequest struct {
+	ID        string `json:"id"`
+	DenomID   string `json:"denom_id"`
+	Amount    uint64 `json:"amount"`
 	Recipient string `json:"recipient"`
 }
 
