@@ -4,11 +4,11 @@ go 1.16
 
 require (
 	github.com/gogo/protobuf v1.3.3
-	github.com/golang/protobuf v1.5.2
-	github.com/irisnet/core-sdk-go v0.0.0-20220712024726-6d9d3db01194
+	github.com/irisnet/core-sdk-go v0.0.0-20220720085949-4d825adb8054
 	github.com/tendermint/tendermint v0.34.19 // indirect
 	google.golang.org/genproto v0.0.0-20211116182654-e63d96a377c4
 	google.golang.org/grpc v1.41.0
+	google.golang.org/protobuf v1.27.1
 	gopkg.in/yaml.v2 v2.4.0
 )
 
