@@ -174,7 +174,7 @@ func (nc nftClient) QuerySupply(denom, creator string) (uint64, sdk.Error) {
 	return res.Amount, nil
 }
 
-// QueryOwner Offset in PageRequest is not available for the time being, it can be replaced with key
+// QueryOwner Offset in PageRequest is deprecated, please use the field `Key` instead.
 func (nc nftClient) QueryOwner(creator, denom string, pageReq *query.PageRequest) (QueryOwnerResp, sdk.Error) {
 	if err := sdk.ValidateAccAddress(creator); err != nil {
 		return QueryOwnerResp{}, sdk.Wrap(err)
