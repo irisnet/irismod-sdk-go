@@ -263,17 +263,24 @@ func (m MsgTransferDenom) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{sdk.MustAccAddressFromBech32(m.Sender)}
 }
 
-func (o Owner) Convert() interface{} {
+func (o QueryOwnerResponse) Convert() interface{} {
 	var idcs []IDC
-	for _, idc := range o.IDCollections {
+	for _, idc := range o.Owner.IDCollections {
 		idcs = append(idcs, IDC{
 			Denom:    idc.DenomId,
 			TokenIDs: idc.TokenIds,
 		})
 	}
+
 	return QueryOwnerResp{
-		Address: o.Address,
-		IDCs:    idcs,
+		OwnerResp: &OwnerResp{
+			Address: o.Owner.Address,
+			IDCs:    idcs,
+		},
+		Pagination: &PageResponse{
+			NextKey: o.Pagination.NextKey,
+			Total:   o.Pagination.Total,
+		},
 	}
 }
 

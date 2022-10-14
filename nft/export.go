@@ -74,15 +74,29 @@ type TransferDenomRequest struct {
 	Recipient string `json:"recipient"`
 }
 
+type QueryOwnerResp struct {
+	OwnerResp  *OwnerResp    `json:"owner"`
+	Pagination *PageResponse `json:"pagination"`
+}
+
+type OwnerResp struct {
+	Address string `json:"address" yaml:"address"`
+	IDCs    []IDC  `json:"idcs" yaml:"idcs"`
+}
+
 // IDC defines a set of nft ids that belong to a specific
 type IDC struct {
 	Denom    string   `json:"denom" yaml:"denom"`
 	TokenIDs []string `json:"token_ids" yaml:"token_ids"`
 }
 
-type QueryOwnerResp struct {
-	Address string `json:"address" yaml:"address"`
-	IDCs    []IDC  `json:"idcs" yaml:"idcs"`
+type PageResponse struct {
+	// next_key is the key to be passed to PageRequest.key to
+	// query the next page most efficiently
+	NextKey []byte `json:"next_key"`
+	// total is total number of results available if PageRequest.count_total
+	// was set, its value is undefined otherwise
+	Total uint64 `json:"total"`
 }
 
 // BaseNFT non fungible token definition
