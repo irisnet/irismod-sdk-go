@@ -201,8 +201,7 @@ func (nc nftClient) QueryOwner(creator, denom string, pageReq *query.PageRequest
 	if err != nil {
 		return QueryOwnerResp{}, sdk.Wrap(err)
 	}
-
-	return res.Owner.Convert().(QueryOwnerResp), nil
+	return res.Convert().(QueryOwnerResp), nil
 }
 
 func (nc nftClient) QueryCollection(denom string, pageReq *query.PageRequest) (QueryCollectionResp, sdk.Error) {
