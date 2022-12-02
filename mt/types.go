@@ -18,7 +18,6 @@ var (
 	_ sdk.Msg = &MsgTransferDenom{}
 )
 
-
 func (m MsgMintMT) Route() string {
 	return ModuleName
 }
