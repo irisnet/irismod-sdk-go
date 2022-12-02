@@ -1,6 +1,7 @@
 package integrationtest
 
 import (
+	"github.com/irisnet/core-sdk-go/types/query"
 	"strings"
 
 	sdk "github.com/irisnet/core-sdk-go/types"
@@ -69,7 +70,7 @@ func (s IntegrationTestSuite) TestToken() {
 	require.Equal(s.T(), t1.Mintable, editTokenReq.Mintable)
 	require.Equal(s.T(), receipt, t1.Owner)
 
-	tokens, er := s.Token.QueryTokens("")
+	tokens, er := s.Token.QueryTokens("", &query.PageRequest{})
 	require.NoError(s.T(), er)
 	require.Contains(s.T(), tokens, t1)
 

@@ -3,6 +3,7 @@ package integrationtest
 import (
 	"fmt"
 	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/core-sdk-go/types/query"
 	"github.com/irisnet/irismod-sdk-go/mt"
 	"github.com/stretchr/testify/require"
 	"strings"
@@ -81,7 +82,7 @@ func (s IntegrationTestSuite) TestMT() {
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), denom)
 
-	denoms, err := s.MT.QueryDenoms()
+	denoms, err := s.MT.QueryDenoms(&query.PageRequest{})
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), denoms)
 
@@ -94,7 +95,7 @@ func (s IntegrationTestSuite) TestMT() {
 	require.NotEmpty(s.T(), mtSingle)
 	require.Equal(s.T(), mtSingle.Data, editMTData)
 
-	mts, err := s.MT.QueryMTs(denomID)
+	mts, err := s.MT.QueryMTs(denomID, &query.PageRequest{})
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), mts)
 

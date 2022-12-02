@@ -70,7 +70,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 }
 
 func (s *IntegrationTestSuite) initAccount() {
-	_, err := s.Import(
+	_, err := s.Recover(
 		s.Account().Name,
 		s.Account().Password,
 		string(getPrivKeyArmor()),

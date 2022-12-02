@@ -2,6 +2,7 @@ package integrationtest
 
 import (
 	"fmt"
+	"github.com/irisnet/core-sdk-go/types/query"
 	"strings"
 
 	sdk "github.com/irisnet/core-sdk-go/types"
@@ -76,11 +77,11 @@ func (s IntegrationTestSuite) TestNFT() {
 	require.NoError(s.T(), err)
 	require.Equal(s.T(), uint64(1), supply)
 
-	owner, err := s.NFT.QueryOwner(nftRes.Creator, mintReq.Denom)
+	owner, err := s.NFT.QueryOwner(nftRes.Creator, mintReq.Denom, &query.PageRequest{})
 	require.NoError(s.T(), err)
-	require.Len(s.T(), owner.IDCs, 1)
-	require.Len(s.T(), owner.IDCs[0].TokenIDs, 1)
-	require.Equal(s.T(), tokenID, owner.IDCs[0].TokenIDs[0])
+	require.Len(s.T(), owner.OwnerResp.IDCs, 1)
+	require.Len(s.T(), owner.OwnerResp.IDCs[0].TokenIDs, 1)
+	require.Equal(s.T(), tokenID, owner.OwnerResp.IDCs[0].TokenIDs[0])
 
 	uName := s.RandStringOfLength(10)
 	pwd := "11111111"
@@ -98,17 +99,17 @@ func (s IntegrationTestSuite) TestNFT() {
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), res.Hash)
 
-	owner, err = s.NFT.QueryOwner(transferReq.Recipient, mintReq.Denom)
+	owner, err = s.NFT.QueryOwner(transferReq.Recipient, mintReq.Denom, &query.PageRequest{})
 	require.NoError(s.T(), err)
-	require.Len(s.T(), owner.IDCs, 1)
-	require.Len(s.T(), owner.IDCs[0].TokenIDs, 1)
-	require.Equal(s.T(), tokenID, owner.IDCs[0].TokenIDs[0])
+	require.Len(s.T(), owner.OwnerResp.IDCs, 1)
+	require.Len(s.T(), owner.OwnerResp.IDCs[0].TokenIDs, 1)
+	require.Equal(s.T(), tokenID, owner.OwnerResp.IDCs[0].TokenIDs[0])
 
 	supply, err = s.NFT.QuerySupply(mintReq.Denom, transferReq.Recipient)
 	require.NoError(s.T(), err)
 	require.Equal(s.T(), uint64(1), supply)
 
-	denoms, err := s.NFT.QueryDenoms()
+	denoms, err := s.NFT.QueryDenoms(&query.PageRequest{})
 	require.NoError(s.T(), err)
 	require.NotEmpty(s.T(), denoms)
 
@@ -118,7 +119,7 @@ func (s IntegrationTestSuite) TestNFT() {
 	require.Equal(s.T(), denomName, d.Name)
 	require.Equal(s.T(), schema, d.Schema)
 
-	col, err := s.NFT.QueryCollection(denomID)
+	col, err := s.NFT.QueryCollection(denomID, &query.PageRequest{})
 	require.NoError(s.T(), err)
 	require.EqualValues(s.T(), d, col.Denom)
 	require.Len(s.T(), col.NFTs, 1)

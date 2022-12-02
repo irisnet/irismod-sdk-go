@@ -291,6 +291,7 @@ func (this BaseNFT) Convert() interface{} {
 		URI:     this.URI,
 		Data:    this.Data,
 		Creator: this.Owner,
+		URIHash: this.UriHash,
 	}
 }
 
@@ -298,10 +299,14 @@ type NFTs []BaseNFT
 
 func (this Denom) Convert() interface{} {
 	return QueryDenomResp{
-		ID:      this.Id,
-		Name:    this.Name,
-		Schema:  this.Schema,
-		Creator: this.Creator,
+		ID:          this.Id,
+		Name:        this.Name,
+		Schema:      this.Schema,
+		Creator:     this.Creator,
+		Description: this.Description,
+		Uri:         this.Uri,
+		UriHash:     this.UriHash,
+		Data:        this.Data,
 	}
 }
 
@@ -324,6 +329,7 @@ func (c Collection) Convert() interface{} {
 			URI:     nft.URI,
 			Data:    nft.Data,
 			Creator: nft.Owner,
+			URIHash: nft.UriHash,
 		})
 	}
 	return QueryCollectionResp{
