@@ -15,10 +15,10 @@ const (
 )
 
 const (
-	MsgTypeURLIssueDenom    = "irismod/nft/MsgIssueDenom"
-	MsgTypeURLTransferNFT   = "irismod/nft/MsgTransferNFT"
-	MsgTypeURLEditNFT       = "irismod/nft/MsgEditNFT"
-	MsgTypeURLMintNFT       = "irismod/nft/MsgMintNFT"
-	MsgTypeURLBurnNFT       = "irismod/nft/MsgBurnNFT"
-	MsgTypeURLTransferDenom = "irismod/nft/MsgTransferDenom"
+	MsgTypeURLMintNFT       = "/irismod.nft.MsgMintNFT"
+	MsgTypeURLTransferNFT   = "/irismod.nft.MsgTransferNFT"
+	MsgTypeURLEditNFT       = "/irismod.nft.MsgEditNFT"
+	MsgTypeURLBurnNFT       = "/irismod.nft.MsgBurnNFT"
+	MsgTypeURLIssueDenom    = "/irismod.nft.MsgIssueDenom"
+	MsgTypeURLTransferDenom = "/irismod.nft.MsgTransferDenom"
 )
