@@ -13,3 +13,12 @@ const (
 	// RouterKey is the message route for the NFT module
 	RouterKey = ModuleName
 )
+
+const (
+	MsgTypeURLIssueDenom    = "irismod/nft/MsgIssueDenom"
+	MsgTypeURLTransferNFT   = "irismod/nft/MsgTransferNFT"
+	MsgTypeURLEditNFT       = "irismod/nft/MsgEditNFT"
+	MsgTypeURLMintNFT       = "irismod/nft/MsgMintNFT"
+	MsgTypeURLBurnNFT       = "irismod/nft/MsgBurnNFT"
+	MsgTypeURLTransferDenom = "irismod/nft/MsgTransferDenom"
+)
