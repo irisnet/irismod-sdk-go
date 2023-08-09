@@ -14,7 +14,7 @@ test-unit:
 
 test-integration:
 	cd integration_test/scripts/ && sh build.sh && sh start.sh
-	sleep 5s
+	sleep 10
 	@go test -v $(PACKAGES)
 	cd integration_test/scripts/ && sh clean.sh
 

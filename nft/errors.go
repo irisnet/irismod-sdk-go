@@ -16,3 +16,8 @@ var (
 	ErrInvalidTokenID    = sdkerrors.Register(ModuleName, 17, "invalid nft id")
 	ErrInvalidTokenURI   = sdkerrors.Register(ModuleName, 18, "invalid nft uri")
 )
+
+// customize error
+var (
+	ErrInvalidClassId = sdkerrors.Register(ModuleName, 19, "invalid classId")
+)
