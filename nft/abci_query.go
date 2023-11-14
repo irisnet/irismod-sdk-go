@@ -5,10 +5,19 @@ import (
 	"errors"
 	"fmt"
 
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	rpcclient "github.com/tendermint/tendermint/rpc/client"
 )
 
 func (cli *Client) ABCIQueryClass(classId string, height int64) (*QueryClassResp, error) {
+	if len(classId) == 0 {
+		return nil, sdkerrors.Wrapf(ErrInvalidDenom, "class id is required")
+	}
+
+	if height < 0 {
+		return nil, sdkerrors.Wrapf(ErrInvalidHeight, "height must be not less than 0")
+	}
+
 	grpcReq := &QueryDenomRequest{
 		DenomId: classId,
 	}
@@ -57,6 +66,18 @@ func (cli *Client) ABCIQueryClass(classId string, height int64) (*QueryClassResp
 }
 
 func (cli *Client) ABCIQueryNFT(classId, tokenId string, height int64) (*QueryNFTResp, error) {
+	if len(classId) == 0 {
+		return nil, sdkerrors.Wrapf(ErrInvalidDenom, "class id is required")
+	}
+
+	if len(tokenId) == 0 {
+		return nil, sdkerrors.Wrapf(ErrInvalidTokenID, "token id is required")
+	}
+
+	if height < 0 {
+		return nil, sdkerrors.Wrapf(ErrInvalidHeight, "height must be not less than 0")
+	}
+
 	grpcReq := &QueryNFTRequest{
 		DenomId: classId,
 		TokenId: tokenId,

@@ -20,4 +20,5 @@ var (
 // customize error
 var (
 	ErrInvalidClassId = sdkerrors.Register(ModuleName, 19, "invalid classId")
+	ErrInvalidHeight  = sdkerrors.Register(ModuleName, 20, "invalid height")
 )
