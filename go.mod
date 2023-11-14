@@ -4,10 +4,11 @@ go 1.18
 
 require (
 	cosmossdk.io/math v1.0.0-rc.0
+	github.com/cosmos/cosmos-proto v1.0.0-beta.1
 	github.com/cosmos/cosmos-sdk v0.46.14
+	github.com/cosmos/gogoproto v1.4.10
 	github.com/gogo/protobuf v1.3.3
-	github.com/irisnet/core-sdk-go v0.2.1-0.20230809092127-5771dc5dc4e2
-	github.com/regen-network/cosmos-proto v0.3.1
+	github.com/irisnet/core-sdk-go v0.2.1-0.20231114084546-0a0f87989cb9
 	github.com/stretchr/testify v1.8.2
 	github.com/tendermint/tendermint v0.34.29
 	github.com/tidwall/gjson v1.15.0
@@ -37,9 +38,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/confio/ics23/go v0.9.0 // indirect
 	github.com/cosmos/btcutil v1.0.5 // indirect
-	github.com/cosmos/cosmos-proto v1.0.0-beta.1 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
-	github.com/cosmos/gogoproto v1.4.10 // indirect
 	github.com/cosmos/gorocksdb v1.2.0 // indirect
 	github.com/cosmos/iavl v0.19.6 // indirect
 	github.com/cosmos/ledger-cosmos-go v0.12.2 // indirect
