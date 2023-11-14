@@ -8,7 +8,7 @@ import (
 	rpcclient "github.com/tendermint/tendermint/rpc/client"
 )
 
-func (cli *Client) ABCIQueryDenom(classId string, height int64) (*QueryClassResp, error) {
+func (cli *Client) ABCIQueryClass(classId string, height int64) (*QueryClassResp, error) {
 	grpcReq := &QueryDenomRequest{
 		DenomId: classId,
 	}

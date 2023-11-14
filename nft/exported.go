@@ -22,6 +22,6 @@ type IClient interface {
 	QueryClasses(pagination PaginationRequest) (*QueryClassesResp, error)
 	QueryNFT(classId, tokenID string) (*QueryNFTResp, error)
 
-	ABCIQueryDenom(classId string, height int64) (*QueryClassResp, error)
+	ABCIQueryClass(classId string, height int64) (*QueryClassResp, error)
 	ABCIQueryNFT(classId, tokenId string, height int64) (*QueryNFTResp, error)
 }
