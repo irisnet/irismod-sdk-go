@@ -22,7 +22,7 @@ type IClient interface {
 	QueryMTSupply(ClassID, mtID string) (uint64, sdk.Error)
 	QueryMTs(ClassID string, pageReq *query.PageRequest) ([]QueryMTResp, sdk.Error)
 	QueryMT(ClassID, mtID string) (QueryMTResp, sdk.Error)
-	QueryBalances(ClassID, owner string) ([]QueryBalanceResp, sdk.Error)
+	QueryBalances(ClassID, owner string, pagination *query.PageRequest) ([]QueryBalanceResp, sdk.Error)
 }
 
 type IABIClient interface {

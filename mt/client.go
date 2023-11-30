@@ -303,7 +303,7 @@ func (cli *Client) QueryMTs(denomID string, pagination *query.PageRequest) ([]Qu
 	return mts, nil
 }
 
-func (cli *Client) QueryBalances(denomID, owner string) ([]QueryBalanceResp, sdk.Error) {
+func (cli *Client) QueryBalances(denomID, owner string, pagination *query.PageRequest) ([]QueryBalanceResp, sdk.Error) {
 	if len(denomID) == 0 {
 		return nil, sdk.Wrapf("denomID is required")
 	}
@@ -315,8 +315,9 @@ func (cli *Client) QueryBalances(denomID, owner string) ([]QueryBalanceResp, sdk
 	res, err := cli.queryCli.Balances(
 		context.Background(),
 		&QueryBalancesRequest{
-			DenomId: denomID,
-			Owner:   owner,
+			DenomId:    denomID,
+			Owner:      owner,
+			Pagination: pagination,
 		},
 	)
 	if err != nil {
