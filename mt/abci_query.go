@@ -1,4 +1,4 @@
-package nft
+package mt
 
 import (
 	"context"
@@ -10,13 +10,13 @@ import (
 )
 
 const (
-	FunctionPathQueryDenom = "/irismod.nft.Query/Denom"
-	FunctionPathQueryNFT   = "/irismod.nft.Query/NFT"
+	FunctionPathQueryDenom = "/irismod.mt.Query/Denom"
+	FunctionPathQueryMT    = "/irismod.mt.Query/MT"
 )
 
 func (cli *Client) ABCIQueryClass(classId string, height int64) (*QueryClassResp, error) {
 	if len(classId) == 0 {
-		return nil, sdkerrors.Wrapf(ErrInvalidDenom, "class id is required")
+		return nil, sdkerrors.Wrapf(ErrInvalidClassId, "class id is required")
 	}
 
 	if height < 0 {
@@ -54,25 +54,18 @@ func (cli *Client) ABCIQueryClass(classId string, height int64) (*QueryClassResp
 	}
 
 	resp := QueryClassResp{
-		ID:               grpcResp.Denom.Id,
-		Name:             grpcResp.Denom.Name,
-		Schema:           grpcResp.Denom.Schema,
-		Symbol:           grpcResp.Denom.Symbol,
-		Creator:          grpcResp.Denom.Creator,
-		Description:      grpcResp.Denom.Description,
-		Uri:              grpcResp.Denom.Uri,
-		UriHash:          grpcResp.Denom.UriHash,
-		Data:             grpcResp.Denom.Data,
-		MintRestricted:   grpcResp.Denom.MintRestricted,
-		UpdateRestricted: grpcResp.Denom.UpdateRestricted,
+		ID:    grpcResp.Denom.Id,
+		Name:  grpcResp.Denom.Name,
+		Data:  grpcResp.Denom.Data,
+		Owner: grpcResp.Denom.Owner,
 	}
 
 	return &resp, nil
 }
 
-func (cli *Client) ABCIQueryNFT(classId, tokenId string, height int64) (*QueryNFTResp, error) {
+func (cli *Client) ABCIQueryMT(classId, tokenId string, height int64) (*QueryMTResp, error) {
 	if len(classId) == 0 {
-		return nil, sdkerrors.Wrapf(ErrInvalidDenom, "class id is required")
+		return nil, sdkerrors.Wrapf(ErrInvalidClassId, "class id is required")
 	}
 
 	if len(tokenId) == 0 {
@@ -83,9 +76,9 @@ func (cli *Client) ABCIQueryNFT(classId, tokenId string, height int64) (*QueryNF
 		return nil, sdkerrors.Wrapf(ErrInvalidHeight, "height must be not less than 0")
 	}
 
-	grpcReq := &QueryNFTRequest{
+	grpcReq := &QueryMTRequest{
 		DenomId: classId,
-		TokenId: tokenId,
+		MtId:    tokenId,
 	}
 
 	reqBz, err := cli.Marshaler().Marshal(grpcReq)
@@ -99,7 +92,7 @@ func (cli *Client) ABCIQueryNFT(classId, tokenId string, height int64) (*QueryNF
 	}
 
 	result, err := cli.ABCIQueryWithOptions(context.Background(),
-		FunctionPathQueryNFT, reqBz, opts)
+		FunctionPathQueryMT, reqBz, opts)
 	if err != nil {
 		return nil, err
 	}
@@ -108,19 +101,16 @@ func (cli *Client) ABCIQueryNFT(classId, tokenId string, height int64) (*QueryNF
 		return nil, errors.New(fmt.Sprint(result.Response.Log))
 	}
 
-	var grpcResp QueryNFTResponse
+	var grpcResp QueryMTResponse
 	err = cli.Marshaler().Unmarshal(result.Response.Value, &grpcResp)
 	if err != nil {
 		return nil, err
 	}
 
-	resp := QueryNFTResp{
-		ID:      grpcResp.NFT.Id,
-		Name:    grpcResp.NFT.Name,
-		URI:     grpcResp.NFT.URI,
-		Data:    grpcResp.NFT.Data,
-		Owner:   grpcResp.NFT.Owner,
-		URIHash: grpcResp.NFT.UriHash,
+	resp := QueryMTResp{
+		ID:     grpcResp.Mt.Id,
+		Supply: grpcResp.Mt.Supply,
+		Data:   grpcResp.Mt.Data,
 	}
 
 	return &resp, nil
