@@ -5,9 +5,15 @@ import (
 	sdk "github.com/irisnet/core-sdk-go/types"
 )
 
+type IABIClient interface {
+	ABCIQueryClass(classId string, height int64) (*QueryClassResp, error)
+	ABCIQueryMT(classId, tokenId string, height int64) (*QueryMTResp, error)
+}
+
 // IClient expose NFT module api for user
 type IClient interface {
 	sdk.Module
+	IABIClient
 	CreateClass(request IssueClassRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	TransferClass(request TransferClassRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 	MintMT(request MintMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
@@ -23,9 +29,4 @@ type IClient interface {
 	QueryMTs(ClassID string, pageReq *query.PageRequest) ([]QueryMTResp, sdk.Error)
 	QueryMT(ClassID, mtID string) (QueryMTResp, sdk.Error)
 	QueryBalances(ClassID, owner string, pagination *query.PageRequest) ([]QueryBalanceResp, sdk.Error)
-}
-
-type IABIClient interface {
-	ABCIQueryClass(classId string, height int64) (*QueryClassResp, error)
-	ABCIQueryMT(classId, tokenId string, height int64) (*QueryMTResp, error)
 }
