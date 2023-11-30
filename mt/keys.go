@@ -26,4 +26,5 @@ const (
 	MsgTypeURLTransferMT    = "/irismod.mt.MsgTransferMT"
 	MsgTypeURLIssueDenom    = "/irismod.mt.MsgIssueDenom"
 	MsgTypeURLTransferDenom = "/irismod.mt.MsgTransferDenom"
+	MsgTypeURLEditMT        = "/irismod.mt.MsgEditMT"
 )
