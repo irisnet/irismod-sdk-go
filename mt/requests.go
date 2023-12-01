@@ -62,3 +62,27 @@ type QueryBalanceResp struct {
 	MtId   string `json:"mt_id"`
 	Amount uint64 `json:"amount"`
 }
+
+type QueryClassesResp struct {
+	Classes    []QueryClassResp `json:"classes" yaml:"classes"`
+	Pagination *PageResponse    `json:"pagination"`
+}
+
+type QueryMtsResp struct {
+	Mts        []QueryMTResp `json:"mts" yaml:"mts"`
+	Pagination *PageResponse `json:"pagination"`
+}
+
+type QueryBalancesResp struct {
+	Balances   []QueryBalanceResp `json:"balances" yaml:"balances"`
+	Pagination *PageResponse      `json:"pagination"`
+}
+
+type PageResponse struct {
+	// next_key is the key to be passed to PageRequest.key to
+	// query the next page most efficiently
+	NextKey []byte `json:"next_key"`
+	// total is total number of results available if PageRequest.count_total
+	// was set, its value is undefined otherwise
+	Total uint64 `json:"total"`
+}

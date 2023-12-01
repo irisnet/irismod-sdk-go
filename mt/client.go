@@ -226,7 +226,7 @@ func (cli *Client) QueryClass(denomID string) (QueryClassResp, sdk.Error) {
 
 }
 
-func (cli *Client) QueryClasses(pagination *query.PageRequest) ([]QueryClassResp, sdk.Error) {
+func (cli *Client) QueryClasses(pagination *query.PageRequest) (*QueryClassesResp, sdk.Error) {
 
 	res, err := cli.queryCli.Denoms(
 		context.Background(),
@@ -246,7 +246,13 @@ func (cli *Client) QueryClasses(pagination *query.PageRequest) ([]QueryClassResp
 			Owner: denom.Owner,
 		})
 	}
-	return denoms, nil
+	return &QueryClassesResp{
+		Classes: denoms,
+		Pagination: &PageResponse{
+			NextKey: res.Pagination.NextKey,
+			Total:   res.Pagination.Total,
+		},
+	}, nil
 }
 
 func (cli *Client) QueryMT(denomID, mtID string) (QueryMTResp, sdk.Error) {
@@ -276,7 +282,7 @@ func (cli *Client) QueryMT(denomID, mtID string) (QueryMTResp, sdk.Error) {
 	}, nil
 }
 
-func (cli *Client) QueryMTs(denomID string, pagination *query.PageRequest) ([]QueryMTResp, sdk.Error) {
+func (cli *Client) QueryMTs(denomID string, pagination *query.PageRequest) (*QueryMtsResp, sdk.Error) {
 	if len(denomID) == 0 {
 		return nil, sdk.Wrapf("denomID is required")
 	}
@@ -300,10 +306,16 @@ func (cli *Client) QueryMTs(denomID string, pagination *query.PageRequest) ([]Qu
 		})
 	}
 
-	return mts, nil
+	return &QueryMtsResp{
+		Mts: mts,
+		Pagination: &PageResponse{
+			NextKey: res.Pagination.NextKey,
+			Total:   res.Pagination.Total,
+		},
+	}, nil
 }
 
-func (cli *Client) QueryBalances(denomID, owner string, pagination *query.PageRequest) ([]QueryBalanceResp, sdk.Error) {
+func (cli *Client) QueryBalances(denomID, owner string, pagination *query.PageRequest) (*QueryBalancesResp, sdk.Error) {
 	if len(denomID) == 0 {
 		return nil, sdk.Wrapf("denomID is required")
 	}
@@ -330,5 +342,11 @@ func (cli *Client) QueryBalances(denomID, owner string, pagination *query.PageRe
 			Amount: balance.Amount,
 		})
 	}
-	return balances, nil
+	return &QueryBalancesResp{
+		Balances: balances,
+		Pagination: &PageResponse{
+			NextKey: res.Pagination.NextKey,
+			Total:   res.Pagination.Total,
+		},
+	}, nil
 }

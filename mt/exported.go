@@ -23,10 +23,10 @@ type IClient interface {
 	BurnMT(request BurnMTRequest, baseTx sdk.BaseTx) (sdk.ResultTx, sdk.Error)
 
 	QuerySupply(ClassID, creator string) (uint64, sdk.Error)
-	QueryClasses(pageReq *query.PageRequest) ([]QueryClassResp, sdk.Error)
+	QueryClasses(pageReq *query.PageRequest) (*QueryClassesResp, sdk.Error)
 	QueryClass(ClassID string) (QueryClassResp, sdk.Error)
 	QueryMTSupply(ClassID, mtID string) (uint64, sdk.Error)
-	QueryMTs(ClassID string, pageReq *query.PageRequest) ([]QueryMTResp, sdk.Error)
+	QueryMTs(ClassID string, pageReq *query.PageRequest) (*QueryMtsResp, sdk.Error)
 	QueryMT(ClassID, mtID string) (QueryMTResp, sdk.Error)
-	QueryBalances(ClassID, owner string, pagination *query.PageRequest) ([]QueryBalanceResp, sdk.Error)
+	QueryBalances(ClassID, owner string, pagination *query.PageRequest) (*QueryBalancesResp, sdk.Error)
 }
