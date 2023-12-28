@@ -1,7 +1,7 @@
 package mt
 
 import (
-	context "context"
+	"context"
 
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/types"
@@ -165,8 +165,9 @@ func (cli *Client) QuerySupply(denomID, creator string) (uint64, sdk.Error) {
 	if len(denomID) == 0 {
 		return 0, sdk.Wrapf("denomID is required")
 	}
-	if _, err := types.ValAddressFromBech32(creator); err != nil {
-		return 0, sdk.Wrap(err)
+
+	if _, err := types.AccAddressFromBech32(creator); err != nil {
+		return 0, sdk.Wrapf("invalid sender address (%s)", err)
 	}
 
 	res, err := cli.queryCli.Supply(
@@ -320,8 +321,8 @@ func (cli *Client) QueryBalances(denomID, owner string, pagination *query.PageRe
 		return nil, sdk.Wrapf("denomID is required")
 	}
 
-	if _, err := types.ValAddressFromBech32(owner); err != nil {
-		return nil, sdk.Wrap(err)
+	if _, err := types.AccAddressFromBech32(owner); err != nil {
+		return nil, sdk.Wrapf("invalid sender address (%s)", err)
 	}
 
 	res, err := cli.queryCli.Balances(
