@@ -273,7 +273,7 @@ func (cli *Client) QueryCollection(classId string, pagination PaginationRequest)
 		Description:      result.Collection.Denom.Description,
 	}
 	nfts := make([]QueryNFTResp, 0, len(result.Collection.NFTs))
-	for index, value := range result.Collection.NFTs {
+	for _, value := range result.Collection.NFTs {
 		nft := QueryNFTResp{
 			ID:      value.Id,
 			Name:    value.Name,
@@ -282,7 +282,7 @@ func (cli *Client) QueryCollection(classId string, pagination PaginationRequest)
 			URI:     value.URI,
 			URIHash: value.UriHash,
 		}
-		nfts[index] = nft
+		nfts = append(nfts, nft)
 	}
 
 	response := &QueryCollectionResp{

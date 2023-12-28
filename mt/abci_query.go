@@ -10,8 +10,9 @@ import (
 )
 
 const (
-	FunctionPathQueryDenom = "/irismod.mt.Query/Denom"
-	FunctionPathQueryMT    = "/irismod.mt.Query/MT"
+	FunctionPathQueryDenom  = "/irismod.mt.Query/Denom"
+	FunctionPathQueryDenoms = "/irismod.mt.Query/Denoms"
+	FunctionPathQueryMT     = "/irismod.mt.Query/MT"
 )
 
 func (cli *Client) ABCIQueryClass(classId string, height int64) (*QueryClassResp, error) {
@@ -58,6 +59,60 @@ func (cli *Client) ABCIQueryClass(classId string, height int64) (*QueryClassResp
 		Name:  grpcResp.Denom.Name,
 		Data:  grpcResp.Denom.Data,
 		Owner: grpcResp.Denom.Owner,
+	}
+
+	return &resp, nil
+}
+
+func (cli *Client) ABCIQueryClass2(classId string, height int64) (*QueryClassResp, error) {
+	var resp QueryClassResp
+
+	if len(classId) == 0 {
+		return nil, sdkerrors.Wrapf(ErrInvalidClassId, "class id is required")
+	}
+
+	if height < 0 {
+		return nil, sdkerrors.Wrapf(ErrInvalidHeight, "height must be not less than 0")
+	}
+
+	grpcReq := &QueryDenomsRequest{}
+
+	reqBz, err := cli.Marshaler().Marshal(grpcReq)
+	if err != nil {
+		return nil, err
+	}
+
+	opts := rpcclient.ABCIQueryOptions{
+		Height: height,
+		Prove:  false,
+	}
+
+	result, err := cli.ABCIQueryWithOptions(context.Background(),
+		FunctionPathQueryDenoms, reqBz, opts)
+	if err != nil {
+		return nil, err
+	}
+
+	if !result.Response.IsOK() {
+		return nil, errors.New(fmt.Sprint(result.Response.Log))
+	}
+
+	var grpcResp QueryDenomsResponse
+	err = cli.Marshaler().Unmarshal(result.Response.Value, &grpcResp)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, denom := range grpcResp.Denoms {
+		if denom.Id == classId {
+			resp = QueryClassResp{
+				ID:    denom.Id,
+				Name:  denom.Name,
+				Data:  denom.Data,
+				Owner: denom.Owner,
+			}
+			break
+		}
 	}
 
 	return &resp, nil

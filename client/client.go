@@ -4,6 +4,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/irisnet/core-sdk-go/client"
 	sdk "github.com/irisnet/core-sdk-go/types"
+	"github.com/irisnet/irismod-sdk-go/mt"
 	"github.com/irisnet/irismod-sdk-go/nft"
 	"github.com/tendermint/tendermint/libs/log"
 )
@@ -14,6 +15,7 @@ type Client struct {
 	sdk.BaseClient
 
 	NFTClient nft.IClient
+	MTClient  mt.IClient
 }
 
 func NewClient(cfg sdk.ClientConfig) (Client, error) {
@@ -28,13 +30,19 @@ func NewClient(cfg sdk.ClientConfig) (Client, error) {
 		return Client{}, err
 	}
 
+	mtClient, err := mt.NewClient(baseClient)
+	if err != nil {
+		return Client{}, err
+	}
+
 	cli := Client{
 		BaseClient:     baseClient,
 		moduleManager:  make(map[string]sdk.Module),
 		encodingConfig: encodingConfig,
 		NFTClient:      nftClient,
+		MTClient:       mtClient,
 	}
-	cli.RegisterModule(nftClient)
+	cli.RegisterModule(nftClient, mtClient)
 	return cli, nil
 }
 

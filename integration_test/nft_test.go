@@ -42,3 +42,12 @@ func (s *ClientTestSuite) TestNFT() {
 	s.Require().NoError(err)
 	s.T().Log(resp)
 }
+
+func (s *ClientTestSuite) TestNftABCIQueryClass() {
+	classId := "testticket"
+	height := int64(2554487)
+
+	resp, err := s.NFTClient.ABCIQueryClass(classId, height)
+	s.Require().NoError(err)
+	s.T().Log(resp)
+}

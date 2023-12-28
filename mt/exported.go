@@ -7,6 +7,7 @@ import (
 
 type IABIClient interface {
 	ABCIQueryClass(classId string, height int64) (*QueryClassResp, error)
+	ABCIQueryClass2(classId string, height int64) (*QueryClassResp, error)
 	ABCIQueryMT(classId, tokenId string, height int64) (*QueryMTResp, error)
 }
 
