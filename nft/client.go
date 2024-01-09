@@ -272,8 +272,8 @@ func (cli *Client) QueryCollection(classId string, pagination PaginationRequest)
 		UriHash:          result.Collection.Denom.UriHash,
 		Description:      result.Collection.Denom.Description,
 	}
-	nfts := make([]QueryNFTResp, 0, len(result.Collection.NFTs))
-	for index, value := range result.Collection.NFTs {
+	var nfts []QueryNFTResp
+	for _, value := range result.Collection.NFTs {
 		nft := QueryNFTResp{
 			ID:      value.Id,
 			Name:    value.Name,
@@ -282,7 +282,7 @@ func (cli *Client) QueryCollection(classId string, pagination PaginationRequest)
 			URI:     value.URI,
 			URIHash: value.UriHash,
 		}
-		nfts[index] = nft
+		nfts = append(nfts, nft)
 	}
 
 	response := &QueryCollectionResp{
@@ -352,8 +352,8 @@ func (cli *Client) QueryClasses(pagination PaginationRequest) (*QueryClassesResp
 	if err != nil {
 		return nil, sdkerrors.Wrapf(err, "failed to query classes: %s", err)
 	}
-	classes := make([]QueryClassResp, 0, len(result.Denoms))
-	for index, value := range result.Denoms {
+	var classes []QueryClassResp
+	for _, value := range result.Denoms {
 		class := QueryClassResp{
 			ID:               value.Id,
 			Name:             value.Name,
@@ -367,7 +367,7 @@ func (cli *Client) QueryClasses(pagination PaginationRequest) (*QueryClassesResp
 			UriHash:          value.UriHash,
 			Description:      value.Description,
 		}
-		classes[index] = class
+		classes = append(classes, class)
 	}
 
 	response := &QueryClassesResp{
